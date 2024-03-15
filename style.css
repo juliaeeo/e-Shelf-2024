@@ -63,3 +63,58 @@ main {
 main h4 {
   font-size: 1.2em;
 }
+
+/* Formulário */
+
+.container {
+  width: 80%;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid rgb(240, 112, 8);
+  border-radius: 10px;
+}
+
+input[type="text"],
+select,
+input[type="radio"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="radio"] {
+  width: 20px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+button {
+  padding: 16px 32px;
+  background-color: rgb(240, 112, 8);
+  color: wheat;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 25px;
+  font-size: 18px;
+}
+
+button:hover {
+  background-color: #0a6b4e;
+}
+
+/* Rodapé */
+
+footer {
+  clear: both;
+  text-align: center;
+  font-size: 0.8em;
+  padding-top: 50px;
+}
