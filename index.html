@@ -6,6 +6,7 @@
 <head>
   <title>e-Shelf</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -30,8 +31,39 @@
   <main>
     <h4>Adicione o seu livro ao catálogo inserindo as seguintes informações:</h4>
 
+    <!-- Formulário -->
+    <div class="container">
+      <form autocomplete="off">
+
+        <label for="livro">Livro:</label>
+        <input type="text" id="livro" name="livro" required>
+
+        <label for="serie">Série:</label>
+        <input type="text" id="serie" name="serie">
+
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" name="autor" required>
+
+        <label for="ano">Ano de Publicação:</label>
+        <input type="text" id="ano" name="ano">
+
+        <label for="finalizado">Livro Finalizado:</label><br>
+        <input type="radio" id="sim" name="finalizado" value="sim" required>
+        <label for="sim">Sim</label>
+        <input type="radio" id="nao" name="finalizado" value="nao" required>
+        <label for="nao">Não</label>
+        <input type="radio" id="andamento" name="finalizado" value="andamento" required>
+        <label for="andamento">Em andamento</label><br>
+
+        <button type="submit">Submeter</button>
+
+    </div>
   </main>
 
+  <!-- rodapé -->
+  <footer>
+    <p> &copy Todos os direitos reservados - Júlia Epischina</p>
+  </footer>
 </body>
 
 </html>
