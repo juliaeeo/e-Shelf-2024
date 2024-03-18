@@ -61,7 +61,7 @@ main {
 }
 
 main h4 {
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 
 /* Formulário */
@@ -117,4 +117,26 @@ footer {
   text-align: center;
   font-size: 0.8em;
   padding-top: 50px;
+}
+
+/* Estilo para o container do catálogo */
+#bookCatalog {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Alinha os livros ao redor com espaço uniforme */
+  margin-top: 20px; /* Adiciona um espaço superior para separar o catálogo do formulário */
+}
+
+/* Estilo para cada livro */
+.book {
+  width: 30%; /* Largura fixa para cada livro */
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px; /* Espaçamento inferior entre os livros */
+  box-sizing: border-box; /* Inclui padding e borda na largura total */
+}
+
+/* Estilo para o texto do livro */
+.book p {
+  margin: 5px 0;
 }
