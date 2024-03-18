@@ -17,14 +17,14 @@
     <h2>Estante de e-books</h2>
   </header>
 
-  <!-- Início da barra de navegação -->
+  <!-- Início da barra de navegação
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="catalogo.html">Catálogo de Livros</a></li>
       <li><a href="estatisticas.html">Estatísticas</a></li>
     </ul>
-  </nav>
+  </nav> -->
 
   <!-- Área de navegação -->
 
@@ -33,7 +33,7 @@
 
     <!-- Formulário -->
     <div class="container">
-      <form autocomplete="off">
+      <form id="bookForm" autocomplete="off">
 
         <label for="livro">Livro:</label>
         <input type="text" id="livro" name="livro" required>
@@ -56,14 +56,23 @@
         <label for="andamento">Em andamento</label><br>
 
         <button type="submit">Submeter</button>
-
+      </form>
     </div>
+
+    <!-- Exibição do catálogo de livros -->
+
+    <h4>Catálogo de Livros</h4>
+    <div id="bookCatalog"></div>
   </main>
 
   <!-- rodapé -->
   <footer>
     <p> &copy Todos os direitos reservados - Júlia Epischina</p>
   </footer>
+
+  <!-- inserção do javascript-->
+  <script src="index.js"></script>
+
 </body>
 
 </html>
