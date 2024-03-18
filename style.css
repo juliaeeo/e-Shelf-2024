@@ -124,14 +124,14 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around; /* Alinha os livros ao redor com espaço uniforme */
-  margin-top: 20px; /* Adiciona um espaço superior para separar o catálogo do formulário */
+  margin-top: 50px; /* Adiciona um espaço superior para separar o catálogo do formulário */
 }
 
 /* Estilo para cada livro */
 .book {
   width: 30%; /* Largura fixa para cada livro */
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #0a6b4e;
   margin-bottom: 20px; /* Espaçamento inferior entre os livros */
   box-sizing: border-box; /* Inclui padding e borda na largura total */
 }
