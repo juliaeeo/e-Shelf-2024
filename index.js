@@ -1,17 +1,20 @@
-function submitForm(event) {
-  event.preventDefault();
+// Função para carregar os livros armazenados no localStorage
+function loadBooks() {
+  let savedBooks = localStorage.getItem("books");
+  if (savedBooks) {
+    document.getElementById("bookCatalog").innerHTML = savedBooks;
+  }
+}
 
-  //Capturando os valores do formulário
-  let livro = document.getElementById("livro").value;
-  let serie = document.getElementById("serie").value;
-  let autor = document.getElementById("autor").value;
-  let ano = document.getElementById("ano").value;
-  let finalizado = document.querySelector(
-    'input[name="finalizado"]:checked'
-  ).value;
+// Função para salvar os livros no localStorage
+function saveBooks() {
+  let booksHtml = document.getElementById("bookCatalog").innerHTML;
+  localStorage.setItem("books", booksHtml);
+}
 
-  //Construindo as informações para o catálogo
-
+// Função para adicionar um novo livro ao catálogo
+function addBookToCatalog(livro, serie, autor, ano, finalizado) {
+  // Construir informações do livro
   let bookInfo =
     "<div class='book'>" +
     "<p><strong>Livro:</strong> " +
@@ -28,14 +31,38 @@ function submitForm(event) {
     "</p>" +
     "<p><strong>Finalizado:</strong> " +
     finalizado +
-    "</p>";
+    "</p>" +
+    "</div>";
 
-  //Mostrando as informações no Catálogo
+  // Adicionar o livro ao catálogo
   document.getElementById("bookCatalog").innerHTML += bookInfo;
 
-  //Limpando os campos do formulário
+  // Salvar os livros atualizados no localStorage
+  saveBooks();
+}
+
+// Função para submeter o formulário
+function submitForm(event) {
+  event.preventDefault(); // Prevenir envio padrão do formulário
+
+  // Obter os dados do formulário
+  let livro = document.getElementById("livro").value;
+  let serie = document.getElementById("serie").value;
+  let autor = document.getElementById("autor").value;
+  let ano = document.getElementById("ano").value;
+  let finalizado = document.querySelector(
+    'input[name="finalizado"]:checked'
+  ).value;
+
+  // Adicionar o novo livro ao catálogo
+  addBookToCatalog(livro, serie, autor, ano, finalizado);
+
+  // Limpar os campos do formulário
   document.getElementById("bookForm").reset();
 }
 
-// Adicionando eventlistener a submissão do formulário
+// Adicionar um ouvinte de evento para o envio do formulário
 document.getElementById("bookForm").addEventListener("submit", submitForm);
+
+// Carregar os livros ao iniciar a página
+loadBooks();
