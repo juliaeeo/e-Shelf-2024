@@ -61,7 +61,8 @@ main {
 }
 
 main h4 {
-  font-size: 1.4em;
+  font-size: 1.3em;
+  background-color: rgb(235, 140, 63);
 }
 
 /* Formulário */
@@ -132,6 +133,7 @@ footer {
   width: 30%; /* Largura fixa para cada livro */
   padding: 10px;
   border: 2px solid #0a6b4e;
+  border-radius: 10px;
   margin-bottom: 20px; /* Espaçamento inferior entre os livros */
   box-sizing: border-box; /* Inclui padding e borda na largura total */
 }
