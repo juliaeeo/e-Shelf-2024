@@ -12,9 +12,23 @@ function saveBooks() {
   localStorage.setItem("books", booksHtml);
 }
 
+// Função para ordenar os livros pelo título
+function sortBooks() {
+  const booksContainer = document.getElementById("bookCatalog");
+  const books = booksContainer.querySelectorAll(".book");
+  const sortedBooks = Array.from(books).sort((a, b) => {
+    const titleA = a.querySelector("p:first-of-type").textContent.toLowerCase();
+    const titleB = b.querySelector("p:first-of-type").textContent.toLowerCase();
+    return titleA.localeCompare(titleB);
+  });
+  booksContainer.innerHTML = ""; // Limpa o conteúdo atual
+  sortedBooks.forEach((book) => booksContainer.appendChild(book)); // Adiciona os livros ordenados de volta ao container
+}
+
 // Função para adicionar um novo livro ao catálogo
 function addBookToCatalog(livro, serie, autor, ano, finalizado) {
   // Construir informações do livro
+  let firstLetter = livro.charAt(0).toUpperCase(); // Obter a primeira letra do título e converter para maiúscula
   let bookInfo =
     "<div class='book'>" +
     "<p><strong>Livro:</strong> " +
@@ -36,6 +50,9 @@ function addBookToCatalog(livro, serie, autor, ano, finalizado) {
 
   // Adicionar o livro ao catálogo
   document.getElementById("bookCatalog").innerHTML += bookInfo;
+
+  // Adicionar uma classe específica para cada livro
+  sortBooks();
 
   // Salvar os livros atualizados no localStorage
   saveBooks();
