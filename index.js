@@ -1,85 +1,99 @@
-// Função para carregar os livros armazenados no localStorage
-function loadBooks() {
-  let savedBooks = localStorage.getItem("books");
-  if (savedBooks) {
-    document.getElementById("bookCatalog").innerHTML = savedBooks;
+// // Inicialize o Supabase com as credenciais do seu projeto
+const supabaseUrl = "https://uyxbhreygsckfskebocj.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5eGJocmV5Z3Nja2Zza2Vib2NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjkxMDgsImV4cCI6MjAyODM0NTEwOH0.f4hfGh5xpT8-rFsfIOElu9msfxtHtpiz7HsIzjTYdko";
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// Função para salvar os dados do formulário no Supabase
+async function saveFormData(livro, serie, autor, ano, finalizado) {
+  try {
+    //Insere os dados na tabela 'livros' do Supabase
+    const { data, error } = await supabase
+      .from("livros")
+      .insert([{ livro, serie, autor, ano, finalizado }]);
+    if (error) {
+      throw error;
+    }
+    console.log("Dados inseridos com sucesso", data);
+    return data;
+  } catch (error) {
+    console.error("Erro ao inserir dados no Supabase", error.message);
+    throw error;
   }
 }
 
-// Função para salvar os livros no localStorage
-function saveBooks() {
-  let booksHtml = document.getElementById("bookCatalog").innerHTML;
-  localStorage.setItem("books", booksHtml);
-}
+// Envio do formulário
+document
+  .getElementById("bookForm")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault();
+    // Coleta dos valores do formulário
+    const livro = document.getElementById("livro").value;
+    const serie = document.getElementById("serie").value;
+    const autor = document.getElementById("autor").value;
+    const ano = document.getElementById("ano").value;
+    const finalizado = document.querySelector(
+      'input[name="finalizado"]:checked'
+    ).value;
 
-// Função para ordenar os livros pelo título
-function sortBooks() {
-  const booksContainer = document.getElementById("bookCatalog");
-  const books = booksContainer.querySelectorAll(".book");
-  const sortedBooks = Array.from(books).sort((a, b) => {
-    const titleA = a.querySelector("p:first-of-type").textContent.toLowerCase();
-    const titleB = b.querySelector("p:first-of-type").textContent.toLowerCase();
-    return titleA.localeCompare(titleB);
+    try {
+      await saveFormData(livro, serie, autor, ano, finalizado);
+      alert("Dados enviados com sucesso");
+      document.getElementById("bookForm").reset();
+    } catch (error) {
+      alert("Ocorreu um erro ao enviar os dados");
+    }
   });
-  booksContainer.innerHTML = ""; // Limpa o conteúdo atual
-  sortedBooks.forEach((book) => booksContainer.appendChild(book)); // Adiciona os livros ordenados de volta ao container
+
+//Função para carregar e exibir os dados do Supabase na página
+async function displayData() {
+  try {
+    const { data: livros, error } = await supabase.from("livros").select();
+    if (error) {
+      throw error;
+    }
+
+    const userDataElement = document.getElementById("bookCatalog");
+
+    //Limpar o conteúdo anterior
+    userDataElement.innerHTML = "";
+
+    //Exibir os dados na página
+    livros.forEach((livro) => {
+      const userDiv = document.createElement("div");
+      userDiv.classList.add("livro");
+      userDiv.innerHTML = `<p><strong>Livro:</strong> ${livro.livro}</p><p><strong>Série:</strong> ${livro.serie}</p><p><strong>Autor:</strong> ${livro.autor}</p><p><strong>Ano:</strong> ${livro.ano}</p><p><strong>Finalizado:</strong> ${livro.finalizado}</p>`;
+
+      //Adicionando botão de exclusão
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Excluir";
+      deleteButton.addEventListener("click", async () => {
+        try {
+          //Excluir registro do Supabase
+          const { error } = await supabase
+            .from("livros")
+            .delete()
+            .eq("id", livro.id);
+          if (error) {
+            throw error;
+          }
+
+          //Atualizar a exibição dos dados na página após a exclusão
+          displayData();
+          console.log("Registro excluido com sucesso");
+        } catch (error) {
+          console.error("Erro ao excluir registro", error.message);
+        }
+      });
+
+      userDiv.appendChild(deleteButton);
+      userDataElement.appendChild(userDiv);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar dados do Supabase".error.message);
+  }
 }
 
-// Função para adicionar um novo livro ao catálogo
-function addBookToCatalog(livro, serie, autor, ano, finalizado) {
-  // Construir informações do livro
-  let firstLetter = livro.charAt(0).toUpperCase(); // Obter a primeira letra do título e converter para maiúscula
-  let bookInfo =
-    "<div class='book'>" +
-    "<p><strong>Livro:</strong> " +
-    livro +
-    "</p>" +
-    "<p><strong>Série:</strong> " +
-    serie +
-    "</p>" +
-    "<p><strong>Autor:</strong> " +
-    autor +
-    "</p>" +
-    "<p><strong>Ano de Publicação:</strong> " +
-    ano +
-    "</p>" +
-    "<p><strong>Finalizado:</strong> " +
-    finalizado +
-    "</p>" +
-    "</div>";
-
-  // Adicionar o livro ao catálogo
-  document.getElementById("bookCatalog").innerHTML += bookInfo;
-
-  // Adicionar uma classe específica para cada livro
-  sortBooks();
-
-  // Salvar os livros atualizados no localStorage
-  saveBooks();
-}
-
-// Função para submeter o formulário
-function submitForm(event) {
-  event.preventDefault(); // Prevenir envio padrão do formulário
-
-  // Obter os dados do formulário
-  let livro = document.getElementById("livro").value;
-  let serie = document.getElementById("serie").value;
-  let autor = document.getElementById("autor").value;
-  let ano = document.getElementById("ano").value;
-  let finalizado = document.querySelector(
-    'input[name="finalizado"]:checked'
-  ).value;
-
-  // Adicionar o novo livro ao catálogo
-  addBookToCatalog(livro, serie, autor, ano, finalizado);
-
-  // Limpar os campos do formulário
-  document.getElementById("bookForm").reset();
-}
-
-// Adicionar um ouvinte de evento para o envio do formulário
-document.getElementById("bookForm").addEventListener("submit", submitForm);
-
-// Carregar os livros ao iniciar a página
-loadBooks();
+// Chamar a função para exibir os dados ao carregar a página
+displayData();

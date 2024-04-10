@@ -111,6 +111,10 @@ button:hover {
   background-color: #0a6b4e;
 }
 
+.btn-excluir {
+  border: 2px;
+}
+
 /* Rodapé */
 
 footer {
