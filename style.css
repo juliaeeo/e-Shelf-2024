@@ -96,7 +96,8 @@ label {
   margin-right: 10px;
 }
 
-button {
+/* botão de submeter formulário */
+.submission {
   padding: 16px 32px;
   background-color: rgb(240, 112, 8);
   color: wheat;
@@ -107,12 +108,18 @@ button {
   font-size: 18px;
 }
 
-button:hover {
+.submission:hover {
   background-color: #0a6b4e;
 }
 
-.btn-excluir {
-  border: 2px;
+/* botão de excluir */
+button {
+  margin-top: 25px;
+  padding: 5px 5px;
+  cursor: pointer;
+  border: none;
+  color: red;
+  background-color: wheat;
 }
 
 /* Rodapé */
@@ -128,21 +135,17 @@ footer {
 #bookCatalog {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; /* Alinha os livros ao redor com espaço uniforme */
+  justify-content: space-around; /* Alinha os livros com espaço uniforme entre eles */
   margin-top: 50px; /* Adiciona um espaço superior para separar o catálogo do formulário */
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-/* Estilo para cada livro */
-.book {
-  width: 30%; /* Largura fixa para cada livro */
-  padding: 10px;
+.livro {
+  width: 30%; /*largura fix para cada livro */
+  margin-bottom: 20px; /* Adiciona espaço abaixo de cada livro */
+  box-sizing: border-box; /* Garante que a largura inclua a margem e o preenchimento */
+  padding: 10px; /* Adiciona preenchimento interno */
   border: 2px solid #0a6b4e;
   border-radius: 10px;
-  margin-bottom: 20px; /* Espaçamento inferior entre os livros */
-  box-sizing: border-box; /* Inclui padding e borda na largura total */
-}
-
-/* Estilo para o texto do livro */
-.book p {
-  margin: 5px 0;
 }
