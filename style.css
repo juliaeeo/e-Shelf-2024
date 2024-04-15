@@ -18,7 +18,7 @@ h1 {
 }
 
 header h2 {
-  font-weight: 500;
+  font-weight: 5em;
   color: #0a6b4e;
   margin-bottom: 10px;
   font-size: 2em;
@@ -60,9 +60,47 @@ main {
   margin-top: 50px;
 }
 
-main h4 {
-  font-size: 1.3em;
+.paragrafo-box {
   background-color: rgb(235, 140, 63);
+  padding: 20px; /* Adiciona um espaçamento interno */
+  margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
+  margin-right: 75px;
+  margin-left: 75px;
+  border-radius: 10px; /* Adiciona bordas arredondadas */
+  font-size: 1.3em;
+}
+
+/* Login e Registro de usuário */
+
+#login-form,
+#register-form {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.login {
+  width: 100%;
+  padding: 10px;
+  background-color: #0a6b4e;
+  color: wheat;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login:hover {
+  background-color: rgb(240, 112, 8);
 }
 
 /* Formulário */
