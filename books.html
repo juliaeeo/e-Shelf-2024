@@ -1,0 +1,85 @@
+<!-- e-Shelf - Estante virtual de e-books -- Júlia Epischina E. de Oliveira -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>e-Shelf</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <!-- Início do cabeçalho -->
+  <header>
+    <h1><span class="colored">e</span>Shelf</h1>
+    <h2>Estante de e-books</h2>
+  </header>
+
+  <!-- Início da barra de navegação
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="catalogo.html">Catálogo de Livros</a></li>
+      <li><a href="estatisticas.html">Estatísticas</a></li>
+    </ul>
+  </nav> -->
+
+  <!-- Área de navegação -->
+
+  <main>
+    <h3>Adicione o seu livro ao catálogo inserindo as seguintes informações:</h3>
+
+    <!-- Formulário -->
+
+
+    <div class="container">
+      <form id="bookForm" autocomplete="off">
+
+        <label for="livro">Livro:</label>
+        <input type="text" id="livro" name="livro" required>
+
+        <label for="serie">Série:</label>
+        <input type="text" id="serie" name="serie">
+
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" name="autor" required>
+
+        <label for="ano">Ano de Publicação:</label>
+        <input type="text" id="ano" name="ano">
+
+        <label for="finalizado">Livro Finalizado:</label><br>
+        <input type="radio" id="sim" name="finalizado" value="Sim" required>
+        <label for="sim">Sim</label>
+        <input type="radio" id="nao" name="finalizado" value="Não" required>
+        <label for="nao">Não</label>
+        <input type="radio" id="andamento" name="finalizado" value="Em andamento" required>
+        <label for="andamento">Em andamento</label><br>
+
+        <button class="submission" type="submit">Submeter</button>
+      </form>
+
+    </div>
+
+    <!-- Exibição do catálogo de livros -->
+
+    <h3>Catálogo de Livros:</h3>
+    <div id="bookCatalog" class="bookCatalog"></div>
+  </main>
+
+  <!-- rodapé -->
+  <footer>
+    <p> &copy Todos os direitos reservados - Júlia Epischina</p>
+  </footer>
+
+  <!-- inserção do javascript-->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module" src="books.js"></script>
+
+
+
+
+</body>
+
+</html>
