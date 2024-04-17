@@ -61,7 +61,17 @@ main {
 }
 
 .paragrafo-box {
-  background-color: rgb(235, 140, 63);
+  background-color: rgb(238, 162, 99);
+  padding: 20px; /* Adiciona um espaçamento interno */
+  margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
+  margin-right: 75px;
+  margin-left: 75px;
+  border-radius: 10px; /* Adiciona bordas arredondadas */
+  font-size: 1.3em;
+}
+
+.paragrafo-box1 {
+  background-color: #34b991;
   padding: 20px; /* Adiciona um espaçamento interno */
   margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
   margin-right: 75px;
@@ -72,13 +82,18 @@ main {
 
 /* Login e Registro de usuário */
 
+#form-container {
+  display: flex;
+  justify-content: center;
+}
+
 #login-form,
 #register-form {
   width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  margin: 0 10px;
+  margin: 50px 25px;
 }
 
 input[type="email"],
@@ -92,7 +107,7 @@ input[type="password"] {
 .login {
   width: 100%;
   padding: 10px;
-  background-color: #0a6b4e;
+  background-color: #34b991;
   color: wheat;
   border: none;
   border-radius: 5px;
@@ -100,7 +115,7 @@ input[type="password"] {
 }
 
 .login:hover {
-  background-color: rgb(240, 112, 8);
+  background-color: rgb(238, 162, 99);
 }
 
 /* Formulário */

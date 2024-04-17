@@ -29,7 +29,7 @@
         </p>
       </div>
 
-      <div class="paragrafo-box">
+      <div class="paragrafo-box1">
         <p>Será possível contabilizar os livros lidos no mês, visualizar livros por autor ou ano de publicação.</p>
       </div>
 
@@ -43,18 +43,20 @@
 
     <!-- Login e registro de usuário -->
 
-    <div id="login-form">
-      <h2>Login</h2>
-      <input type="email" id="register-email" placeholder="Email" required>
-      <input type="password" id="register-password" placeholder="Senha" required>
-      <button class="login" onclick="login()">Entrar</button>
-    </div>
+    <div id="form-container">
+      <div id="login-form">
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-password" placeholder="Senha" required>
+        <button class="login" onclick="login()">Entrar</button>
+      </div>
 
-    <div id="register-form">
-      <h2>Registro</h2>
-      <input type="email" id="register-email" placeholder="Email" required>
-      <input type="password" id="register-password" placeholder="Senha" required>
-      <button class="login" onclick="register()">Registrar</button>
+      <div id="register-form">
+        <h2>Registro</h2>
+        <input type="email" id="register-email" placeholder="Email" required>
+        <input type="password" id="register-password" placeholder="Senha" required>
+        <button class="login" onclick="register()">Registrar</button>
+      </div>
     </div>
   </main>
 
@@ -65,8 +67,7 @@
 
   <!-- inserção do javascript-->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script type="module" src="index.js"></script>
-
+  <script src="login.js"></script>
 </body>
 
 </html>

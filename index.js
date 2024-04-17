@@ -1,3 +1,5 @@
+// Para inserir dados no formulário e exibir o catálogo de livros
+
 // // Inicialize o Supabase com as credenciais do seu projeto
 const supabaseUrl = "https://uyxbhreygsckfskebocj.supabase.co";
 const supabaseKey =
