@@ -1,0 +1,46 @@
+<!-- e-Shelf - Estante virtual de e-books -- Júlia Epischina E. de Oliveira -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>e-Shelf</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <!-- Início do cabeçalho -->
+  <header>
+    <h1><a href="index.html"> <span class="colored">e</span>Shelf</a></h1>
+    <h2>Estante de e-books</h2>
+  </header>
+
+
+  <!-- Área de navegação -->
+
+  <main>
+    <!-- Login e registro de usuário -->
+
+    <div id="register-form">
+      <h3>Faça o seu registro na plataforma e-Shelf:</h3>
+      <input type="email" id="register-email" placeholder="Email" required>
+      <input type="password" id="register-password" placeholder="Senha" required>
+      <button class="login" onclick="register()">Cadastre-se</button>
+    </div>
+
+    <p>Já tem uma conta? Faça o seu <a href="login.html" id="login-link"> login </a></p>
+  </main>
+
+  <!-- rodapé -->
+  <footer>
+    <p> &copy Todos os direitos reservados - Júlia Epischina</p>
+  </footer>
+
+  <!-- inserção do javascript-->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="login.js"></script>
+</body>
+
+</html>
