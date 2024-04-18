@@ -99,3 +99,8 @@ async function displayData() {
 
 // Chamar a função para exibir os dados ao carregar a página
 displayData();
+
+// Rolar suavemente para a seção do catálogo de livros quando clicar na palavra "Catálogo"
+document.getElementById("catalogLink").addEventListener("click", function () {
+  document.getElementById("bookCatalog").scrollIntoView({ behavior: "smooth" });
+});
