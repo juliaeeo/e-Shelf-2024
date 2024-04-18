@@ -25,7 +25,7 @@ async function register() {
     alert("Usuário registrado com sucesso!");
 
     // Redirecionar para outra página após o login bem-sucedido
-    window.location.href = "login.html";
+    window.location.href = "books.html";
 
     // Limpar os campos após o registro bem-sucedido
     document.getElementById("register-email").value = "";
@@ -57,7 +57,7 @@ async function login() {
     if (data) {
       alert("Login realizado com sucesso!");
       // Redirecionar para outra página após o login bem-sucedido
-      window.location.href = "login.html";
+      window.location.href = "books.html";
     } else {
       alert("Credenciais inválidas. Por favor, verifique seu email e senha.");
     }
@@ -67,4 +67,14 @@ async function login() {
   } catch (error) {
     alert("Erro ao fazer login. Por favor, tente novamente.");
   }
+}
+
+function showLoginForm() {
+  document.getElementById("login-form").style.display = "block";
+  document.getElementById("register-form").style.display = "none";
+}
+
+function showRegisterForm() {
+  document.getElementById("login-form").style.display = "none";
+  document.getElementById("register-form").style.display = "block";
 }
