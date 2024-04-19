@@ -13,24 +13,24 @@ async function register() {
   const email = document.getElementById("register-email").value;
   const password = document.getElementById("register-password").value;
 
-  // // Expressão regular para validar o formato do email
-  // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Expressão regular para validar o formato do email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // // Verificar se o email e a senha foram fornecidos
-  // if (!email || !password) {
-  //   alert("Por favor, preencha todos os campos.");
-  //   return;
-  // }
-  // // Verificar se o email tem um formato válido
-  // if (!emailRegex.test(email)) {
-  //   alert("Por favor, insira um email válido.");
-  //   return;
-  // }
-  // // Verificar se a senha tem no mínimo 6 caracteres
-  // if (password.length < 6) {
-  //   alert("A senha deve ter no mínimo 6 caracteres.");
-  //   return;
-  // }
+  // Verificar se o email e a senha foram fornecidos
+  if (!email || !password) {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
+  // Verificar se o email tem um formato válido
+  if (!emailRegex.test(email) || email.includes("..")) {
+    alert("Por favor, insira um email válido.");
+    return;
+  }
+  // Verificar se a senha tem no mínimo 6 caracteres
+  if (password.length < 6) {
+    alert("A senha deve ter no mínimo 6 caracteres.");
+    return;
+  }
 
   try {
     const { data, error } = await supabase
@@ -91,6 +91,13 @@ async function login() {
 function showLoginForm() {
   document.getElementById("login-form").style.display = "block";
   document.getElementById("register-form").style.display = "none";
+
+  //Adicionar o ouvinte de evento ao formulário de login
+  document
+    .getElementById("login-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault(); //evita o envio padrão do formulario
+    });
 }
 
 function showRegisterForm() {
