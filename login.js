@@ -1,5 +1,3 @@
-// Controle do login e registro de usuário
-
 // // Inicialize o Supabase com as credenciais do seu projeto
 const supabaseUrl = "https://uyxbhreygsckfskebocj.supabase.co";
 const supabaseKey =
@@ -7,100 +5,69 @@ const supabaseKey =
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-//Função para registro de usuário
-// window.register = register;
-async function register() {
-  const email = document.getElementById("register-email").value;
-  const password = document.getElementById("register-password").value;
-
-  // Expressão regular para validar o formato do email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  // Verificar se o email e a senha foram fornecidos
-  if (!email || !password) {
-    alert("Por favor, preencha todos os campos.");
-    return;
-  }
-  // Verificar se o email tem um formato válido
-  if (!emailRegex.test(email) || email.includes("..")) {
-    alert("Por favor, insira um email válido.");
-    return;
-  }
-  // Verificar se a senha tem no mínimo 6 caracteres
-  if (password.length < 6) {
-    alert("A senha deve ter no mínimo 6 caracteres.");
-    return;
-  }
-
-  try {
-    const { data, error } = await supabase
-      .from("usuarios")
-      .insert([{ email, password }]);
-
-    if (error) {
-      throw error;
+////////////////////////////////////////////////////////////////////////////////////////////////
+//Adiciona um evento de clique à seta do login para alternar a visibilidade das opções da conta
+///////////////////////////////////////////////////////////////////////////////////////
+document
+  .getElementById("account-toggle")
+  .addEventListener("click", function () {
+    let accountOptions = document.getElementById("account-options");
+    //Se as opções de conta estão visíveis, esconde-as. Caso contrário, mostra-as
+    if (accountOptions.style.display === "block") {
+      accountOptions.style.display = "none";
+    } else {
+      accountOptions.style.display = "block";
     }
+  });
 
-    alert("Usuário registrado com sucesso!");
+//////////////////////////////////////////
+// Controle do login de usuário
+///////////////////////////////////////////
 
-    // Redirecionar para outra página após o login bem-sucedido
-    window.location.href = "books.html";
-
-    // Limpar os campos após o registro bem-sucedido
-    document.getElementById("register-email").value = "";
-    document.getElementById("register-password").value = "";
-  } catch (error) {
-    alert("Erro ao registrar usuário. Por favor, tente novamente.");
-  }
-}
-
-//Função para login de usuário
-
-async function login() {
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
-
+//Função para fazer login
+async function signIn(email, password) {
   try {
-    // Consulta ao Supabase para verificar se o usuário existe na tabela 'usuarios'
-    const { data, error } = await supabase
-      .from("usuarios")
-      .select()
+    //Verifica se o usuário existe antes de fazer login
+    const { data: userExists, error: userError } = await supabase
+      .from("users")
+      .select("id")
       .eq("email", email)
-      .eq("password", password)
       .single();
 
-    if (error) {
-      throw error;
+    if (userError) {
+      throw new Error("Erro ao verificar o usuário: " + userError.message);
     }
 
-    if (data) {
-      alert("Login realizado com sucesso!");
-      // Redirecionar para outra página após o login bem-sucedido
-      window.location.href = "books.html";
-    } else {
-      alert("Credenciais inválidas. Por favor, verifique seu email e senha.");
+    if (!userExists) {
+      throw new Error("Usuário não encontrado.");
     }
-    // Limpar os campos após o registro bem-sucedido
-    document.getElementById("login-email").value = "";
-    document.getElementById("login-password").value = "";
+
+    //Faz login apenas se o usuário estiver registrado
+
+    const { user, error } = await supabase.auth.signIn({
+      email,
+      password,
+    });
+    if (error) {
+      throw new Error("Erro ao fazer login: " + error.message);
+    } else {
+      console.log("Login bem sucedido:", user);
+      return user;
+    }
   } catch (error) {
-    alert("Erro ao fazer login. Por favor, tente novamente.");
+    alert(error.message);
+    console.error("Erro ao fazer login:", error.message);
+    return null;
   }
 }
 
-function showLoginForm() {
-  document.getElementById("login-form").style.display = "block";
-  document.getElementById("register-form").style.display = "none";
-
-  //Adicionar o ouvinte de evento ao formulário de login
-  document
-    .getElementById("login-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault(); //evita o envio padrão do formulario
-    });
-}
-
-function showRegisterForm() {
-  document.getElementById("login-form").style.display = "none";
-  document.getElementById("register-form").style.display = "block";
+// Função para chamar a função signIn quando o usuário clica em "Entrar"
+function loginUser() {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+  signIn(email, password).then((user) => {
+    if (user) {
+      window.location.href = "books.html";
+    }
+  });
 }

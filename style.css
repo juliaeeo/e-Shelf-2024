@@ -30,36 +30,41 @@ header h2 {
   text-align: center;
 }
 
-/* Barra de navegação */
+/* Area do minha conta */
 
-.barraNav1 {
-  border: 2px solid #0a6b4e;
-  border-radius: 10px;
-}
-
-.barraNav2 {
-  border: 2px solid rgb(240, 112, 8);
-  border-radius: 10px;
-}
-
-nav {
-  overflow: hidden;
-  margin: 40px auto 60px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-nav a {
-  text-decoration: none;
-  font-size: 20px;
+.account-text {
+  padding-left: 5px;
+  padding-right: 5px;
   font-weight: bold;
-  display: inline-block;
-  text-align: center;
-  padding: 14px 80px;
 }
 
-nav a:hover {
-  background-color: rgb(240, 112, 8);
+.account-box {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer; /* Adiciona um cursor de apontar para indicar que é clicável */
+}
+
+.account-options {
+  display: none; /*inicialmente esconde as opções de conta*/
+  position: absolute;
+  top: 30px; /*ajusta a posição vertical das opções*/
+  right: 0;
+  background-color: whitesmoke; /* Define a cor de fundo das opções */
+  border: 2px solid #34b991; /* Adiciona uma borda às opções */
+  padding: 5px;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-options a {
+  display: inline; /* Faz com que os links sejam exibidos como blocos */
+  text-decoration: none;
+  color: black;
+  margin-bottom: 10px; /* Adiciona espaço entre os links */
+  font-weight: bold;
+  font-size: 0.9em;
 }
 
 /* Remover sublinhado dos links */
