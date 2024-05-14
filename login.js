@@ -20,54 +20,34 @@ document
     }
   });
 
-//////////////////////////////////////////
-// Controle do login de usuário
-///////////////////////////////////////////
+// //////////////////////////////////////////
+// // Controle do login de usuário
+// ///////////////////////////////////////////
 
-//Função para fazer login
-async function signIn(email, password) {
-  try {
-    //Verifica se o usuário existe antes de fazer login
-    const { data: userExists, error: userError } = await supabase
-      .from("users")
-      .select("id")
-      .eq("email", email)
-      .single();
-
-    if (userError) {
-      throw new Error("Erro ao verificar o usuário: " + userError.message);
-    }
-
-    if (!userExists) {
-      throw new Error("Usuário não encontrado.");
-    }
-
-    //Faz login apenas se o usuário estiver registrado
-
-    const { user, error } = await supabase.auth.signIn({
-      email,
-      password,
-    });
-    if (error) {
-      throw new Error("Erro ao fazer login: " + error.message);
-    } else {
-      console.log("Login bem sucedido:", user);
-      return user;
-    }
-  } catch (error) {
-    alert(error.message);
-    console.error("Erro ao fazer login:", error.message);
-    return null;
-  }
-}
-
-// Função para chamar a função signIn quando o usuário clica em "Entrar"
-function loginUser() {
+//Função para fazer login do usuário
+async function loginUser() {
+  //Coletando dados do formulário
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
-  signIn(email, password).then((user) => {
-    if (user) {
+
+  try {
+    //Fazendo login do usário no Supabase
+    const { user, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    //Verificando se houve erro no login
+    if (error) {
+      alert("Erro ao fazer login: " + error.message);
+    } else {
+      //Redirecionando para a página books.html após o sucesso do login
       window.location.href = "books.html";
     }
-  });
+  } catch (error) {
+    console.error("Erro ao fazer login:", error.message);
+    alert(
+      "Erro ao fazer login. Por favor, verifique seu email e senha e tente novamente."
+    );
+  }
 }
