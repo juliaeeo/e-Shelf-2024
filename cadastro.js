@@ -5,51 +5,32 @@ const supabaseKey =
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-//////////////////////////////////////////
-// Controle do registro de usuário
-///////////////////////////////////////////
+// //////////////////////////////////////////
+// // Controle do registro de usuário
+// ///////////////////////////////////////////
 
 //Função para registrar um novo usuário
-async function signUp(email, password) {
-  try {
-    const { user, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    if (error) {
-      throw new Error("Erro ao registrar: " + error.message);
-    } else {
-      alert(
-        "Usuário registrado com sucesso: " +
-          email +
-          "Verifique a confirmação em seu email."
-      );
-      return user;
-    }
-  } catch (error) {
-    alert("Erro ao registrar: " + error.message);
-    console.error("Erro ao registrar:", error.message);
-    return null;
-  }
-}
-
-// Função para chamar a função signUp quando o usuário clica em "Registrar"
 async function registerUser() {
+  //Coletando dados do formulário
   const email = document.getElementById("register-email").value;
   const password = document.getElementById("register-password").value;
 
   try {
-    const user = await signUp(email, password);
-    if (user) {
+    //Criando o usuário no Supabase
+    const { user, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    //Verificando se houve erro no registro
+    if (error) {
+      alert("Erro ao registrar usuário: " + error.message);
+    } else {
+      //Redirecionando para a página books.html após o sucesso do registro
       window.location.href = "books.html";
     }
   } catch (error) {
-    if (error.message.includes("Email rate limit exceeded")) {
-      alert(
-        "Ocorreu um problema ao enviar o e-mail de confirmação. Por favor, tente novamente mais tarde."
-      );
-    } else {
-      alert("Erro ao registrar: " + error.message);
-    }
+    console.error("Erro ao registrar usuário: ", error.message);
+    alert("Erro ao registrar usuário. Por favor, tente novamente mais tarde.");
   }
 }
