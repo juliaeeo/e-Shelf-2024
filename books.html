@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -15,6 +16,16 @@
   <header>
     <h1><a href="index.html"><span class="colored">e</span>Shelf</a></h1>
     <h2>Estante de e-books</h2>
+
+    <div class="account-box" id="account-toggle">
+      <i class="fas fa-user"></i>
+      <span class="account-text">Sair</span>
+      <i class="fas fa-chevron-down"></i>
+      <div class="account-options" id="account-options" style="display: none;">
+        <a href="#" id="logout">Logout</a>
+      </div>
+    </div>
+
   </header>
 
 
@@ -59,7 +70,7 @@
 
     <!-- Exibição do catálogo de livros -->
 
-    <h3>Catálogo de Livros:</h3>
+    <h3 id="catalogo">CATÁLOGO DE LIVROS:</h3>
     <div id="bookCatalog" class="bookCatalog"></div>
   </main>
 
