@@ -178,6 +178,37 @@ label {
   margin-right: 10px;
 }
 
+/* Página do cadastro */
+#register-form input {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid rgb(240, 112, 8);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Página do login */
+#login-form input {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid rgb(240, 112, 8);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Estilos para o botão */
+#register-form button {
+  width: 50%;
+  padding: 10px;
+  background-color: #34b991;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 /* botão de submeter formulário */
 .submission {
   padding: 16px 32px;
@@ -230,4 +261,27 @@ footer {
   padding: 10px; /* Adiciona preenchimento interno */
   border: 2px solid #0a6b4e;
   border-radius: 10px;
+}
+
+/* Estilos para telas menores, como celulares */
+
+@media only screen and (max-width: 600px) {
+  .account-box {
+    padding: 10px; /* Adiciona espaço ao redor do elemento */
+    background-color: whitesmoke; /* Cor de fundo para destacar a área */
+    border-radius: 5px; /* Borda arredondada para uma aparência mais suave */
+    text-align: center; /* Centraliza o conteúdo */
+    margin-top: -30px; /*Compensa o espaço ocupado pelo cabeçalho*/
+    width: 10%;
+  }
+  .account-box i {
+    font-size: 14px; /* Aumenta o tamanho do ícone */
+    margin-right: 5px; /* Adiciona espaço entre o ícone e o texto */
+  }
+  .account-text {
+    font-size: 14px; /* Aumenta o tamanho do texto */
+  }
+  .account-options {
+    margin-top: 10px; /* Adiciona espaço acima das opções de conta */
+  }
 }
