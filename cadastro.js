@@ -26,6 +26,9 @@ async function registerUser() {
     if (error) {
       alert("Erro ao registrar usuário: " + error.message);
     } else {
+      alert(
+        "Usuário registrado com sucesso. Verifique seu email para confirmar seu cadastro."
+      );
       //Redirecionando para a página books.html após o sucesso do registro
       window.location.href = "books.html";
     }
