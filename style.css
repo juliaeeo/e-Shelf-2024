@@ -226,13 +226,15 @@ label {
 }
 
 /* botão de excluir */
-button {
-  margin-top: 25px;
-  padding: 5px 5px;
-  cursor: pointer;
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
   border: none;
   color: red;
-  background-color: wheat;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 /* Rodapé */
@@ -246,37 +248,61 @@ footer {
 
 /* Estilo para o container do catálogo */
 #bookCatalog {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; /* Alinha os livros com espaço uniforme entre eles */
+  justify-content: space-evenly; /* Alinha os livros */
   margin-top: 50px; /* Adiciona um espaço superior para separar o catálogo do formulário */
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  gap: 5px;
 }
 
 .livro {
-  width: 30%; /*largura fix para cada livro */
-  margin-bottom: 20px; /* Adiciona espaço abaixo de cada livro */
-  box-sizing: border-box; /* Garante que a largura inclua a margem e o preenchimento */
-  padding: 10px; /* Adiciona preenchimento interno */
+  /* width: 25%; largura fixa para cada livro */
+  /* margin-bottom: 20px; Adiciona espaço abaixo de cada livro */
+  /* box-sizing: border-box; Garante que a largura inclua a margem e o preenchimento */
+  /* padding: 15px; */
   border: 2px solid #0a6b4e;
   border-radius: 10px;
+  text-align: left;
+  position: relative;
+  padding: 15px;
+  width: 350px;
+  margin: 10px;
 }
 
 #catalogo {
   background-color: orange;
 }
 
+/* ---------------------------------------------- */
 /* Estilos para telas menores, como celulares */
+/* ---------------------------------------------- */
 
 @media only screen and (max-width: 600px) {
+  h1 {
+    text-align: center;
+    color: #0a6b4e;
+    font-size: 60px;
+  }
+
+  header h2 {
+    font-weight: 2em;
+    color: #0a6b4e;
+    margin-bottom: 15px;
+    font-size: 2em;
+    text-align: center;
+  }
+
   .account-box {
-    padding: 8px; /* Adiciona espaço ao redor do elemento */
+    padding: 5px; /* Adiciona espaço ao redor do elemento */
     background-color: #34b991; /* Cor de fundo para destacar a área */
     border-radius: 5px; /* Borda arredondada para uma aparência mais suave */
     text-align: center; /* Centraliza o conteúdo */
-    margin-top: -30px; /*Compensa o espaço ocupado pelo cabeçalho*/
-    width: 10%;
+    margin-top: 10px; /*Compensa o espaço ocupado pelo cabeçalho*/
+    width: 12%;
+    margin-right: -15px;
   }
   .account-box i {
     font-size: 17px; /* Aumenta o tamanho do ícone */
@@ -286,8 +312,14 @@ footer {
     font-size: 14px; /* Aumenta o tamanho do texto */
   }
   .account-options {
-    margin-top: 90px; /* Adiciona espaço acima das opções de conta */
+    margin-top: 60px; /* Adiciona espaço acima das opções de conta */
     width: 100%;
     font-size: 14px;
+    padding: 2px;
   }
 }
+
+/* Mudança das línguas */
+/* .hidden {
+  display: none;
+} */
