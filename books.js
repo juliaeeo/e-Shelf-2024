@@ -114,7 +114,8 @@ async function displayData() {
 
       // Adicionando botão de exclusão
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Excluir";
+      deleteButton.textContent = "x";
+      deleteButton.className = "delete-button";
       deleteButton.addEventListener("click", async () => {
         try {
           // Excluir registro do Supabase
