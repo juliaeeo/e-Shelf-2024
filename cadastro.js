@@ -20,6 +20,9 @@ async function registerUser() {
     const { user, error } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        emailRedirectTo: "https://juliaeeo.github.io/e-Shelf-2024/",
+      },
     });
 
     //Verificando se houve erro no registro
