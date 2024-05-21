@@ -307,7 +307,7 @@ footer {
     background-color: #34b991; /* Cor de fundo para destacar a área */
     border-radius: 5px; /* Borda arredondada para uma aparência mais suave */
     /* text-align: center; Centraliza o conteúdo */
-    margin-top: 135px; /*Compensa o espaço ocupado pelo cabeçalho*/
+    margin-top: 100px; /*Compensa o espaço ocupado pelo cabeçalho*/
     width: auto;
     margin-right: 170px;
     cursor: pointer;
