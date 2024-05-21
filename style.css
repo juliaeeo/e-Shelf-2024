@@ -284,18 +284,18 @@ footer {
 /* Estilos para telas menores, como celulares */
 /* ---------------------------------------------- */
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 768px) {
   h1 {
     text-align: center;
     color: #0a6b4e;
-    font-size: 60px;
+    font-size: 40px;
   }
 
   header h2 {
     font-weight: 1.5em;
     color: #0a6b4e;
-    margin-bottom: 15px;
-    font-size: 2em;
+    margin-bottom: 10px;
+    font-size: 1.5em;
     text-align: center;
   }
 
@@ -307,9 +307,9 @@ footer {
     background-color: #34b991; /* Cor de fundo para destacar a área */
     border-radius: 5px; /* Borda arredondada para uma aparência mais suave */
     /* text-align: center; Centraliza o conteúdo */
-    margin-top: 100px; /*Compensa o espaço ocupado pelo cabeçalho*/
-    width: auto;
-    margin-right: 170px;
+    margin-top: 50px; /*Compensa o espaço ocupado pelo cabeçalho*/
+    width: 100%;
+    margin-right: 0px;
     cursor: pointer;
   }
   .account-box i {
@@ -322,23 +322,35 @@ footer {
   .account-options {
     margin-top: 8px; /* Adiciona espaço acima das opções de conta */
     width: auto;
-    font-size: 15px;
-    padding: 2px;
+    font-size: 14px;
+    padding: 5px;
     border-radius: 5px;
     display: none;
     position: absolute;
     align-items: center;
   }
 
-  .paragrafo-box0 {
+  .paragrafo-box0,
+  .paragrafo-box2 {
     background-color: rgb(238, 162, 99);
     padding: 20px; /* Adiciona um espaçamento interno */
     margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
-    margin-right: 75px;
+    margin-right: 20px;
     margin-left: 75px;
-    margin-top: 90px;
+    margin-top: 50px;
     border-radius: 10px; /* Adiciona bordas arredondadas */
-    font-size: 1.3em;
+    font-size: 1em;
+  }
+
+  .paragrafo-box1 {
+    background-color: #34b991;
+    padding: 20px; /* Adiciona um espaçamento interno */
+    margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
+    margin-right: 20px;
+    margin-left: 75px;
+    margin-top: 50px;
+    border-radius: 10px; /* Adiciona bordas arredondadas */
+    font-size: 1em;
   }
 }
 
