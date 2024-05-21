@@ -1,7 +1,7 @@
 <!-- e-Shelf - Estante virtual de e-books -- Júlia Epischina E. de Oliveira -->
 
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html lang="pt">
+<html lang="pt">
 
 <head>
   <title>e-Shelf</title>
@@ -12,59 +12,125 @@
 </head>
 
 <body>
-  <!-- Início do cabeçalho -->
-  <header>
-    <h1><span class="colored">e</span>Shelf</h1>
-    <h2>Estante de e-books</h2>
+  <section id="content-pt">
+    <!-- Início do cabeçalho -->
+    <header>
+      <h1><span class="colored">e</span>Shelf</h1>
+      <h2>Estante de e-books</h2>
 
-    <!-- Adição de div para a conta -->
-    <div class="account-box" id="account-toggle">
-      <i class="fas fa-user"></i>
-      <span class="account-text">Minha Conta</span>
-      <i class="fas fa-chevron-down"></i> <!-- Ícone da seta para baixo -->
-      <div class="account-options" id="account-options">
-        <a href="login.html">Entrar</a> ou
-        <a href="cadastro.html">Registrar</a>
+      <!-- <div class="lang">
+        <button id="lang-pt">Português</button>
+        <button id="lang-en">English</button>
+      </div> -->
+
+
+      <!-- Adição de div para a conta -->
+      <div class="account-box" id="account-toggle">
+        <i class="fas fa-user"></i>
+        <span class="account-text">Minha Conta</span>
+        <i class="fas fa-chevron-down"></i> <!-- Ícone da seta para baixo -->
+        <div class="account-options" id="account-options">
+          <a href="login.html">Entrar</a> ou
+          <a href="cadastro.html">Registrar</a>
+        </div>
       </div>
-    </div>
 
-  </header>
+    </header>
+
+    <!-- Área de navegação -->
+
+    <main>
+
+      <h4>
+        <div class="paragrafo-box0">
+          <p>e-Shelf irá salvar os seus e-books, categorizando-os em lidos, não lidos ou em leitura em
+            andamento.
+          </p>
+        </div>
+
+        <div class="paragrafo-box1">
+          <p>Será possível contabilizar os livros lidos, visualizar livros por autor ou ano de publicação.</p>
+        </div>
+
+        <div class="paragrafo-box2">
+          <p> Faça o seu login ou seu cadastro para
+            adicionar um
+            livro ao seu catálogo pessoal e
+            para acessar sua
+            área
+            privada. </p>
+        </div>
+
+      </h4>
+    </main>
+    <!-- rodapé -->
+    <footer>
+      <p> &copy Todos os direitos reservados - Júlia Epischina</p>
+    </footer>
+  </section>
+
+
+  <!-- ----------------------- -->
+  <!-- Língua inglesa -->
+  <!-- Conteúdo em inglês -->
+  <!-- ------------------------ -->
+
+  <!-- <section id="content-en" class="hidden"> -->
+  <!-- Início do cabeçalho -->
+  <!-- <header>
+      <h1><span class="colored">e</span>Shelf</h1>
+      <h2>e-books' shelf</h2>
+
+      <div class="lang">
+        <button id="lang-pt">Português</button>
+        <button id="lang-en">English</button>
+      </div> -->
+
+  <!-- Adição de div para a conta -->
+  <!-- <div class="account-box" id="account-toggle">
+        <i class="fas fa-user"></i>
+        <span class="account-text">My Account</span>
+        <i class="fas fa-chevron-down"></i> Ícone da seta para baixo -->
+  <!-- <div class="account-options" id="account-options">
+          <a href="login.html">Enter</a> ou
+          <a href="cadastro.html">Register</a>
+        </div>
+      </div>
+    </footer>
+  </section></header> -->
 
   <!-- Área de navegação -->
 
-  <main>
+  <!-- <main>
 
-    <h4>
-      <div class="paragrafo-box">
-        <p>e-Shelf irá salvar os seus e-books, categorizando-os em lidos, não lidos ou em leitura em
-          andamento.
-        </p>
-      </div>
+      <h4>
+        <div class="paragrafo-box">
+          <p>e-Shelf will save your e-books, categorizing them as read, unread or read in progress.
+          </p>
+        </div>
 
-      <div class="paragrafo-box1">
-        <p>Será possível contabilizar os livros lidos no mês, visualizar livros por autor ou ano de publicação.</p>
-      </div>
+        <div class="paragrafo-box1">
+          <p>It will be possible to count the books read in the month, view the books by author or year of publication.
+          </p>
+        </div>
 
-      <div class="paragrafo-box">
-        <p> Faça o seu login ou seu cadastro para
-          adicionar um
-          livro ao seu catálogo pessoal e
-          para acessar sua
-          área
-          privada. </p>
-      </div>
+        <div class="paragrafo-box">
+          <p> Login or register to add a book to your personal catalog and access your private area. </p>
+        </div>
 
-    </h4>
-  </main>
+      </h4>
+    </main> -->
 
   <!-- rodapé -->
-  <footer>
-    <p> &copy Todos os direitos reservados - Júlia Epischina</p>
-  </footer>
+  <!-- <footer>
+      <p> &copy All rights reserved - Júlia Epischina</p>
+    </footer>
+  </section> -->
 
   <!-- inserção do javascript-->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="login.js"></script>
+  <script src="language.js"></script>
 
 </body>
 
