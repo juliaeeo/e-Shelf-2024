@@ -306,10 +306,11 @@ footer {
     padding: 5px; /* Adiciona espaço ao redor do elemento */
     background-color: #34b991; /* Cor de fundo para destacar a área */
     border-radius: 5px; /* Borda arredondada para uma aparência mais suave */
-    /* text-align: center; Centraliza o conteúdo */
+    text-align: center;
     margin-top: 50px; /*Compensa o espaço ocupado pelo cabeçalho*/
-    width: 100%;
-    margin-right: 0px;
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
     cursor: pointer;
   }
   .account-box i {
@@ -336,7 +337,7 @@ footer {
     padding: 20px; /* Adiciona um espaçamento interno */
     margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
     margin-right: 20px;
-    margin-left: 75px;
+    margin-left: 20px;
     margin-top: 50px;
     border-radius: 10px; /* Adiciona bordas arredondadas */
     font-size: 1em;
@@ -347,7 +348,7 @@ footer {
     padding: 20px; /* Adiciona um espaçamento interno */
     margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
     margin-right: 20px;
-    margin-left: 75px;
+    margin-left: 20px;
     margin-top: 50px;
     border-radius: 10px; /* Adiciona bordas arredondadas */
     font-size: 1em;
