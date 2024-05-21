@@ -284,7 +284,7 @@ footer {
 /* Estilos para telas menores, como celulares */
 /* ---------------------------------------------- */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1440px) {
   h1 {
     text-align: center;
     color: #0a6b4e;
@@ -307,9 +307,9 @@ footer {
     background-color: #34b991; /* Cor de fundo para destacar a área */
     border-radius: 5px; /* Borda arredondada para uma aparência mais suave */
     /* text-align: center; Centraliza o conteúdo */
-    margin-top: 155px; /*Compensa o espaço ocupado pelo cabeçalho*/
+    margin-top: 135px; /*Compensa o espaço ocupado pelo cabeçalho*/
     width: auto;
-    margin-right: 150px;
+    margin-right: 170px;
     cursor: pointer;
   }
   .account-box i {
@@ -336,7 +336,7 @@ footer {
     margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
     margin-right: 75px;
     margin-left: 75px;
-    margin-top: 110px;
+    margin-top: 90px;
     border-radius: 10px; /* Adiciona bordas arredondadas */
     font-size: 1.3em;
   }
