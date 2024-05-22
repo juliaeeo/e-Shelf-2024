@@ -11,6 +11,17 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ3KGLM3YR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-RQ3KGLM3YR');
+</script>
+
+
 <body>
   <!-- Início do cabeçalho -->
   <header>
@@ -24,6 +35,7 @@
   <main>
     <div id="register-form">
       <h3>Faça o seu registro na plataforma e-Shelf:</h3>
+      <input type="text" id="first_name" placeholder="Nome" required>
       <input type="email" id="register-email" placeholder="Email" required>
       <input type="password" id="register-password" placeholder="Senha" required>
       <button class="login" onclick="registerUser()">Cadastre-se</button>
