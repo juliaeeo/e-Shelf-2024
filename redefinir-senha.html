@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Redefinir Senha - e-Shelf</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1><a href="index.html"><span class="colored">e</span>Shelf</a></h1>
+    <h2>Estante de e-books</h2>
+  </header>
+
+  <main>
+    <div id="reset-password-form">
+      <h3>Redefinir Senha</h3>
+      <input type="password" id="new-password" placeholder="Nova Senha" required>
+      <button class="reset" onclick="updatePassword()">Redefinir Senha</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; Todos os direitos reservados - Júlia Epischina</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="update-password.js"></script>
+</body>
+
+</html>
