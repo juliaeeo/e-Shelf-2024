@@ -189,8 +189,10 @@ label {
   box-sizing: border-box;
 }
 
+/* ------------------- */
 /* Página do login */
-#login-form input {
+/* ------------------- */
+.login-form input {
   width: 50%;
   padding: 10px;
   margin-bottom: 15px;
@@ -235,6 +237,17 @@ label {
   border: none;
   color: red;
   font-size: 20px;
+  cursor: pointer;
+}
+
+/* Redefinir senha */
+.reset {
+  width: 50%;
+  padding: 10px;
+  background-color: #34b991;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
