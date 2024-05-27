@@ -35,61 +35,20 @@
         <a href="#" id="logout">Logout</a>
       </div>
     </div>
-
   </header>
-
 
   <!-- Área de navegação -->
 
   <main>
     <h3 id="catalogoLink">Adicione o seu livro ao<span class="colored2"> <a href="#bookCatalog">
           catálogo</a></span>
-      inserindo as seguintes
-      informações:</h3>
+      fazendo sua busca por nome de livro ou autor:</h3>
 
-    <!-- Formulário -->
-    <div class="container">
-      <form id="bookForm" autocomplete="off">
-
-        <label for="livro">Livro:</label>
-        <input type="text" id="livro" name="livro" required>
-
-        <label for="serie">Série:</label>
-        <input type="text" id="serie" name="serie">
-
-        <label for="autor">Autor:</label>
-        <input type="text" id="autor" name="autor" required>
-
-        <label for="ano">Ano de Publicação:</label>
-        <input type="text" id="ano" name="ano">
-
-        <label for="finalizado">Livro Finalizado:</label><br>
-        <input type="radio" id="sim" name="finalizado" value="Sim" required>
-        <label for="sim">Sim</label>
-        <input type="radio" id="nao" name="finalizado" value="Não" required>
-        <label for="nao">Não</label>
-        <input type="radio" id="andamento" name="finalizado" value="Em andamento" required>
-        <label for="andamento">Em andamento</label><br>
-
-        <button id="submitBtn" class="submission" type="button">Submeter</button>
-      </form>
-    </div>
-
-    <!-- Busca de livros -->
-    <h3 id="catalogoLink">Ou faça uma busca por título do livro ou autor:</h3>
-
-    <div class="container">
-      <div class="search-container">
-        <input type="text" id="searchQuery" placeholder="Digite o nome do livro ou autor">
-        <button id="searchButton" class="searchButton">Buscar</button>
-      </div>
-    </div>
-
-    <!-- ------------------------------- -->
-    <!-- Exibição do catálogo de livros -->
-    <!-- -------------------------------- -->
+    <input type="text" id="searchQuery" placeholder="Digite o nome do livro ou autor">
+    <button onclick="searchBooks()">Buscar</button>
 
     <h2 id="catalogo">CATÁLOGO DE LIVROS</h2>
+
     <div id="bookCatalog" class="bookCatalog"></div>
     <div id="results"></div>
   </main>
@@ -101,7 +60,6 @@
 
   <!-- inserção do javascript-->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script type="module" src="books.js"></script>
   <script type="module" src="busca_livros.js"></script>
 
 </body>
