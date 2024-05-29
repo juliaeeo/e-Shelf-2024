@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="busca.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
@@ -75,15 +76,18 @@
       </form>
     </div>
 
-    <!-- Busca de livros -->
-    <h3 id="catalogoLink">Ou faça uma busca por título do livro ou autor:</h3>
-
-    <div class="container">
+    <!-- Busca de livros na barra de busca-->
+    <h3 id="catalogoLink">Ou faça sua busca por nome de livro ou autor. Clique na opção
+      desejada para adicionar o livro ao <span class="colored2"> <a href="#bookCatalog">
+          catálogo</a></span>
+      .</h3>
+    <div class="container2">
       <div class="search-container">
         <input type="text" id="searchQuery" placeholder="Digite o nome do livro ou autor">
-        <button id="searchButton" class="searchButton">Buscar</button>
+        <ul id="searchResults" class="search-results"></ul>
       </div>
     </div>
+
 
     <!-- ------------------------------- -->
     <!-- Exibição do catálogo de livros -->

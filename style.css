@@ -231,12 +231,12 @@ label {
 /* botão de excluir */
 .delete-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 5px;
   background: transparent;
   border: none;
   color: red;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
 }
 
@@ -261,7 +261,10 @@ footer {
 }
 
 /* Estilo para o container do catálogo */
-#bookCatalog {
+/* Exibição dos livros */
+
+#bookCatalog,
+#results {
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -269,28 +272,59 @@ footer {
   margin-top: 50px; /* Adiciona um espaço superior para separar o catálogo do formulário */
   margin-left: 50px;
   margin-right: 50px;
-  gap: 5px;
+  gap: 1em;
 }
 
-.livro {
-  /* width: 25%; largura fixa para cada livro */
-  /* margin-bottom: 20px; Adiciona espaço abaixo de cada livro */
-  /* box-sizing: border-box; Garante que a largura inclua a margem e o preenchimento */
-  /* padding: 15px; */
-  border: 2px solid #0a6b4e;
-  border-radius: 10px;
-  text-align: left;
-  position: relative;
-  padding: 15px;
-  width: 350px;
-  margin: 10px;
-}
+/* .livro { */
+/* width: 25%; largura fixa para cada livro */
+/* margin-bottom: 20px; Adiciona espaço abaixo de cada livro */
+/* box-sizing: border-box; Garante que a largura inclua a margem e o preenchimento */
+/* padding: 15px; */
+/* border: 2px solid #0a6b4e; */
+/* border-radius: 10px; */
+/* text-align: left; */
+/* position: relative; */
+/* padding: 15px; */
+/* width: 350px; */
+/* margin: 10px; */
+/* } */
 
 #catalogo {
   background-color: orange;
   border: 2px solid #0a6b4e;
   width: 80%;
   margin: auto;
+}
+
+.book,
+.livro {
+  position: relative;
+  background-color: whitesmoke;
+  /* border: 1px solid #ccc; */
+  border: 2px solid #0a6b4e;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(33.333% - 1em); /* Responsividade: 3 colunas por linha */
+  max-width: calc(33.333% - 1em);
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.book img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.book h3,
+.livro h3 {
+  margin: 0.5em 0;
+}
+
+.book p,
+.livro p {
+  margin: 0.5em 0;
 }
 
 /* ---------------------------------------------- */
@@ -374,7 +408,7 @@ footer {
 } */
 
 /* Ferramenta de busca de livros */
-
+/* 
 #searchQuery {
   width: 80%;
   padding: 10px;
@@ -397,4 +431,4 @@ footer {
 
 #searchButton:hover {
   background-color: #0a6b4e;
-}
+} */
