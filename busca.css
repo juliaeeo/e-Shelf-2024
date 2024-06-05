@@ -13,11 +13,13 @@
   left: 0;
   right: 0;
   background: white;
-  border: 1px solid #ccc;
+  border: 2px solid #34b991;
+  border-radius: 10px;
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
   display: none; /* Inicialmente escondida */
+  text-align: left;
 }
 
 .search-results li {
