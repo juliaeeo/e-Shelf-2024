@@ -304,8 +304,8 @@ footer {
   border: 2px solid #0a6b4e;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  flex: 1 1 calc(33.333% - 1em); /* Responsividade: 3 colunas por linha */
-  max-width: calc(33.333% - 1em);
+  flex: 1 1 calc(20% - 1em); /* Responsividade: 3 colunas por linha */
+  max-width: calc(20% - 1em);
   padding: 1em;
   box-sizing: border-box;
   text-align: left;
@@ -400,5 +400,11 @@ footer {
     margin-top: 50px;
     border-radius: 10px; /* Adiciona bordas arredondadas */
     font-size: 1em;
+  }
+
+  .book,
+  .livro {
+    flex: 1 1 calc(50% - 1em); /* para dispositivos menores, 2 livros por linha */
+    max-width: calc(50% - 1em);
   }
 }
