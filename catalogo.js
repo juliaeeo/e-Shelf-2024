@@ -174,6 +174,17 @@ function displayResults(books) {
   resultsList.style.display = "block";
 }
 
+// Adiciona um ouvinte de eventos de clique ao documento para limpar os resultados da barra de buscas
+document.addEventListener("click", function (event) {
+  const searchResults = document.getElementById("searchResults");
+  // Verifica se o clique não foi dentro dos resultados de busca
+  if (!event.target.closest("#searchResults")) {
+    // Limpa os resultados de busca e oculta o elemento
+    searchResults.innerHTML = "";
+    searchResults.style.display = "none";
+  }
+});
+
 // Event listener para a barra de busca
 document.getElementById("searchQuery").addEventListener("input", searchBooks);
 
@@ -237,7 +248,7 @@ async function displayData() {
       userDiv.innerHTML = `
         <p><strong>Livro:</strong> ${livro.livro}</p>
         <p><strong>Autor:</strong> ${livro.autor}</p>
-        <p><strong>Data:</strong> ${livro.data}</p>
+        <p><strong>Data de Publicação:</strong> ${livro.data}</p>
       `;
 
       const deleteButton = document.createElement("button");

@@ -308,14 +308,15 @@ footer {
   max-width: calc(33.333% - 1em);
   padding: 1em;
   box-sizing: border-box;
+  text-align: left;
 }
-
+/* 
 .book img {
   max-width: 100%;
   height: auto;
   display: block;
   margin-bottom: 0.5em;
-}
+} */
 
 .book h3,
 .livro h3 {
@@ -401,34 +402,3 @@ footer {
     font-size: 1em;
   }
 }
-
-/* Mudança das línguas */
-/* .hidden {
-  display: none;
-} */
-
-/* Ferramenta de busca de livros */
-/* 
-#searchQuery {
-  width: 80%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#searchButton {
-  padding: 6px 12px;
-  background-color: rgb(240, 112, 8);
-  color: whitesmoke;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-size: 18px;
-  width: 20%;
-}
-
-#searchButton:hover {
-  background-color: #0a6b4e;
-} */
