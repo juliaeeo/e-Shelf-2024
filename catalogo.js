@@ -39,14 +39,14 @@ async function checkUserAuthentication() {
 }
 
 // Função para salvar os dados do formulário na tabela "livros"
-async function saveFormData(livro, serie, autor, ano, finalizado) {
+async function saveFormData(livro, autor, serie, ano, finalizado) {
   try {
     const user = await checkUserAuthentication();
     if (!user) return;
 
     const { data, error } = await supabase
       .from("livros")
-      .insert([{ livro, serie, autor, ano, finalizado, user_id: user.id }]);
+      .insert([{ livro, autor, serie, ano, finalizado, user_id: user.id }]);
     if (error) {
       throw error;
     }
@@ -59,14 +59,14 @@ async function saveFormData(livro, serie, autor, ano, finalizado) {
 }
 
 // Função para salvar os resultados da busca na tabela "livros_busca"
-async function saveSearchResult(livro, autor, data) {
+async function saveSearchResult(livro, autor, genero, data) {
   try {
     const user = await checkUserAuthentication();
     if (!user) return;
 
     const { data: insertData, error } = await supabase
       .from("livros_busca")
-      .insert([{ livro, autor, data, user_id: user.id }]);
+      .insert([{ livro, autor, genero, data, user_id: user.id }]);
     if (error) {
       throw error;
     }
@@ -83,15 +83,15 @@ document
   .getElementById("submitBtn")
   .addEventListener("click", async function () {
     const livro = document.getElementById("livro").value;
-    const serie = document.getElementById("serie").value;
     const autor = document.getElementById("autor").value;
+    const serie = document.getElementById("serie").value;
     const ano = document.getElementById("ano").value;
     const finalizado = document.querySelector(
       'input[name="finalizado"]:checked'
     ).value;
 
     try {
-      await saveFormData(livro, serie, autor, ano, finalizado);
+      await saveFormData(livro, autor, serie, ano, finalizado);
       alert("Dados enviados com sucesso");
       document.getElementById("bookForm").reset();
       displayData();
@@ -149,16 +149,20 @@ function displayResults(books) {
       : "Autor desconhecido";
     const publishedDate =
       book.volumeInfo.publishedDate || "Data não disponível";
-    const formattedDate = publishedDate
-      ? new Date(publishedDate).toISOString().split("T")[0]
-      : null;
+    const publishedYear =
+      publishedDate !== "Data não disponível"
+        ? new Date(publishedDate).getFullYear().toString()
+        : "Ano não disponível";
+    const genres = book.volumeInfo.categories
+      ? book.volumeInfo.categories.join(", ")
+      : "Gênero não disponível";
 
     const listItem = document.createElement("li");
-    listItem.textContent = `${title} - ${authors} - ${publishedDate}`;
+    listItem.textContent = `${title} - ${authors} - ${genres} - ${publishedYear}`;
 
     listItem.addEventListener("click", async () => {
       try {
-        await saveSearchResult(title, authors, formattedDate);
+        await saveSearchResult(title, authors, genres, publishedYear);
         displayData();
         resultsList.style.display = "none";
         resultsList.innerHTML = "";
@@ -177,11 +181,13 @@ function displayResults(books) {
 // Adiciona um ouvinte de eventos de clique ao documento para limpar os resultados da barra de buscas
 document.addEventListener("click", function (event) {
   const searchResults = document.getElementById("searchResults");
+  const searchQuery = document.getElementById("searchQuery");
   // Verifica se o clique não foi dentro dos resultados de busca
   if (!event.target.closest("#searchResults")) {
     // Limpa os resultados de busca e oculta o elemento
     searchResults.innerHTML = "";
     searchResults.style.display = "none";
+    searchQuery.value = "";
   }
 });
 
@@ -215,8 +221,8 @@ async function displayData() {
       userDiv.classList.add("livro");
       userDiv.innerHTML = `
         <p><strong>Livro:</strong> ${livro.livro}</p>
-        <p><strong>Série:</strong> ${livro.serie}</p>
         <p><strong>Autor:</strong> ${livro.autor}</p>
+        <p><strong>Gênero:</strong> ${livro.serie}</p>
         <p><strong>Ano:</strong> ${livro.ano}</p>
         <p><strong>Finalizado:</strong> ${livro.finalizado}</p>
       `;
@@ -248,7 +254,8 @@ async function displayData() {
       userDiv.innerHTML = `
         <p><strong>Livro:</strong> ${livro.livro}</p>
         <p><strong>Autor:</strong> ${livro.autor}</p>
-        <p><strong>Data de Publicação:</strong> ${livro.data}</p>
+        <p><strong>Gênero:</strong> ${livro.genero}</p>
+        <p><strong>Ano:</strong> ${livro.data}</p>
       `;
 
       const deleteButton = document.createElement("button");
