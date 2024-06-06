@@ -55,22 +55,25 @@
         <label for="livro">Livro:</label>
         <input type="text" id="livro" name="livro" required>
 
-        <label for="serie">Série:</label>
-        <input type="text" id="serie" name="serie">
-
         <label for="autor">Autor:</label>
         <input type="text" id="autor" name="autor" required>
+
+        <label for="serie">Gênero:</label>
+        <input type="text" id="serie" name="serie">
 
         <label for="ano">Ano de Publicação:</label>
         <input type="text" id="ano" name="ano">
 
         <label for="finalizado">Livro Finalizado:</label><br>
         <input type="radio" id="sim" name="finalizado" value="Sim" required>
-        <label for="sim">Sim</label>
+        <label for="sim" class="tooltip">Sim<span class="tooltiptext">Este livro está finalizado. Isso significa que
+            você já terminou de ler ou usar este livro.</span></label>
         <input type="radio" id="nao" name="finalizado" value="Não" required>
-        <label for="nao">Não</label>
+        <label for="nao" class="tooltip">Não<span class="tooltiptext">Este livro não está finalizado, ou seja, você
+            desistiu da leitura ou irá lê-lo em outro momento.</span></label>
         <input type="radio" id="andamento" name="finalizado" value="Em andamento" required>
-        <label for="andamento">Em andamento</label><br>
+        <label for="andamento" class="tooltip">Em andamento<span class="tooltiptext">Este livro está em andamento. Isso
+            significa que você ainda está lendo ou usando este livro.</span></label><br>
 
         <button id="submitBtn" class="submission" type="button">Submeter</button>
       </form>

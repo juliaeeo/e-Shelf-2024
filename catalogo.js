@@ -14,7 +14,7 @@ document.getElementById("logout").addEventListener("click", function (event) {
   window.location.href = "index.html";
 });
 
-// // Inicialize o Supabase com as credenciais do seu projeto
+// Inicialize o Supabase com as credenciais do seu projeto
 const supabaseUrl = "https://uyxbhreygsckfskebocj.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5eGJocmV5Z3Nja2Zza2Vib2NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjkxMDgsImV4cCI6MjAyODM0NTEwOH0.f4hfGh5xpT8-rFsfIOElu9msfxtHtpiz7HsIzjTYdko";
@@ -59,14 +59,14 @@ async function saveFormData(livro, autor, serie, ano, finalizado) {
 }
 
 // Função para salvar os resultados da busca na tabela "livros_busca"
-async function saveSearchResult(livro, autor, genero, data) {
+async function saveSearchResult(livro, autor, genero, data, finalizado) {
   try {
     const user = await checkUserAuthentication();
     if (!user) return;
 
     const { data: insertData, error } = await supabase
       .from("livros_busca")
-      .insert([{ livro, autor, genero, data, user_id: user.id }]);
+      .insert([{ livro, autor, genero, data, finalizado, user_id: user.id }]);
     if (error) {
       throw error;
     }
@@ -161,8 +161,20 @@ function displayResults(books) {
     listItem.textContent = `${title} - ${authors} - ${genres} - ${publishedYear}`;
 
     listItem.addEventListener("click", async () => {
+      const finalizado = prompt(
+        "Informe o status do livro (Sim, Não ou  Em andamento):",
+        "Sim"
+      );
+      if (!finalizado) return;
+
       try {
-        await saveSearchResult(title, authors, genres, publishedYear);
+        await saveSearchResult(
+          title,
+          authors,
+          genres,
+          publishedYear,
+          finalizado
+        );
         displayData();
         resultsList.style.display = "none";
         resultsList.innerHTML = "";
@@ -182,9 +194,12 @@ function displayResults(books) {
 document.addEventListener("click", function (event) {
   const searchResults = document.getElementById("searchResults");
   const searchQuery = document.getElementById("searchQuery");
-  // Verifica se o clique não foi dentro dos resultados de busca
-  if (!event.target.closest("#searchResults")) {
-    // Limpa os resultados de busca e oculta o elemento
+  // Verifica se o clique não foi dentro dos resultados de busca ou da barra de pesquisa
+  if (
+    !event.target.closest("#searchResults") &&
+    !event.target.closest("#searchQuery")
+  ) {
+    // Limpa os resultados de busca, oculta o elemento e limpa o campo de busca
     searchResults.innerHTML = "";
     searchResults.style.display = "none";
     searchQuery.value = "";
@@ -227,20 +242,13 @@ async function displayData() {
         <p><strong>Finalizado:</strong> ${livro.finalizado}</p>
       `;
 
+      // Botão de excluir
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "x";
-      deleteButton.className = "delete-button";
+      deleteButton.textContent = "Excluir";
+      deleteButton.classList.add("delete-button");
       deleteButton.addEventListener("click", async () => {
-        try {
-          const { error } = await supabase
-            .from("livros")
-            .delete()
-            .eq("id", livro.id);
-          if (error) throw error;
-          displayData();
-        } catch (error) {
-          console.error("Erro ao excluir registro", error.message);
-        }
+        await deleteBook(livro.id);
+        displayData();
       });
 
       userDiv.appendChild(deleteButton);
@@ -256,22 +264,15 @@ async function displayData() {
         <p><strong>Autor:</strong> ${livro.autor}</p>
         <p><strong>Gênero:</strong> ${livro.genero}</p>
         <p><strong>Ano:</strong> ${livro.data}</p>
+        <p><strong>Finalizado:</strong> ${livro.finalizado}</p>
       `;
 
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "x";
-      deleteButton.className = "delete-button";
+      deleteButton.textContent = "Excluir";
+      deleteButton.classList.add("delete-button");
       deleteButton.addEventListener("click", async () => {
-        try {
-          const { error } = await supabase
-            .from("livros_busca")
-            .delete()
-            .eq("id", livro.id);
-          if (error) throw error;
-          displayData();
-        } catch (error) {
-          console.error("Erro ao excluir registro", error.message);
-        }
+        await deleteBookSearch(livro.id);
+        displayData();
       });
 
       userDiv.appendChild(deleteButton);
@@ -282,7 +283,27 @@ async function displayData() {
   }
 }
 
-// Carrega os dados ao carregar a página
-window.addEventListener("DOMContentLoaded", () => {
-  displayData();
-});
+// Função para deletar um livro da tabela "livros"
+async function deleteBook(id) {
+  try {
+    const { error } = await supabase.from("livros").delete().eq("id", id);
+    if (error) throw error;
+    console.log("Livro excluído com sucesso");
+  } catch (error) {
+    console.error("Erro ao excluir livro", error.message);
+  }
+}
+
+// Função para deletar um livro da tabela "livros_busca"
+async function deleteBookSearch(id) {
+  try {
+    const { error } = await supabase.from("livros_busca").delete().eq("id", id);
+    if (error) throw error;
+    console.log("Livro excluído com sucesso");
+  } catch (error) {
+    console.error("Erro ao excluir livro", error.message);
+  }
+}
+
+// Inicializar a exibição dos dados
+displayData();

@@ -229,16 +229,17 @@ label {
 }
 
 /* botão de excluir */
-.delete-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: transparent;
-  border: none;
+/* .delete-button {
+  border: 1px solid #0a6b4e;
+  border-radius: 10px;
   color: red;
-  font-size: 18px;
+  font-size: 12px;
   cursor: pointer;
-}
+  position: absolute;
+  bottom: 10px; /* ajuste conforme necessário */
+  /* left: 10px; ajuste conforme necessário */
+  /* width: 25%; */
+} */
 
 /* Redefinir senha */
 .reset {
@@ -407,4 +408,32 @@ footer {
     flex: 1 1 calc(50% - 1em); /* para dispositivos menores, 2 livros por linha */
     max-width: calc(50% - 1em);
   }
+}
+
+/* Css para o tooltip */
+.tooltip {
+  position: relative;
+  cursor: help;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #34b991;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
