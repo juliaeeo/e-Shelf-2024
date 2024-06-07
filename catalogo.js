@@ -162,7 +162,7 @@ function displayResults(books) {
 
     listItem.addEventListener("click", async () => {
       const finalizado = prompt(
-        "Informe o status do livro (Sim, Não ou  Em andamento):",
+        "Informe o status do livro (Sim para livro finalizado, Não para futura leitura ou desistência da leitura, Em andamento para leitura em andamento.):",
         "Sim"
       );
       if (!finalizado) return;
@@ -239,12 +239,12 @@ async function displayData() {
         <p><strong>Autor:</strong> ${livro.autor}</p>
         <p><strong>Gênero:</strong> ${livro.serie}</p>
         <p><strong>Ano:</strong> ${livro.ano}</p>
-        <p><strong>Finalizado:</strong> ${livro.finalizado}</p>
+        <p class="finalizado"><strong>Finalizado:</strong> ${livro.finalizado}</p>
       `;
 
       // Botão de excluir
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Excluir";
+      deleteButton.textContent = "x";
       deleteButton.classList.add("delete-button");
       deleteButton.addEventListener("click", async () => {
         await deleteBook(livro.id);
@@ -268,7 +268,7 @@ async function displayData() {
       `;
 
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Excluir";
+      deleteButton.textContent = "x";
       deleteButton.classList.add("delete-button");
       deleteButton.addEventListener("click", async () => {
         await deleteBookSearch(livro.id);

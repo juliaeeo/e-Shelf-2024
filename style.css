@@ -229,17 +229,15 @@ label {
 }
 
 /* botão de excluir */
-/* .delete-button {
-  border: 1px solid #0a6b4e;
-  border-radius: 10px;
-  color: red;
-  font-size: 12px;
-  cursor: pointer;
+.delete-button {
   position: absolute;
-  bottom: 10px; /* ajuste conforme necessário */
-/* left: 10px; ajuste conforme necessário */
-/* width: 25%; */
-/* } */
+  bottom: 5px;
+  right: 5px;
+  border: none;
+  color: rgb(184, 13, 13);
+  background-color: whitesmoke;
+  cursor: pointer;
+}
 
 /* Redefinir senha */
 .reset {
@@ -276,20 +274,6 @@ footer {
   gap: 1em;
 }
 
-/* .livro { */
-/* width: 25%; largura fixa para cada livro */
-/* margin-bottom: 20px; Adiciona espaço abaixo de cada livro */
-/* box-sizing: border-box; Garante que a largura inclua a margem e o preenchimento */
-/* padding: 15px; */
-/* border: 2px solid #0a6b4e; */
-/* border-radius: 10px; */
-/* text-align: left; */
-/* position: relative; */
-/* padding: 15px; */
-/* width: 350px; */
-/* margin: 10px; */
-/* } */
-
 #catalogo {
   background-color: orange;
   border: 2px solid #0a6b4e;
@@ -305,19 +289,18 @@ footer {
   border: 2px solid #0a6b4e;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  flex: 1 1 calc(20% - 1em); /* Responsividade: 3 colunas por linha */
-  max-width: calc(20% - 1em);
+  /* flex: 1 1 calc(20% - 1em); Responsividade: 3 colunas por linha */
+  /* max-width: calc(20% - 1em); */
+  flex: 1 1 200px;
+  max-width: 200px;
+  box-sizing: border-box;
+  margin: 10px 0;
   padding: 1em;
   box-sizing: border-box;
   text-align: left;
+  padding: 10px;
+  margin-bottom: 15px;
 }
-/* 
-.book img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin-bottom: 0.5em;
-} */
 
 .book h3,
 .livro h3 {
@@ -326,7 +309,41 @@ footer {
 
 .book p,
 .livro p {
-  margin: 0.5em 0;
+  /* margin: 0.5em 0; */
+  margin: 5px 0;
+}
+
+.livro .finalizado,
+.book .finalizado {
+  margin-bottom: 15px;
+}
+
+/* Css para o tooltip */
+.tooltip {
+  position: relative;
+  cursor: help;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #34b991;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* ---------------------------------------------- */
@@ -408,32 +425,4 @@ footer {
     flex: 1 1 calc(50% - 1em); /* para dispositivos menores, 2 livros por linha */
     max-width: calc(50% - 1em);
   }
-}
-
-/* Css para o tooltip */
-.tooltip {
-  position: relative;
-  cursor: help;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 200px;
-  background-color: #34b991;
-  color: #fff;
-  text-align: center;
-  border-radius: 10px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -100px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
 }
