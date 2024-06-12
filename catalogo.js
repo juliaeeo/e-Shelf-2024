@@ -14,6 +14,10 @@ document.getElementById("logout").addEventListener("click", function (event) {
   window.location.href = "index.html";
 });
 
+// -------------------------------------------------------
+// -------------------------------------------------------
+// -------------------------------------------------------
+
 // Inicialize o Supabase com as credenciais do seu projeto
 const supabaseUrl = "https://uyxbhreygsckfskebocj.supabase.co";
 const supabaseKey =
@@ -230,54 +234,60 @@ async function displayData() {
     const userDataElement = document.getElementById("bookCatalog");
     userDataElement.innerHTML = "";
 
-    // Exibir os dados da tabela "livros"
-    livros.forEach((livro) => {
-      const userDiv = document.createElement("div");
-      userDiv.classList.add("livro");
-      userDiv.innerHTML = `
-        <p><strong>Livro:</strong> ${livro.livro}</p>
-        <p><strong>Autor:</strong> ${livro.autor}</p>
-        <p><strong>Gênero:</strong> ${livro.serie}</p>
-        <p><strong>Ano:</strong> ${livro.ano}</p>
-        <p class="finalizado"><strong>Finalizado:</strong> ${livro.finalizado}</p>
-      `;
+    // Unificar os dados de ambas as tabelas para facilitar a filtragem
+    const allBooks = [...livros, ...livrosBusca];
 
-      // Botão de excluir
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "x";
-      deleteButton.classList.add("delete-button");
-      deleteButton.addEventListener("click", async () => {
-        await deleteBook(livro.id);
-        displayData();
+    // Função para renderizar livros com base em um filtro
+    function renderBooks(filter) {
+      userDataElement.innerHTML = "";
+      allBooks.forEach((livro) => {
+        if (filter === "all" || livro.finalizado === filter) {
+          const userDiv = document.createElement("div");
+          userDiv.classList.add("livro");
+          userDiv.innerHTML = `
+            <p><strong>Livro:</strong> ${livro.livro}</p>
+            <p><strong>Autor:</strong> ${livro.autor}</p>
+            <p><strong>Gênero:</strong> ${livro.serie}</p>
+            <p><strong>Ano:</strong> ${livro.ano}</p>
+            <p class="finalizado"><strong>Finalizado:</strong> ${livro.finalizado}</p>
+          `;
+
+          // Botão de excluir
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "x";
+          deleteButton.classList.add("delete-button");
+          deleteButton.addEventListener("click", async () => {
+            await deleteBook(livro.id);
+            displayData();
+          });
+
+          userDiv.appendChild(deleteButton);
+          userDataElement.appendChild(userDiv);
+        }
       });
+    }
 
-      userDiv.appendChild(deleteButton);
-      userDataElement.appendChild(userDiv);
-    });
+    //Renderizar todos os livros ao carregar a página
+    renderBooks("all");
 
-    // Exibir os dados da tabela "livros_busca"
-    livrosBusca.forEach((livro) => {
-      const userDiv = document.createElement("div");
-      userDiv.classList.add("livro");
-      userDiv.innerHTML = `
-        <p><strong>Livro:</strong> ${livro.livro}</p>
-        <p><strong>Autor:</strong> ${livro.autor}</p>
-        <p><strong>Gênero:</strong> ${livro.genero}</p>
-        <p><strong>Ano:</strong> ${livro.data}</p>
-        <p><strong>Finalizado:</strong> ${livro.finalizado}</p>
-      `;
-
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "x";
-      deleteButton.classList.add("delete-button");
-      deleteButton.addEventListener("click", async () => {
-        await deleteBookSearch(livro.id);
-        displayData();
-      });
-
-      userDiv.appendChild(deleteButton);
-      userDataElement.appendChild(userDiv);
-    });
+    // Função para filtrar livros com base no status
+    window.filterBooksByStatus = function (status) {
+      let filter;
+      switch (status) {
+        case "finalizado":
+          filter = "Sim";
+          break;
+        case "nao_finalizado":
+          filter = "Não";
+          break;
+        case "em_andamento":
+          filter = "Em andamento";
+          break;
+        default:
+          filter = "all";
+      }
+      renderBooks(filter);
+    };
   } catch (error) {
     console.error("Erro ao carregar dados do Supabase", error.message);
   }
