@@ -360,24 +360,60 @@ footer {
 }
 
 /* Estilo para os botões de filtro */
-#filterButtons {
-  display: flex;
-  justify-content: center;
+/* Estilos para o menu dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
   margin-top: 20px;
 }
 
-#filterButtons button {
+.dropdown button {
   padding: 10px 20px;
   margin: 0 10px;
   background-color: #34b991;
-  color: white;
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-#filterButtons button:hover {
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: whitesmoke;
+  border: 1px solid #34b991;
+  border-radius: 5px;
+  min-width: 160px;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  text-align: center;
+}
+
+.dropdown-content button {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: center;
+}
+.dropdown-content button:hover {
   background-color: rgb(238, 162, 99);
+  max-width: 80%;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+  justify-content: center;
+  margin: 0 auto;
 }
 
 /* ---------------------------------------------- */
