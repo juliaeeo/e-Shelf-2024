@@ -7,9 +7,21 @@
 /* Cabeçalho */
 
 h1 {
-  text-align: center;
+  /* text-align: center; */
   color: #0a6b4e;
   font-size: 70px;
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  background-color: white; /* Para evitar sobreposição de conteúdo ao rolar a página */
+  position: -webkit-sticky; /* Para suporte no Safari */
+  position: sticky; /* Para outros navegadores */
+  top: 0; /* Fixa o elemento ao topo da página */
+  z-index: 1000; /* Para garantir que o elemento fique acima de outros conteúdos */
+  margin: 0;
+  padding: 10px 0; /* Adiciona um pouco de espaço ao redor do conteúdo do cabeçalho */
 }
 
 .colored {
@@ -22,8 +34,8 @@ h1 {
   font-weight: bolder;
 }
 
-header h2 {
-  font-weight: 5em;
+h2 {
+  font-weight: 1500;
   color: #0a6b4e;
   margin-bottom: 10px;
   font-size: 2em;
@@ -277,7 +289,8 @@ footer {
 #catalogo {
   background-color: orange;
   border: 2px solid #0a6b4e;
-  width: 80%;
+  border-radius: 10px;
+  color: black;
   margin: auto;
 }
 
@@ -344,6 +357,27 @@ footer {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+/* Estilo para os botões de filtro */
+#filterButtons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#filterButtons button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #34b991;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#filterButtons button:hover {
+  background-color: rgb(238, 162, 99);
 }
 
 /* ---------------------------------------------- */
