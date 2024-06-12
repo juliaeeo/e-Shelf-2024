@@ -26,7 +26,7 @@
   <!-- Início do cabeçalho -->
   <header>
     <h1><a href="index.html"><span class="colored">e</span>Shelf</a></h1>
-    <h2>Estante de e-books</h2>
+    <!-- <h2>Estante de e-books</h2> -->
 
     <div class="account-box" id="account-toggle">
       <i class="fas fa-user"></i>
@@ -39,6 +39,7 @@
 
   </header>
 
+  <h2>Estante de e-books</h2>
 
   <!-- Área de navegação -->
 
@@ -97,7 +98,17 @@
     <!-- -------------------------------- -->
 
     <h2 id="catalogo">CATÁLOGO DE LIVROS</h2>
-    <div id="bookCatalog" class="bookCatalog"></div>
+
+    <!-- Botões de filtro -->
+    <div id="filterButtons">
+      <button onclick="filterBooksByStatus('all')">Todos os livros</button>
+      <button onclick="filterBooksByStatus('finalizado')">Finalizados</button>
+      <button onclick="filterBooksByStatus('nao_finalizado')">Não finalizados</button>
+      <button onclick="filterBooksByStatus('em_andamento')">Em andamento</button>
+
+    </div>
+
+    <div id="bookCatalog" class="bookCatalog"></div>0
     <div id="results"></div>
   </main>
 
@@ -108,9 +119,8 @@
 
   <!-- inserção do javascript-->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <!-- <script type="module" src="books.js"></script> -->
-  <!-- <script type="module" src="busca_livros.js"></script> -->
   <script type="module" src="catalogo.js"></script>
+  <!-- <script type="module" src="filter_books.js"></script> -->
 </body>
 
 </html>
