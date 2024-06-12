@@ -100,12 +100,40 @@
     <h2 id="catalogo">CATÁLOGO DE LIVROS</h2>
 
     <!-- Botões de filtro -->
-    <div id="filterButtons">
-      <button onclick="filterBooksByStatus('all')">Todos os livros</button>
-      <button onclick="filterBooksByStatus('finalizado')">Finalizados</button>
-      <button onclick="filterBooksByStatus('nao_finalizado')">Não finalizados</button>
-      <button onclick="filterBooksByStatus('em_andamento')">Em andamento</button>
+    <div class="button-container">
+      <div class="dropdown">
+        <button id="filterButtons">Filtrar por status</button>
+        <div class="dropdown-content" id="filterOptions">
+          <button onclick="filterBooksByStatus('all')">Todos os livros</button>
+          <button onclick="filterBooksByStatus('finalizado')">Finalizados</button>
+          <button onclick="filterBooksByStatus('nao_finalizado')">Não finalizados</button>
+          <button onclick="filterBooksByStatus('em_andamento')">Em andamento</button>
+        </div>
+      </div>
 
+      <div class="dropdown">
+        <button id="filterButtons">Ordenar por gênero</button>
+        <div class="dropdown-content">
+          <button>Gênero A-Z</button>
+          <button>Gênero Z-A</button>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button id="filterButtons">Ordenar por autor</button>
+        <div class="dropdown-content">
+          <button>Autor A-Z</button>
+          <button>Autor Z-A</button>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button id="filterButtons">Ordem alfabética dos livros</button>
+        <div class="dropdown-content">
+          <button>Livros A-Z</button>
+          <button>Livros Z-A</button>
+        </div>
+      </div>
     </div>
 
     <div id="bookCatalog" class="bookCatalog"></div>0
