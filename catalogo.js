@@ -326,13 +326,21 @@ async function displayData() {
 
     // Ordem por Gênero A-Z
     document.getElementById("sortGenderAZ").addEventListener("click", () => {
-      allBooks.sort((a, b) => (a.serie || "").localeCompare(b.serie || ""));
+      allBooks.sort((a, b) => {
+        const genreA = a.serie || a.genero || "";
+        const genreB = b.serie || b.genero || "";
+        return genreA.localeCompare(genreB);
+      });
       renderBooks(window.currentFilter || "all");
     });
 
     // Ordenação por Gênero Z-A
     document.getElementById("sortGenderZa").addEventListener("click", () => {
-      allBooks.sort((a, b) => (b.serie || "").localeCompare(a.serie || ""));
+      allBooks.sort((a, b) => {
+        const genreA = a.serie || a.genero || "";
+        const genreB = b.serie || b.genero || "";
+        return genreB.localeCompare(genreA);
+      });
       renderBooks(window.currentFilter || "all");
     });
   } catch (error) {
