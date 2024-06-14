@@ -384,11 +384,14 @@ footer {
   background-color: whitesmoke;
   border: 1px solid #34b991;
   border-radius: 5px;
-  min-width: 160px;
-  width: 100%;
+  min-width: 100px;
+  width: 80%;
+  max-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .dropdown-content button {
