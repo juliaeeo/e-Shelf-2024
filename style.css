@@ -414,6 +414,7 @@ footer {
   gap: 10px; /* Espaço entre os botões */
   justify-content: center;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 /* ---------------------------------------------- */
@@ -440,26 +441,27 @@ footer {
     align-items: center; /*alinha verticalmente os itens no centro*/
     justify-content: center; /*centraliza os itens horizontalmente*/
     padding: 5px; /* Adiciona espaço ao redor do elemento */
-    background-color: #34b991; /* Cor de fundo para destacar a área */
+    /* background-color: #34b991;  */
     border-radius: 5px; /* Borda arredondada para uma aparência mais suave */
     text-align: center;
-    margin-top: 50px; /*Compensa o espaço ocupado pelo cabeçalho*/
+    margin-top: 10px; /*Compensa o espaço ocupado pelo cabeçalho*/
     width: auto;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     cursor: pointer;
+    font-size: 12px;
   }
   .account-box i {
-    font-size: 16px; /* Aumenta o tamanho do ícone */
+    font-size: 14px; /* Aumenta o tamanho do ícone */
     margin-right: 5px; /* Adiciona espaço entre o ícone e o texto */
   }
   .account-text {
-    font-size: 14px; /* Aumenta o tamanho do texto */
+    font-size: 12px; /* Aumenta o tamanho do texto */
   }
   .account-options {
     margin-top: 8px; /* Adiciona espaço acima das opções de conta */
     width: auto;
-    font-size: 14px;
+    font-size: 12px;
     padding: 5px;
     border-radius: 5px;
     display: none;
@@ -494,5 +496,9 @@ footer {
   .livro {
     flex: 1 1 calc(50% - 1em); /* para dispositivos menores, 2 livros por linha */
     max-width: calc(50% - 1em);
+  }
+
+  .button-container {
+    flex-wrap: wrap;
   }
 }
