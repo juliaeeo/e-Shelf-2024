@@ -228,14 +228,14 @@ async function displayData() {
     if (livrosResponse.error) throw livrosResponse.error;
     if (livrosBuscaResponse.error) throw livrosBuscaResponse.error;
 
-    const livros = livrosResponse.data;
-    const livrosBusca = livrosBuscaResponse.data;
+    const livros = livrosResponse.data || [];
+    const livrosBusca = livrosBuscaResponse.data || [];
+
+    // Combinar e ordenar os livros alfabeticamente pel título
+    const allBooks = [...livros, ...livrosBusca];
 
     const userDataElement = document.getElementById("bookCatalog");
     userDataElement.innerHTML = "";
-
-    // Unificar os dados de ambas as tabelas para facilitar a filtragem
-    const allBooks = [...livros, ...livrosBusca];
 
     // Função para renderizar livros com base em um filtro
     function renderBooks(filter) {
@@ -244,11 +244,16 @@ async function displayData() {
         if (filter === "all" || livro.finalizado === filter) {
           const userDiv = document.createElement("div");
           userDiv.classList.add("livro");
+
+          // Verificar se o livro vem da tabela "livros" ou "livros_busca"
+          const genero = livro.serie || livro.genero || "Gênero não disponível";
+          const ano = livro.ano || livro.data || "Ano não disponível";
+
           userDiv.innerHTML = `
             <p><strong>Livro:</strong> ${livro.livro}</p>
             <p><strong>Autor:</strong> ${livro.autor}</p>
-            <p><strong>Gênero:</strong> ${livro.serie}</p>
-            <p><strong>Ano:</strong> ${livro.ano}</p>
+            <p><strong>Gênero:</strong> ${genero}</p>
+            <p><strong>Ano:</strong> ${ano}</p>
             <p class="finalizado"><strong>Finalizado:</strong> ${livro.finalizado}</p>
           `;
 
@@ -257,7 +262,13 @@ async function displayData() {
           deleteButton.textContent = "x";
           deleteButton.classList.add("delete-button");
           deleteButton.addEventListener("click", async () => {
-            await deleteBook(livro.id);
+            if (livro.hasOwnProperty("serie") || livro.hasOwnProperty("ano")) {
+              //Excluir da tabela "livros"
+              await deleteBook(livro.id);
+            } else {
+              //Excluir da tabela livros_busca
+              await deleteBookSearch(livro.id);
+            }
             displayData();
           });
 
@@ -288,6 +299,42 @@ async function displayData() {
       }
       renderBooks(filter);
     };
+
+    // Ordenação alfabética dos livros A-Z
+    document.getElementById("sortAZ").addEventListener("click", () => {
+      allBooks.sort((a, b) => a.livro.localeCompare(b.livro));
+      renderBooks(window.currentFilter || "all");
+    });
+
+    // Ordenação alfabética dos livros Z - A
+    document.getElementById("sortZa").addEventListener("click", () => {
+      allBooks.sort((a, b) => b.livro.localeCompare(a.livro));
+      renderBooks(window.currentFilter || "all");
+    });
+
+    // Ordenação por Autor A-Z
+    document.getElementById("sortAutorAZ").addEventListener("click", () => {
+      allBooks.sort((a, b) => a.autor.localeCompare(b.autor));
+      renderBooks(window.currentFilter || "all");
+    });
+
+    // Ordenação por Autor Z-A
+    document.getElementById("sortAutorZa").addEventListener("click", () => {
+      allBooks.sort((a, b) => b.autor.localeCompare(a.autor));
+      renderBooks(window.currentFilter || "all");
+    });
+
+    // Ordem por Gênero A-Z
+    document.getElementById("sortGenderAZ").addEventListener("click", () => {
+      allBooks.sort((a, b) => (a.serie || "").localeCompare(b.serie || ""));
+      renderBooks(window.currentFilter || "all");
+    });
+
+    // Ordenação por Gênero Z-A
+    document.getElementById("sortGenderZa").addEventListener("click", () => {
+      allBooks.sort((a, b) => (b.serie || "").localeCompare(a.serie || ""));
+      renderBooks(window.currentFilter || "all");
+    });
   } catch (error) {
     console.error("Erro ao carregar dados do Supabase", error.message);
   }
