@@ -287,7 +287,7 @@ footer {
 }
 
 #catalogo {
-  background-color: orange;
+  background-color: rgb(171, 197, 182);
   border: 2px solid #0a6b4e;
   border-radius: 10px;
   color: black;
@@ -420,6 +420,81 @@ footer {
   flex-wrap: wrap;
 }
 
+.filter-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.dropdown-statistic {
+  display: none;
+  position: absolute;
+  background-color: whitesmoke;
+  border: 1px solid #34b991;
+  border-radius: 5px;
+  min-width: 100px;
+  width: 80%;
+  max-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropdownS {
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
+}
+
+.dropdownS button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: rgb(238, 162, 99);
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-statistic {
+  display: none;
+  position: absolute;
+  background-color: whitesmoke;
+  border: 1px solid rgb(238, 162, 99);
+  border-radius: 5px;
+  min-width: 100px;
+  width: 80%;
+  max-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropdown-statistic button {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: center;
+}
+.dropdown-statistic button:hover {
+  background-color: #34b991;
+  max-width: 80%;
+}
+.dropdownS:hover .dropdown-statistic {
+  display: block;
+}
+
 /* ---------------------------------------------- */
 /* Estilos para telas menores, como celulares */
 /* ---------------------------------------------- */
@@ -437,9 +512,11 @@ footer {
     margin-bottom: 10px;
     font-size: 1.5em;
     text-align: center;
+    order: 1;
   }
 
   .account-box {
+    order: 2;
     display: flex; /*alinha os itens em uma linha */
     align-items: center; /*alinha verticalmente os itens no centro*/
     justify-content: center; /*centraliza os itens horizontalmente*/
@@ -453,6 +530,7 @@ footer {
     margin-right: 10px;
     cursor: pointer;
     font-size: 12px;
+    flex-direction: column;
   }
   .account-box i {
     font-size: 14px; /* Aumenta o tamanho do ícone */
