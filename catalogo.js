@@ -25,6 +25,8 @@ const supabaseKey =
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Função para verificar a autenticação do usuário
 async function checkUserAuthentication() {
   const {
@@ -42,6 +44,8 @@ async function checkUserAuthentication() {
   return user;
 }
 
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Função para salvar os dados do formulário na tabela "livros"
 async function saveFormData(livro, autor, serie, ano, finalizado) {
   try {
@@ -62,6 +66,8 @@ async function saveFormData(livro, autor, serie, ano, finalizado) {
   }
 }
 
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Função para salvar os resultados da busca na tabela "livros_busca"
 async function saveSearchResult(livro, autor, genero, data, finalizado) {
   try {
@@ -82,6 +88,8 @@ async function saveSearchResult(livro, autor, genero, data, finalizado) {
   }
 }
 
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Envio do formulário
 document
   .getElementById("submitBtn")
@@ -105,9 +113,13 @@ document
     }
   });
 
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Chave da API do Google Books
 const API_KEY = "AIzaSyByZueS-sEDclSmT-lL4NnJ0Iejwn-251I";
 
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Função para buscar livros na API do Google Books
 async function searchBooks() {
   const query = document.getElementById("searchQuery").value;
@@ -133,6 +145,8 @@ async function searchBooks() {
   }
 }
 
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Função para exibir os resultados da busca
 function displayResults(books) {
   const resultsList = document.getElementById("searchResults");
@@ -213,6 +227,8 @@ document.addEventListener("click", function (event) {
 // Event listener para a barra de busca
 document.getElementById("searchQuery").addEventListener("input", searchBooks);
 
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Função para carregar e exibir os dados do Supabase na página
 async function displayData() {
   try {
@@ -237,6 +253,8 @@ async function displayData() {
     const userDataElement = document.getElementById("bookCatalog");
     userDataElement.innerHTML = "";
 
+    // -------------------------------------------------------
+    // -------------------------------------------------------
     // Função para renderizar livros com base em um filtro
     function renderBooks(filter) {
       userDataElement.innerHTML = "";
@@ -281,6 +299,8 @@ async function displayData() {
     //Renderizar todos os livros ao carregar a página
     renderBooks("all");
 
+    // -------------------------------------------------------
+    // -------------------------------------------------------
     // Função para filtrar livros com base no status
     window.filterBooksByStatus = function (status) {
       let filter;
@@ -348,6 +368,243 @@ async function displayData() {
   }
 }
 
+// -------------------------------------------------------
+// -------------------------------------------------------
+// Função para contar a quantidade de livros marcados como "Sim" em livros_busca e livros
+async function countBooksRead() {
+  try {
+    const user = await checkUserAuthentication();
+    if (!user) return;
+
+    // Consulta para contar os livros marcados como "Sim" na tabela livros_busca
+    const { data: dataLivrosBusca, error: errorLivrosBusca } = await supabase
+      .from("livros_busca")
+      .select("livro")
+      .eq("user_id", user.id)
+      .eq("finalizado", "Sim");
+
+    if (errorLivrosBusca) {
+      throw errorLivrosBusca;
+    }
+
+    // Consulta para contar os livros marcados como "Sim" na tabela livros
+    const { data: dataLivros, error: errorLivros } = await supabase
+      .from("livros")
+      .select("livro")
+      .eq("user_id", user.id)
+      .eq("finalizado", "Sim");
+
+    if (errorLivros) {
+      throw errorLivros;
+    }
+
+    // Somar os resultados das duas consultas
+    const countLivrosBusca = dataLivrosBusca ? dataLivrosBusca.length : 0;
+    const countLivros = dataLivros ? dataLivros.length : 0;
+    const totalCount = countLivrosBusca + countLivros;
+
+    return totalCount;
+  } catch (error) {
+    console.error("Erro ao contar livros lidos", error.message);
+    throw error;
+  }
+}
+
+// Event listener para o botão "Livros lidos"
+document
+  .querySelector(".dropdown-statistic button:nth-child(1)")
+  .addEventListener("click", async () => {
+    try {
+      const count = await countBooksRead();
+      alert(`Você leu ${count} livro(s).`);
+    } catch (error) {
+      console.error(
+        "Erro ao obter estatísticas de livros lidos",
+        error.message
+      );
+    }
+  });
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+// Função para contar a quantidade de livros lidos por autor
+async function countBooksReadByAuthor() {
+  try {
+    const user = await checkUserAuthentication();
+    if (!user) return;
+
+    // Consulta para obter todos os livros marcados como "Sim" na tabela livros_busca
+    const { data: livrosBusca, error: errorLivrosBusca } = await supabase
+      .from("livros_busca")
+      .select("autor")
+      .eq("user_id", user.id)
+      .eq("finalizado", "Sim");
+
+    if (errorLivrosBusca) {
+      throw errorLivrosBusca;
+    }
+
+    // Consulta para obter todos os livros marcados como "Sim" na tabela livros
+    const { data: livros, error: errorLivros } = await supabase
+      .from("livros")
+      .select("autor")
+      .eq("user_id", user.id)
+      .eq("finalizado", "Sim");
+
+    if (errorLivros) {
+      throw errorLivros;
+    }
+
+    // Função para contar livros lidos por autor
+    const countBooksByAuthor = (livrosData) => {
+      const count = {};
+      livrosData.forEach((livro) => {
+        const autor = livro.autor || "Autor não especificado";
+        if (!count[autor]) {
+          count[autor] = 1;
+        } else {
+          count[autor]++;
+        }
+      });
+      return count;
+    };
+
+    // Combinar e contar os resultados das duas consultas
+    const booksBuscaCount = countBooksByAuthor(livrosBusca || []);
+    const booksCount = countBooksByAuthor(livros || []);
+    // Combinar os resultados das duas consultas
+    const resultsByAuthor = { ...booksBuscaCount, ...booksCount };
+
+    // Preparar mensagem para o alert
+    let alertMessage = "Livros lidos por autor:\n\n\n";
+    for (const autor in resultsByAuthor) {
+      if (resultsByAuthor.hasOwnProperty(autor)) {
+        alertMessage += `${autor}: ${resultsByAuthor[autor]} livro(s)\n\n`;
+      }
+    }
+
+    // Exibir os resultados via alert
+    alert(alertMessage);
+  } catch (error) {
+    console.error("Erro ao contar livros lidos por autor", error.message);
+    throw error;
+  }
+}
+
+// Event listener para o botão "Livros lidos por autor"
+document
+  .querySelector(".dropdown-statistic button:nth-child(2)")
+  .addEventListener("click", async () => {
+    try {
+      await countBooksReadByAuthor();
+    } catch (error) {
+      console.error(
+        "Erro ao exibir estatísticas de livros lidos por autor",
+        error.message
+      );
+    }
+  });
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+// Função para contar a quantidade de livros lidos por genero
+async function countBooksFinishedByGenre() {
+  try {
+    const user = await checkUserAuthentication();
+    if (!user) return;
+
+    // Consulta para obter todos os livros marcados como "Sim" na tabela livros_busca
+    const { data: livrosBusca, error: errorLivrosBusca } = await supabase
+      .from("livros_busca")
+      .select("genero")
+      .eq("user_id", user.id)
+      .eq("finalizado", "Sim");
+
+    if (errorLivrosBusca) {
+      throw errorLivrosBusca;
+    }
+
+    // Consulta para obter todos os livros marcados como "Sim" na tabela livros
+    const { data: livros, error: errorLivros } = await supabase
+      .from("livros")
+      .select("serie")
+      .eq("user_id", user.id)
+      .eq("finalizado", "Sim");
+
+    if (errorLivros) {
+      throw errorLivros;
+    }
+
+    // Função para contar livros finalizados por gênero
+    const countBooksByGenre = (livrosData) => {
+      const count = {};
+      livrosData.forEach((livro) => {
+        const genero = livro.genero || "Gênero não especificado";
+        if (!count[genero]) {
+          count[genero] = 1;
+        } else {
+          count[genero]++;
+        }
+      });
+      return count;
+    };
+
+    // Contagem de livros finalizados por gênero nas duas tabelas
+    const booksBuscaCount = countBooksByGenre(livrosBusca || []);
+    const booksCount = countBooksByGenre(livros || []);
+
+    // Combinar os resultados das duas consultas
+    const resultsByGenre = {};
+    for (const genero in booksBuscaCount) {
+      if (booksBuscaCount.hasOwnProperty(genero)) {
+        resultsByGenre[genero] = booksBuscaCount[genero];
+      }
+    }
+    for (const genero in booksCount) {
+      if (booksCount.hasOwnProperty(genero)) {
+        if (resultsByGenre[genero]) {
+          resultsByGenre[genero] += booksCount[genero];
+        } else {
+          resultsByGenre[genero] = booksCount[genero];
+        }
+      }
+    }
+
+    // Preparar mensagem para o alert
+    let alertMessage = "Livros finalizados por gênero:\n";
+    for (const genero in resultsByGenre) {
+      if (resultsByGenre.hasOwnProperty(genero)) {
+        alertMessage += `${genero}: ${resultsByGenre[genero]} livro(s)\n`;
+      }
+    }
+
+    // Exibir alert com os resultados
+    alert(alertMessage);
+  } catch (error) {
+    console.error(
+      "Erro ao contar livros finalizados por gênero",
+      error.message
+    );
+    throw error;
+  }
+}
+
+// Event listener para o botão "Livros finalizados por gênero"
+document
+  .querySelector(".dropdown-statistic button:nth-child(3)")
+  .addEventListener("click", async () => {
+    try {
+      await countBooksFinishedByGenre();
+    } catch (error) {
+      console.error(
+        "Erro ao exibir estatísticas de livros finalizados por gênero",
+        error.message
+      );
+    }
+  });
+
+// -------------------------------------------------------
+// -------------------------------------------------------
 // Função para deletar um livro da tabela "livros"
 async function deleteBook(id) {
   try {
@@ -372,3 +629,5 @@ async function deleteBookSearch(id) {
 
 // Inicializar a exibição dos dados
 displayData();
+// -------------------------------------------------------
+// -------------------------------------------------------

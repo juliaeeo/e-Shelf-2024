@@ -23,10 +23,11 @@
 </script>
 
 <body>
+
+  <!-- ---------------------------------------------- -->
   <!-- Início do cabeçalho -->
   <header>
     <h1><a href="index.html"><span class="colored">e</span>Shelf</a></h1>
-    <!-- <h2>Estante de e-books</h2> -->
 
     <div class="account-box" id="account-toggle">
       <i class="fas fa-user"></i>
@@ -41,7 +42,7 @@
 
   <h2>Estante de e-books</h2>
 
-
+  <!-- ---------------------------------------------- -->
   <!-- Área de navegação -->
 
   <main>
@@ -50,6 +51,7 @@
       inserindo as seguintes
       informações:</h3>
 
+    <!-- ---------------------------------------------- -->
     <!-- Formulário -->
     <div class="container">
       <form id="bookForm" autocomplete="off">
@@ -81,6 +83,7 @@
       </form>
     </div>
 
+    <!-- ---------------------------------------------- -->
     <!-- Busca de livros na barra de busca-->
     <h3 id="catalogoLink">Ou faça sua busca por nome de livro ou autor. Clique na opção
       desejada para adicionar o livro ao <span class="colored2"> <a href="#bookCatalog">
@@ -143,27 +146,24 @@
 
       <div class="dropdownS">
         <button id="statisticButtons">Alterar status</button>
-        <div class="dropdown-statistic">
-          <button>Livro finalizado</button>
-          <button>Livro não finalizado</button>
-          <button>Livro em andamento</button>
-        </div>
       </div>
 
       <div class="dropdownS">
-        <button id="statisticButtons">Estatísticas</button>
+        <button class="alterarStatusButton" id="statisticButtons">Estatísticas</button>
         <div class="dropdown-statistic">
-          <button>Livros lidos</button>
-          <button>Livros lidos por autor</button>
-          <button>Livros lidos por gênero</button>
+          <button class="countBooksRead">Livros finalizados</button>
+          <button class="countBooksReadByAuthor">Livros finalizados por autor</button>
+          <button class="countBooksFinishedByGenre">Livros finalizados por gênero</button>
         </div>
       </div>
 
     </div>
 
+
     <div id="bookCatalog" class="bookCatalog"></div>0
     <div id="results"></div>
   </main>
+
 
   <!-- rodapé -->
   <footer>
