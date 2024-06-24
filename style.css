@@ -481,6 +481,57 @@ footer {
   display: block;
 }
 
+/* Estilização básica do dialog */
+dialog {
+  width: 30%;
+  max-width: 600px;
+  border: solid 2px rgb(238, 162, 99);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: whitesmoke;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Centralizar o dialog */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Estilização do conteúdo do dialog */
+#booksReadCount,
+#resultMessage,
+#genreResultMessage {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  white-space: pre-line;
+  text-align: justify;
+}
+
+/* Estilização do botão de fechar */
+#closeDialog,
+#closeResultDialog,
+#closeGenreResultDialog {
+  background-color: #34b991;
+  color: whitesmoke;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#closeDialog:hover,
+#closeResultDialog:hover,
+#closeGenreResultDialog:hover {
+  background-color: rgb(238, 162, 99);
+}
+
 /* ---------------------------------------------- */
 /* Estilos para telas menores, como celulares */
 /* ---------------------------------------------- */

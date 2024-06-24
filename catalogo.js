@@ -410,13 +410,27 @@ async function countBooksRead() {
   }
 }
 
+// Função para mostrar o diálogo
+function showDialog(count) {
+  const dialog = document.getElementById("booksReadDialog");
+  const dialogContent = document.getElementById("booksReadCount");
+  dialogContent.textContent = `Você leu ${count} livro(s).`;
+  dialog.showModal();
+
+  // Fechar o diálogo ao clicar no botão 'Fechar'
+  const closeButton = document.getElementById("closeDialog");
+  closeButton.onclick = function () {
+    dialog.close();
+  };
+}
+
 // Event listener para o botão "Livros lidos"
 document
-  .querySelector(".dropdown-statistic button:nth-child(1)")
+  .querySelector(".countBooksRead")
   .addEventListener("click", async () => {
     try {
       const count = await countBooksRead();
-      alert(`Você leu ${count} livro(s).`);
+      showDialog(count);
     } catch (error) {
       console.error(
         "Erro ao obter estatísticas de livros lidos",
@@ -472,19 +486,39 @@ async function countBooksReadByAuthor() {
     // Combinar e contar os resultados das duas consultas
     const booksBuscaCount = countBooksByAuthor(livrosBusca || []);
     const booksCount = countBooksByAuthor(livros || []);
-    // Combinar os resultados das duas consultas
-    const resultsByAuthor = { ...booksBuscaCount, ...booksCount };
 
-    // Preparar mensagem para o alert
-    let alertMessage = "Livros lidos por autor:\n\n\n";
-    for (const autor in resultsByAuthor) {
-      if (resultsByAuthor.hasOwnProperty(autor)) {
-        alertMessage += `${autor}: ${resultsByAuthor[autor]} livro(s)\n\n`;
+    // Combinar os resultados das duas consultas
+    const resultsByAuthor = {};
+    for (const autor in booksBuscaCount) {
+      if (resultsByAuthor[autor]) {
+        resultsByAuthor[autor] += booksBuscaCount[autor];
+      } else {
+        resultsByAuthor[autor] = booksBuscaCount[autor];
       }
     }
 
-    // Exibir os resultados via alert
-    alert(alertMessage);
+    for (const autor in booksCount) {
+      if (resultsByAuthor[autor]) {
+        resultsByAuthor[autor] += booksCount[autor];
+      } else {
+        resultsByAuthor[autor] = booksCount[autor];
+      }
+    }
+
+    // Ordenar os autores
+    const sortedAuthors = Object.keys(resultsByAuthor).sort();
+
+    //  Preparar mensagem para o dialog
+    let dialogMessage = "Livros lidos por autor:\n\n";
+    sortedAuthors.forEach((autor) => {
+      dialogMessage += `${autor}: ${resultsByAuthor[autor]} livro(s)\n`;
+    });
+
+    // Exibir os resultados via dialog
+    const dialog = document.getElementById("resultDialog");
+    const messageElement = document.getElementById("resultMessage");
+    messageElement.textContent = dialogMessage;
+    dialog.showModal();
   } catch (error) {
     console.error("Erro ao contar livros lidos por autor", error.message);
     throw error;
@@ -493,7 +527,7 @@ async function countBooksReadByAuthor() {
 
 // Event listener para o botão "Livros lidos por autor"
 document
-  .querySelector(".dropdown-statistic button:nth-child(2)")
+  .querySelector(".countBooksReadByAuthor")
   .addEventListener("click", async () => {
     try {
       await countBooksReadByAuthor();
@@ -504,6 +538,19 @@ document
       );
     }
   });
+
+// Event listener para fechar o dialog
+document.getElementById("closeResultDialog").addEventListener("click", () => {
+  const dialog = document.getElementById("resultDialog");
+  dialog.close();
+});
+
+// Adiciona um evento para fechar o diálogo ao clicar fora dele (opcional)
+document.getElementById("resultDialog").addEventListener("click", (event) => {
+  if (event.target === document.getElementById("resultDialog")) {
+    document.getElementById("resultDialog").close();
+  }
+});
 
 // -------------------------------------------------------
 // -------------------------------------------------------
@@ -536,10 +583,10 @@ async function countBooksFinishedByGenre() {
     }
 
     // Função para contar livros finalizados por gênero
-    const countBooksByGenre = (livrosData) => {
+    const countBooksByGenre = (livrosData, colunaGenero) => {
       const count = {};
       livrosData.forEach((livro) => {
-        const genero = livro.genero || "Gênero não especificado";
+        const genero = livro[colunaGenero] || "Gênero não especificado";
         if (!count[genero]) {
           count[genero] = 1;
         } else {
@@ -550,36 +597,33 @@ async function countBooksFinishedByGenre() {
     };
 
     // Contagem de livros finalizados por gênero nas duas tabelas
-    const booksBuscaCount = countBooksByGenre(livrosBusca || []);
-    const booksCount = countBooksByGenre(livros || []);
+    const booksBuscaCount = countBooksByGenre(livrosBusca || [], "genero");
+    const booksCount = countBooksByGenre(livros || [], "serie");
 
     // Combinar os resultados das duas consultas
-    const resultsByGenre = {};
-    for (const genero in booksBuscaCount) {
-      if (booksBuscaCount.hasOwnProperty(genero)) {
-        resultsByGenre[genero] = booksBuscaCount[genero];
-      }
-    }
+    const resultsByGenre = { ...booksBuscaCount };
     for (const genero in booksCount) {
-      if (booksCount.hasOwnProperty(genero)) {
-        if (resultsByGenre[genero]) {
-          resultsByGenre[genero] += booksCount[genero];
-        } else {
-          resultsByGenre[genero] = booksCount[genero];
-        }
+      if (resultsByGenre[genero]) {
+        resultsByGenre[genero] += booksCount[genero];
+      } else {
+        resultsByGenre[genero] = booksCount[genero];
       }
     }
 
-    // Preparar mensagem para o alert
-    let alertMessage = "Livros finalizados por gênero:\n";
-    for (const genero in resultsByGenre) {
-      if (resultsByGenre.hasOwnProperty(genero)) {
-        alertMessage += `${genero}: ${resultsByGenre[genero]} livro(s)\n`;
-      }
-    }
+    // Ordenar os gêneros
+    const sortedGenres = Object.keys(resultsByGenre).sort();
 
-    // Exibir alert com os resultados
-    alert(alertMessage);
+    // Preparar mensagem para o dialog
+    let dialogMessage = "Livros finalizados por gênero:\n\n";
+    sortedGenres.forEach((genero) => {
+      dialogMessage += `${genero}: ${resultsByGenre[genero]} livro(s)\n`;
+    });
+
+    // Exibir os resultados via dialog
+    const dialog = document.getElementById("genreResultDialog");
+    const messageElement = document.getElementById("genreResultMessage");
+    messageElement.textContent = dialogMessage;
+    dialog.showModal();
   } catch (error) {
     console.error(
       "Erro ao contar livros finalizados por gênero",
@@ -591,7 +635,7 @@ async function countBooksFinishedByGenre() {
 
 // Event listener para o botão "Livros finalizados por gênero"
 document
-  .querySelector(".dropdown-statistic button:nth-child(3)")
+  .querySelector(".countBooksFinishedByGenre")
   .addEventListener("click", async () => {
     try {
       await countBooksFinishedByGenre();
@@ -600,6 +644,23 @@ document
         "Erro ao exibir estatísticas de livros finalizados por gênero",
         error.message
       );
+    }
+  });
+
+// Event listener para fechar o dialog
+document
+  .getElementById("closeGenreResultDialog")
+  .addEventListener("click", () => {
+    const dialog = document.getElementById("genreResultDialog");
+    dialog.close();
+  });
+
+// Adiciona um evento para fechar o diálogo ao clicar fora dele (opcional)
+document
+  .getElementById("genreResultDialog")
+  .addEventListener("click", (event) => {
+    if (event.target === document.getElementById("genreResultDialog")) {
+      document.getElementById("genreResultDialog").close();
     }
   });
 
