@@ -361,15 +361,29 @@ footer {
 
 /* Estilo para os botões de filtro */
 /* Estilos para o menu dropdown */
-.dropdown {
+.dropdown,
+.dropdownS {
   position: relative;
   display: inline-block;
   margin-top: 20px;
 }
 
 .dropdown button {
-  padding: 10px 20px;
-  margin: 0 10px;
+  /* padding: 10px 20px; */
+  /* margin: 0 10px; */
+  padding: 10px;
+  background-color: #34b991;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown button {
+  /* padding: 10px 20px; */
+  /* margin: 0 10px; */
+  padding: 10px;
   background-color: #34b991;
   color: black;
   border: none;
@@ -384,9 +398,10 @@ footer {
   background-color: whitesmoke;
   border: 1px solid #34b991;
   border-radius: 5px;
-  min-width: 100px;
-  width: 80%;
-  max-width: 160px;
+  /* min-width: 100px; */
+  min-width: 160px;
+  /* width: 80%; */
+  /* max-width: 160px; */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   text-align: center;
@@ -415,29 +430,22 @@ footer {
 
 .button-container {
   display: flex;
-  gap: 10px; /* Espaço entre os botões */
+  gap: 40px; /* Espaço entre os botões */
   justify-content: center;
   margin: 0 auto;
   flex-wrap: wrap;
 }
 
-.filter-container {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 0 auto;
-}
-
-.dropdownS {
+/* .dropdownS {
   position: relative;
   display: inline-block;
   margin-top: 30px;
-}
+} */
 
 .dropdownS button {
-  padding: 10px 20px;
-  margin: 0 10px;
+  /* padding: 10px 20px; */
+  /* margin: 0 10px; */
+  padding: 10px;
   background-color: rgb(238, 162, 99);
   color: black;
   border: none;
@@ -452,9 +460,9 @@ footer {
   background-color: whitesmoke;
   border: 1px solid rgb(238, 162, 99);
   border-radius: 5px;
-  min-width: 100px;
-  width: 93%;
-  max-width: 160px;
+  min-width: 160px;
+  /* width: 93%; */
+  /* max-width: 160px; */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   text-align: center;
