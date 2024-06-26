@@ -13,6 +13,61 @@ document.getElementById("logout").addEventListener("click", function (event) {
   // lógica para o logout
   window.location.href = "index.html";
 });
+// javascript pros ícones de filtro, ordenação e estatística
+document.addEventListener("DOMContentLoaded", function () {
+  const filterButton = document.getElementById("filterButton");
+  const sortButton = document.getElementById("sortButton");
+  const sortAuthorButton = document.getElementById("sortAuthorButton");
+  const sortGenreButton = document.getElementById("sortGenreButton");
+  const statusButton = document.getElementById("statusButton");
+  const statsButton = document.getElementById("statsButton");
+
+  const filterOptions = document.getElementById("filterOptions");
+  const sortOptions = sortButton.nextElementSibling;
+  const sortAuthorOptions = sortAuthorButton.nextElementSibling;
+  const sortGenreOptions = sortGenreButton.nextElementSibling;
+  const statsOptions = statsButton.nextElementSibling;
+
+  filterButton.addEventListener("click", () => {
+    toggleDropdown(filterOptions);
+  });
+
+  sortButton.addEventListener("click", () => {
+    toggleDropdown(sortOptions);
+  });
+
+  sortAuthorButton.addEventListener("click", () => {
+    toggleDropdown(sortAuthorOptions);
+  });
+
+  sortGenreButton.addEventListener("click", () => {
+    toggleDropdown(sortGenreOptions);
+  });
+
+  statsButton.addEventListener("click", () => {
+    toggleDropdown(statsOptions);
+  });
+
+  function toggleDropdown(element) {
+    element.style.display =
+      element.style.display === "block" ? "none" : "block";
+  }
+
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest(".dropdown")) {
+      closeAllDropdowns();
+    }
+  });
+
+  function closeAllDropdowns() {
+    const dropdowns = document.querySelectorAll(
+      ".dropdown-content, .dropdown-statistic"
+    );
+    dropdowns.forEach((dropdown) => {
+      dropdown.style.display = "none";
+    });
+  }
+});
 
 // -------------------------------------------------------
 // -------------------------------------------------------
@@ -326,11 +381,11 @@ async function displayData() {
       renderBooks(window.currentFilter || "all");
     });
 
-    // Ordenação alfabética dos livros Z - A
-    document.getElementById("sortZa").addEventListener("click", () => {
-      allBooks.sort((a, b) => b.livro.localeCompare(a.livro));
-      renderBooks(window.currentFilter || "all");
-    });
+    // // Ordenação alfabética dos livros Z - A
+    // document.getElementById("sortZa").addEventListener("click", () => {
+    //   allBooks.sort((a, b) => b.livro.localeCompare(a.livro));
+    //   renderBooks(window.currentFilter || "all");
+    // });
 
     // Ordenação por Autor A-Z
     document.getElementById("sortAutorAZ").addEventListener("click", () => {
@@ -338,11 +393,11 @@ async function displayData() {
       renderBooks(window.currentFilter || "all");
     });
 
-    // Ordenação por Autor Z-A
-    document.getElementById("sortAutorZa").addEventListener("click", () => {
-      allBooks.sort((a, b) => b.autor.localeCompare(a.autor));
-      renderBooks(window.currentFilter || "all");
-    });
+    // // Ordenação por Autor Z-A
+    // document.getElementById("sortAutorZa").addEventListener("click", () => {
+    //   allBooks.sort((a, b) => b.autor.localeCompare(a.autor));
+    //   renderBooks(window.currentFilter || "all");
+    // });
 
     // Ordem por Gênero A-Z
     document.getElementById("sortGenderAZ").addEventListener("click", () => {
@@ -354,15 +409,15 @@ async function displayData() {
       renderBooks(window.currentFilter || "all");
     });
 
-    // Ordenação por Gênero Z-A
-    document.getElementById("sortGenderZa").addEventListener("click", () => {
-      allBooks.sort((a, b) => {
-        const genreA = a.serie || a.genero || "";
-        const genreB = b.serie || b.genero || "";
-        return genreB.localeCompare(genreA);
-      });
-      renderBooks(window.currentFilter || "all");
-    });
+    // // Ordenação por Gênero Z-A
+    // document.getElementById("sortGenderZa").addEventListener("click", () => {
+    //   allBooks.sort((a, b) => {
+    //     const genreA = a.serie || a.genero || "";
+    //     const genreB = b.serie || b.genero || "";
+    //     return genreB.localeCompare(genreA);
+    //   });
+    //   renderBooks(window.currentFilter || "all");
+    // });
   } catch (error) {
     console.error("Erro ao carregar dados do Supabase", error.message);
   }

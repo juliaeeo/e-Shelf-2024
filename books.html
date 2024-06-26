@@ -103,10 +103,11 @@
 
     <h2 id="catalogo">CATÁLOGO DE LIVROS</h2>
 
-    <!-- Botões de filtro -->
+    <!-- Container único para todos os botões -->
     <div class="button-container">
+      <!-- Botões de filtro -->
       <div class="dropdown">
-        <button id="filterButtons">Filtrar por status</button>
+        <button id="filterButtons"><i class="fas fa-filter"></i></button>
         <div class="dropdown-content" id="filterOptions">
           <button onclick="filterBooksByStatus('all')">Todos os livros</button>
           <button onclick="filterBooksByStatus('finalizado')">Finalizados</button>
@@ -116,40 +117,22 @@
       </div>
 
       <div class="dropdown">
-        <button id="filterButtons">Ordem alfabética dos livros</button>
+        <button id="filterButtons"><i class="fas fa-sort-alpha-down"></i></button>
         <div class="dropdown-content">
-          <button id="sortAZ">Livros A-Z</button>
-          <button id="sortZa">Livros Z-A</button>
+          <button id="sortAZ">Livros</button>
+          <button id="sortAutorAZ">Autor</button>
+          <button id="sortGenderAZ">Gênero</button>
         </div>
       </div>
 
 
-      <div class="dropdown">
-        <button id="filterButtons">Ordenar por autor</button>
-        <div class="dropdown-content">
-          <button id="sortAutorAZ">Autor A-Z</button>
-          <button id="sortAutorZa">Autor Z-A</button>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button id="filterButtons">Ordenar por gênero</button>
-        <div class="dropdown-content">
-          <button id="sortGenderAZ">Gênero A-Z</button>
-          <button id="sortGenderZa">Gênero Z-A</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Botões de estatísticas e alterar status -->
-    <div class="filter-container">
-
+      <!-- Botões de estatísticas e alterar status -->
       <div class="dropdownS">
-        <button id="statisticButtons">Alterar status</button>
+        <button id="statisticButtons"><i class="fas fa-edit"></i></button>
       </div>
 
       <div class="dropdownS">
-        <button class="alterarStatusButton" id="statisticButtons">Estatísticas</button>
+        <button class="alterarStatusButton" id="statisticButtons"><i class="fas fa-chart-bar"></i></button>
         <div class="dropdown-statistic">
           <button class="countBooksRead">Livros finalizados</button>
           <button class="countBooksReadByAuthor">Livros finalizados por autor</button>
@@ -159,7 +142,7 @@
 
     </div>
 
-    <!-- Diálogo -->
+    <!-- Caixa de Diálogo -->
     <dialog id="booksReadDialog">
       <p id="booksReadCount"></p>
       <button id="closeDialog">Fechar</button>
