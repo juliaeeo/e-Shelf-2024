@@ -116,9 +116,9 @@
         </div>
       </div>
 
-      <div class="dropdown">
+      <div class="dropdownS">
         <button id="filterButtons"><i class="fas fa-sort-alpha-down"></i></button>
-        <div class="dropdown-content">
+        <div class="dropdown-statistic">
           <button id="sortAZ">Livros</button>
           <button id="sortAutorAZ">Autor</button>
           <button id="sortGenderAZ">Gênero</button>
@@ -126,14 +126,14 @@
       </div>
 
 
-      <!-- Botões de estatísticas e alterar status -->
+      <!-- Botões de estatísticas e alterar status
       <div class="dropdownS">
-        <button id="statisticButtons"><i class="fas fa-edit"></i></button>
-      </div>
+        <button class="alterarStatusButton" id="editStatusButton"><i class="fas fa-edit"></i></button>
+      </div> -->
 
-      <div class="dropdownS">
-        <button class="alterarStatusButton" id="statisticButtons"><i class="fas fa-chart-bar"></i></button>
-        <div class="dropdown-statistic">
+      <div class="dropdown">
+        <button id="filterButtons"><i class="fas fa-chart-bar"></i></button>
+        <div class="dropdown-content">
           <button class="countBooksRead">Livros finalizados</button>
           <button class="countBooksReadByAuthor">Livros finalizados por autor</button>
           <button class="countBooksFinishedByGenre">Livros finalizados por gênero</button>
@@ -147,6 +147,7 @@
       <p id="booksReadCount"></p>
       <button id="closeDialog">Fechar</button>
     </dialog>
+
 
     <dialog id="resultDialog">
       <p id="resultMessage"></p>

@@ -381,23 +381,11 @@ async function displayData() {
       renderBooks(window.currentFilter || "all");
     });
 
-    // // Ordenação alfabética dos livros Z - A
-    // document.getElementById("sortZa").addEventListener("click", () => {
-    //   allBooks.sort((a, b) => b.livro.localeCompare(a.livro));
-    //   renderBooks(window.currentFilter || "all");
-    // });
-
     // Ordenação por Autor A-Z
     document.getElementById("sortAutorAZ").addEventListener("click", () => {
       allBooks.sort((a, b) => a.autor.localeCompare(b.autor));
       renderBooks(window.currentFilter || "all");
     });
-
-    // // Ordenação por Autor Z-A
-    // document.getElementById("sortAutorZa").addEventListener("click", () => {
-    //   allBooks.sort((a, b) => b.autor.localeCompare(a.autor));
-    //   renderBooks(window.currentFilter || "all");
-    // });
 
     // Ordem por Gênero A-Z
     document.getElementById("sortGenderAZ").addEventListener("click", () => {
@@ -408,16 +396,6 @@ async function displayData() {
       });
       renderBooks(window.currentFilter || "all");
     });
-
-    // // Ordenação por Gênero Z-A
-    // document.getElementById("sortGenderZa").addEventListener("click", () => {
-    //   allBooks.sort((a, b) => {
-    //     const genreA = a.serie || a.genero || "";
-    //     const genreB = b.serie || b.genero || "";
-    //     return genreB.localeCompare(genreA);
-    //   });
-    //   renderBooks(window.currentFilter || "all");
-    // });
   } catch (error) {
     console.error("Erro ao carregar dados do Supabase", error.message);
   }
@@ -718,6 +696,10 @@ document
       document.getElementById("genreResultDialog").close();
     }
   });
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+// Função para mudar o status de um livro
 
 // -------------------------------------------------------
 // -------------------------------------------------------

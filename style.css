@@ -243,7 +243,7 @@ label {
 /* botão de excluir */
 .delete-button {
   position: absolute;
-  bottom: 5px;
+  top: 5px;
   right: 5px;
   border: none;
   color: rgb(184, 13, 13);
@@ -287,11 +287,11 @@ footer {
 }
 
 #catalogo {
-  background-color: rgb(171, 197, 182);
+  /* background-color: rgb(171, 197, 182); */
   border: 2px solid #0a6b4e;
   border-radius: 10px;
   color: black;
-  margin: auto;
+  margin: 20px 50px;
 }
 
 .book,
@@ -365,25 +365,14 @@ footer {
 .dropdownS {
   position: relative;
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .dropdown button {
   /* padding: 10px 20px; */
   /* margin: 0 10px; */
-  padding: 10px;
-  background-color: #34b991;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.dropdown button {
-  /* padding: 10px 20px; */
-  /* margin: 0 10px; */
-  padding: 10px;
+  width: 50px;
+  height: 50px;
   background-color: #34b991;
   color: black;
   border: none;
@@ -412,10 +401,11 @@ footer {
 
 .dropdown-content button {
   color: black;
-  padding: 12px 16px;
+  padding: 10px 14px;
   text-decoration: none;
   display: block;
   width: 100%;
+  height: 75%;
   border: none;
   background: none;
   text-align: center;
@@ -436,16 +426,12 @@ footer {
   flex-wrap: wrap;
 }
 
-/* .dropdownS {
-  position: relative;
-  display: inline-block;
-  margin-top: 30px;
-} */
-
 .dropdownS button {
   /* padding: 10px 20px; */
   /* margin: 0 10px; */
-  padding: 10px;
+  /* padding: 10px; */
+  width: 50px;
+  height: 50px;
   background-color: rgb(238, 162, 99);
   color: black;
   border: none;
@@ -477,6 +463,7 @@ footer {
   text-decoration: none;
   display: block;
   width: 100%;
+  height: 75%;
   border: none;
   background: none;
   text-align: center;
