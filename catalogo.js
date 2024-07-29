@@ -81,8 +81,8 @@ const supabaseKey =
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // -------------------------------------------------------
-// -------------------------------------------------------
 // Função para verificar a autenticação do usuário
+// -------------------------------------------------------
 async function checkUserAuthentication() {
   const {
     data: { user },
@@ -99,9 +99,10 @@ async function checkUserAuthentication() {
   return user;
 }
 
-// -------------------------------------------------------
-// -------------------------------------------------------
+
+// ------------------------------------------------------------
 // Função para salvar os dados do formulário na tabela "livros"
+// ------------------------------------------------------------
 async function saveFormData(livro, autor, serie, ano, finalizado) {
   try {
     const user = await checkUserAuthentication();
@@ -121,9 +122,10 @@ async function saveFormData(livro, autor, serie, ano, finalizado) {
   }
 }
 
-// -------------------------------------------------------
-// -------------------------------------------------------
+
+// -----------------------------------------------------------------
 // Função para salvar os resultados da busca na tabela "livros_busca"
+// -----------------------------------------------------------------
 async function saveSearchResult(livro, autor, genero, data, finalizado) {
   try {
     const user = await checkUserAuthentication();
@@ -143,9 +145,10 @@ async function saveSearchResult(livro, autor, genero, data, finalizado) {
   }
 }
 
-// -------------------------------------------------------
+
 // -------------------------------------------------------
 // Envio do formulário
+// -------------------------------------------------------
 document
   .getElementById("submitBtn")
   .addEventListener("click", async function () {
@@ -168,14 +171,16 @@ document
     }
   });
 
-// -------------------------------------------------------
-// -------------------------------------------------------
-// Chave da API do Google Books
-const API_KEY = "AIzaSyByZueS-sEDclSmT-lL4NnJ0Iejwn-251I";
 
 // -------------------------------------------------------
+// Chave da API do Google Books
+// -------------------------------------------------------
+const API_KEY = "AIzaSyByZueS-sEDclSmT-lL4NnJ0Iejwn-251I";
+
+
 // -------------------------------------------------------
 // Função para buscar livros na API do Google Books
+// -------------------------------------------------------
 async function searchBooks() {
   const query = document.getElementById("searchQuery").value;
   const resultsList = document.getElementById("searchResults");
@@ -200,9 +205,10 @@ async function searchBooks() {
   }
 }
 
-// -------------------------------------------------------
+
 // -------------------------------------------------------
 // Função para exibir os resultados da busca
+// -------------------------------------------------------
 function displayResults(books) {
   const resultsList = document.getElementById("searchResults");
   resultsList.innerHTML = "";
@@ -282,9 +288,10 @@ document.addEventListener("click", function (event) {
 // Event listener para a barra de busca
 document.getElementById("searchQuery").addEventListener("input", searchBooks);
 
-// -------------------------------------------------------
-// -------------------------------------------------------
+
+// ------------------------------------------------------------
 // Função para carregar e exibir os dados do Supabase na página
+// ------------------------------------------------------------
 async function displayData() {
   try {
     const user = await checkUserAuthentication();
@@ -308,9 +315,10 @@ async function displayData() {
     const userDataElement = document.getElementById("bookCatalog");
     userDataElement.innerHTML = "";
 
-    // -------------------------------------------------------
+
     // -------------------------------------------------------
     // Função para renderizar livros com base em um filtro
+    // -------------------------------------------------------
     function renderBooks(filter) {
       userDataElement.innerHTML = "";
       allBooks.forEach((livro) => {
@@ -355,8 +363,8 @@ async function displayData() {
     renderBooks("all");
 
     // -------------------------------------------------------
-    // -------------------------------------------------------
     // Função para filtrar livros com base no status
+    // -------------------------------------------------------
     window.filterBooksByStatus = function (status) {
       let filter;
       switch (status) {
@@ -401,9 +409,9 @@ async function displayData() {
   }
 }
 
-// -------------------------------------------------------
-// -------------------------------------------------------
+// ---------------------------------------------------------------------------------------
 // Função para contar a quantidade de livros marcados como "Sim" em livros_busca e livros
+// --------------------------------------------------------------------------------------
 async function countBooksRead() {
   try {
     const user = await checkUserAuthentication();
@@ -472,9 +480,10 @@ document
     }
   });
 
-// -------------------------------------------------------
-// -------------------------------------------------------
+
+// ---------------------------------------------------------
 // Função para contar a quantidade de livros lidos por autor
+// ---------------------------------------------------------
 async function countBooksReadByAuthor() {
   try {
     const user = await checkUserAuthentication();
@@ -585,9 +594,10 @@ document.getElementById("resultDialog").addEventListener("click", (event) => {
   }
 });
 
-// -------------------------------------------------------
-// -------------------------------------------------------
+
+// ----------------------------------------------------------
 // Função para contar a quantidade de livros lidos por genero
+// ----------------------------------------------------------
 async function countBooksFinishedByGenre() {
   try {
     const user = await checkUserAuthentication();
@@ -697,13 +707,11 @@ document
     }
   });
 
-// -------------------------------------------------------
-// -------------------------------------------------------
-// Função para mudar o status de um livro
+
 
 // -------------------------------------------------------
-// -------------------------------------------------------
 // Função para deletar um livro da tabela "livros"
+// -------------------------------------------------------
 async function deleteBook(id) {
   try {
     const { error } = await supabase.from("livros").delete().eq("id", id);
@@ -727,5 +735,3 @@ async function deleteBookSearch(id) {
 
 // Inicializar a exibição dos dados
 displayData();
-// -------------------------------------------------------
-// -------------------------------------------------------
