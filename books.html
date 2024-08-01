@@ -125,12 +125,6 @@
         </div>
       </div>
 
-
-      <!-- Botões de estatísticas e alterar status
-      <div class="dropdownS">
-        <button class="alterarStatusButton" id="editStatusButton"><i class="fas fa-edit"></i></button>
-      </div> -->
-
       <div class="dropdown">
         <button id="filterButtons"><i class="fas fa-chart-bar"></i></button>
         <div class="dropdown-content">
@@ -157,6 +151,25 @@
     <dialog id="genreResultDialog">
       <p id="genreResultMessage"></p>
       <button id="closeGenreResultDialog">Fechar</button>
+    </dialog>
+
+    <dialog id="edit-status-dialog">
+      <form method="dialog">
+        <p>Informe o novo status do livro:</p>
+        <label>
+          <input type="radio" name="status" value="Sim" required /> Sim (Livro finalizado)
+        </label>
+        <label>
+          <input type="radio" name="status" value="Não" /> Não (Futura leitura ou desistência da leitura)
+        </label>
+        <label>
+          <input type="radio" name="status" value="Em andamento" /> Em andamento (Leitura em andamento)
+        </label>
+        <menu>
+          <button value="cancel">Cancelar</button>
+          <button id="confirm-status-button" value="default">Confirmar</button>
+        </menu>
+      </form>
     </dialog>
 
 

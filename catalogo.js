@@ -99,7 +99,6 @@ async function checkUserAuthentication() {
   return user;
 }
 
-
 // ------------------------------------------------------------
 // Função para salvar os dados do formulário na tabela "livros"
 // ------------------------------------------------------------
@@ -122,7 +121,6 @@ async function saveFormData(livro, autor, serie, ano, finalizado) {
   }
 }
 
-
 // -----------------------------------------------------------------
 // Função para salvar os resultados da busca na tabela "livros_busca"
 // -----------------------------------------------------------------
@@ -144,7 +142,6 @@ async function saveSearchResult(livro, autor, genero, data, finalizado) {
     throw error;
   }
 }
-
 
 // -------------------------------------------------------
 // Envio do formulário
@@ -171,12 +168,10 @@ document
     }
   });
 
-
 // -------------------------------------------------------
 // Chave da API do Google Books
 // -------------------------------------------------------
 const API_KEY = "AIzaSyByZueS-sEDclSmT-lL4NnJ0Iejwn-251I";
-
 
 // -------------------------------------------------------
 // Função para buscar livros na API do Google Books
@@ -204,7 +199,6 @@ async function searchBooks() {
     );
   }
 }
-
 
 // -------------------------------------------------------
 // Função para exibir os resultados da busca
@@ -288,7 +282,6 @@ document.addEventListener("click", function (event) {
 // Event listener para a barra de busca
 document.getElementById("searchQuery").addEventListener("input", searchBooks);
 
-
 // ------------------------------------------------------------
 // Função para carregar e exibir os dados do Supabase na página
 // ------------------------------------------------------------
@@ -314,7 +307,6 @@ async function displayData() {
 
     const userDataElement = document.getElementById("bookCatalog");
     userDataElement.innerHTML = "";
-
 
     // -------------------------------------------------------
     // Função para renderizar livros com base em um filtro
@@ -353,7 +345,76 @@ async function displayData() {
             displayData();
           });
 
+          // Função para editar o livro
+          async function editBook(livro) {
+            const dialog = document.getElementById("edit-status-dialog");
+            const confirmButton = document.getElementById(
+              "confirm-status-button"
+            );
+
+            // Show the dialog
+            dialog.showModal();
+
+            // Add an event listener for the confirm button click
+            confirmButton.addEventListener(
+              "click",
+              async () => {
+                // Get the selected status from the dialog
+                const form = dialog.querySelector("form");
+                const formData = new FormData(form);
+                const newStatus = formData.get("status");
+
+                if (!newStatus) return; // If no status is selected, do nothing
+
+                try {
+                  const user = await checkUserAuthentication();
+                  if (!user) return;
+
+                  // Identify the table
+                  const tableName =
+                    livro.hasOwnProperty("serie") || livro.hasOwnProperty("ano")
+                      ? "livros"
+                      : "livros_busca";
+
+                  // Update the status of the book
+                  const { error } = await supabase
+                    .from(tableName)
+                    .update({ finalizado: newStatus })
+                    .eq("id", livro.id)
+                    .eq("user_id", user.id);
+
+                  if (error) {
+                    throw error;
+                  }
+
+                  console.log("Status atualizado com sucesso");
+                  alert("Status do livro atualizado com sucesso");
+                  displayData(); // Update the display of data
+                } catch (error) {
+                  console.error(
+                    "Erro ao atualizar status do livro",
+                    error.message
+                  );
+                  alert("Erro ao atualizar o status do livro");
+                } finally {
+                  dialog.close(); // Close the dialog
+                }
+              },
+              { once: true }
+            ); // Ensure the listener is added only once
+          }
+
+          // Botão de editar
+          const editButton = document.createElement("button");
+          editButton.textContent = "✎"; // Icon for edit
+          editButton.classList.add("edit-button");
+          editButton.addEventListener("click", () => {
+            // chamar a função de editar quando o botão é clicado
+            editBook(livro);
+          });
+
           userDiv.appendChild(deleteButton);
+          userDiv.appendChild(editButton);
           userDataElement.appendChild(userDiv);
         }
       });
@@ -480,7 +541,6 @@ document
     }
   });
 
-
 // ---------------------------------------------------------
 // Função para contar a quantidade de livros lidos por autor
 // ---------------------------------------------------------
@@ -594,7 +654,6 @@ document.getElementById("resultDialog").addEventListener("click", (event) => {
   }
 });
 
-
 // ----------------------------------------------------------
 // Função para contar a quantidade de livros lidos por genero
 // ----------------------------------------------------------
@@ -706,8 +765,6 @@ document
       document.getElementById("genreResultDialog").close();
     }
   });
-
-
 
 // -------------------------------------------------------
 // Função para deletar um livro da tabela "livros"
