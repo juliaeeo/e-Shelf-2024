@@ -15,13 +15,19 @@ h1 {
 
 header {
   text-align: center;
-  background-color: white; /* Para evitar sobreposição de conteúdo ao rolar a página */
-  position: -webkit-sticky; /* Para suporte no Safari */
-  position: sticky; /* Para outros navegadores */
-  top: 0; /* Fixa o elemento ao topo da página */
-  z-index: 1000; /* Para garantir que o elemento fique acima de outros conteúdos */
+  background-color: white;
+  /* Para evitar sobreposição de conteúdo ao rolar a página */
+  position: -webkit-sticky;
+  /* Para suporte no Safari */
+  position: sticky;
+  /* Para outros navegadores */
+  top: 0;
+  /* Fixa o elemento ao topo da página */
+  z-index: 1000;
+  /* Para garantir que o elemento fique acima de outros conteúdos */
   margin: 0;
-  padding: 10px 0; /* Adiciona um pouco de espaço ao redor do conteúdo do cabeçalho */
+  padding: 10px 0;
+  /* Adiciona um pouco de espaço ao redor do conteúdo do cabeçalho */
 }
 
 .colored {
@@ -54,16 +60,21 @@ h2 {
   position: absolute;
   top: 30px;
   right: 30px;
-  cursor: pointer; /* Adiciona um cursor de apontar para indicar que é clicável */
+  cursor: pointer;
+  /* Adiciona um cursor de apontar para indicar que é clicável */
 }
 
 .account-options {
-  display: none; /*inicialmente esconde as opções de conta*/
+  display: none;
+  /*inicialmente esconde as opções de conta*/
   position: absolute;
-  top: 30px; /*ajusta a posição vertical das opções*/
+  top: 30px;
+  /*ajusta a posição vertical das opções*/
   right: 0;
-  background-color: whitesmoke; /* Define a cor de fundo das opções */
-  border: 2px solid #34b991; /* Adiciona uma borda às opções */
+  background-color: whitesmoke;
+  /* Define a cor de fundo das opções */
+  border: 2px solid #34b991;
+  /* Adiciona uma borda às opções */
   padding: 5px;
   width: auto;
   align-items: center;
@@ -71,10 +82,12 @@ h2 {
 }
 
 .account-options a {
-  display: inline; /* Faz com que os links sejam exibidos como blocos */
+  display: inline;
+  /* Faz com que os links sejam exibidos como blocos */
   text-decoration: none;
   color: black;
-  margin-bottom: 10px; /* Adiciona espaço entre os links */
+  margin-bottom: 10px;
+  /* Adiciona espaço entre os links */
   font-weight: bold;
   font-size: 0.9em;
 }
@@ -105,21 +118,27 @@ main {
 .paragrafo-box0,
 .paragrafo-box2 {
   background-color: rgb(238, 162, 99);
-  padding: 20px; /* Adiciona um espaçamento interno */
-  margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
+  padding: 20px;
+  /* Adiciona um espaçamento interno */
+  margin-bottom: 20px;
+  /* Adiciona espaço abaixo de cada caixa de parágrafo */
   margin-right: 75px;
   margin-left: 75px;
-  border-radius: 10px; /* Adiciona bordas arredondadas */
+  border-radius: 10px;
+  /* Adiciona bordas arredondadas */
   font-size: 1.3em;
 }
 
 .paragrafo-box1 {
   background-color: #34b991;
-  padding: 20px; /* Adiciona um espaçamento interno */
-  margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
+  padding: 20px;
+  /* Adiciona um espaçamento interno */
+  margin-bottom: 20px;
+  /* Adiciona espaço abaixo de cada caixa de parágrafo */
   margin-right: 75px;
   margin-left: 75px;
-  border-radius: 10px; /* Adiciona bordas arredondadas */
+  border-radius: 10px;
+  /* Adiciona bordas arredondadas */
   font-size: 1.3em;
 }
 
@@ -264,6 +283,7 @@ label {
   font-size: 15px;
 }
 
+
 /* Redefinir senha */
 .reset {
   width: 50%;
@@ -292,8 +312,10 @@ footer {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly; /* Alinha os livros */
-  margin-top: 50px; /* Adiciona um espaço superior para separar o catálogo do formulário */
+  justify-content: space-evenly;
+  /* Alinha os livros */
+  margin-top: 50px;
+  /* Adiciona um espaço superior para separar o catálogo do formulário */
   margin-left: 50px;
   margin-right: 50px;
   gap: 1em;
@@ -423,17 +445,20 @@ footer {
   background: none;
   text-align: center;
 }
+
 .dropdown-content button:hover {
   background-color: rgb(238, 162, 99);
   max-width: 80%;
 }
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
 .button-container {
   display: flex;
-  gap: 40px; /* Espaço entre os botões */
+  gap: 40px;
+  /* Espaço entre os botões */
   justify-content: center;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -481,10 +506,12 @@ footer {
   background: none;
   text-align: center;
 }
+
 .dropdown-statistic button:hover {
   background-color: #34b991;
   max-width: 80%;
 }
+
 .dropdownS:hover .dropdown-statistic {
   display: block;
 }
@@ -514,8 +541,8 @@ dialog::backdrop {
 #booksReadCount,
 #resultMessage,
 #genreResultMessage {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  /* font-weight: bold; */
   margin-bottom: 20px;
   white-space: pre-line;
   text-align: justify;
@@ -549,6 +576,37 @@ dialog::backdrop {
   font-size: 13px;
 }
 
+#confirm-status-button {
+  margin-top: 40px;
+  background-color: #34b991;
+  color: whitesmoke;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#cancel {
+  background-color: rgb(167, 11, 11);
+  color: whitesmoke;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#edit-status-dialog label {
+  display: block;
+  /* Faz com que cada label ocupe uma linha separada */
+  text-align: left;
+  /* Alinha o texto à esquerda */
+  font-size: 14px;
+}
+
+
+
 /* ---------------------------------------------- */
 /* Estilos para telas menores, como celulares */
 /* ---------------------------------------------- */
@@ -569,29 +627,42 @@ dialog::backdrop {
   }
 
   .account-box {
-    display: flex; /*alinha os itens em uma linha */
-    align-items: center; /*alinha verticalmente os itens no centro*/
-    justify-content: center; /*centraliza os itens horizontalmente*/
-    padding: 5px; /* Adiciona espaço ao redor do elemento */
+    display: flex;
+    /*alinha os itens em uma linha */
+    align-items: center;
+    /*alinha verticalmente os itens no centro*/
+    justify-content: center;
+    /*centraliza os itens horizontalmente*/
+    padding: 5px;
+    /* Adiciona espaço ao redor do elemento */
     /* background-color: #34b991;  */
-    border-radius: 5px; /* Borda arredondada para uma aparência mais suave */
+    border-radius: 5px;
+    /* Borda arredondada para uma aparência mais suave */
     text-align: center;
-    margin-top: 7px; /*Compensa o espaço ocupado pelo cabeçalho*/
+    margin-top: 7px;
+    /*Compensa o espaço ocupado pelo cabeçalho*/
     width: auto;
     margin-left: 10px;
     margin-right: 10px;
     cursor: pointer;
     font-size: 12px;
   }
+
   .account-box i {
-    font-size: 14px; /* Aumenta o tamanho do ícone */
-    margin-right: 5px; /* Adiciona espaço entre o ícone e o texto */
+    font-size: 14px;
+    /* Aumenta o tamanho do ícone */
+    margin-right: 5px;
+    /* Adiciona espaço entre o ícone e o texto */
   }
+
   .account-text {
-    font-size: 12px; /* Aumenta o tamanho do texto */
+    font-size: 12px;
+    /* Aumenta o tamanho do texto */
   }
+
   .account-options {
-    margin-top: 8px; /* Adiciona espaço acima das opções de conta */
+    margin-top: 8px;
+    /* Adiciona espaço acima das opções de conta */
     width: auto;
     font-size: 12px;
     padding: 5px;
@@ -604,23 +675,29 @@ dialog::backdrop {
   .paragrafo-box0,
   .paragrafo-box2 {
     background-color: rgb(238, 162, 99);
-    padding: 20px; /* Adiciona um espaçamento interno */
-    margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
+    padding: 20px;
+    /* Adiciona um espaçamento interno */
+    margin-bottom: 20px;
+    /* Adiciona espaço abaixo de cada caixa de parágrafo */
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 50px;
-    border-radius: 10px; /* Adiciona bordas arredondadas */
+    border-radius: 10px;
+    /* Adiciona bordas arredondadas */
     font-size: 1em;
   }
 
   .paragrafo-box1 {
     background-color: #34b991;
-    padding: 20px; /* Adiciona um espaçamento interno */
-    margin-bottom: 20px; /* Adiciona espaço abaixo de cada caixa de parágrafo */
+    padding: 20px;
+    /* Adiciona um espaçamento interno */
+    margin-bottom: 20px;
+    /* Adiciona espaço abaixo de cada caixa de parágrafo */
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 50px;
-    border-radius: 10px; /* Adiciona bordas arredondadas */
+    border-radius: 10px;
+    /* Adiciona bordas arredondadas */
     font-size: 1em;
   }
 
