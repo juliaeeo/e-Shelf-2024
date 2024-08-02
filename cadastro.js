@@ -32,8 +32,8 @@ async function registerUser() {
       alert(
         "Usuário registrado com sucesso. Verifique seu email para confirmar seu cadastro."
       );
-      //Redirecionando para a página books.html após o sucesso do registro
-      window.location.href = "books.html";
+      //Redirecionando para a página login.html após o sucesso do registro
+      window.location.href = "login.html";
     }
   } catch (error) {
     console.error("Erro ao registrar usuário: ", error.message);
