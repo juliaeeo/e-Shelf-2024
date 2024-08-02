@@ -744,7 +744,8 @@ dialog::backdrop {
   }
 }
 
-/* Modal styles */
+/* Modal styles  */
+
 .modal {
   display: none;
   position: fixed;
@@ -759,11 +760,19 @@ dialog::backdrop {
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+  width: 35%;
+  max-width: 600px;
+  border: solid 2px rgb(238, 162, 99);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  background-color: whitesmoke;
+  text-align: justify;
+  font-size: 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-110%, -120%);
 }
 
 .close {
@@ -775,7 +784,12 @@ dialog::backdrop {
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: red;
   text-decoration: none;
   cursor: pointer;
+}
+
+.instruction-text {
+  margin-bottom: 20px;
+  /* Espaço de 10px abaixo do texto */
 }

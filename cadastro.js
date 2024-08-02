@@ -30,7 +30,7 @@ async function registerUser() {
       alert("Erro ao registrar usuário: " + error.message);
     } else {
       alert(
-        "Usuário registrado com sucesso. Verifique seu email para confirmar seu cadastro."
+        "Usuário registrado com sucesso. Verifique seu email para confirmar seu cadastro e em seguida faça o seu login."
       );
       //Redirecionando para a página login.html após o sucesso do registro
       window.location.href = "login.html";

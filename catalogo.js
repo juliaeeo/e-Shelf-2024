@@ -205,6 +205,10 @@ async function searchBooks() {
 // -------------------------------------------------------
 function displayResults(books) {
   const resultsList = document.getElementById("searchResults");
+  const modal = document.getElementById("modal");
+  const closeModal = document.getElementById("closeModal");
+  const checkboxContainer = document.getElementById("checkboxContainer");
+
   resultsList.innerHTML = "";
 
   if (!books || books.length === 0) {
@@ -233,35 +237,80 @@ function displayResults(books) {
     const listItem = document.createElement("li");
     listItem.textContent = `${title} - ${authors} - ${genres} - ${publishedYear}`;
 
-    listItem.addEventListener("click", async () => {
-      const finalizado = prompt(
-        "Informe o status do livro (Sim para livro finalizado, Não para futura leitura ou desistência da leitura, Em andamento para leitura em andamento.):",
-        "Sim"
-      );
-      if (!finalizado) return;
+    listItem.addEventListener("click", () => {
+      // Clear any existing checkboxes
+      checkboxContainer.innerHTML = "";
 
-      try {
-        await saveSearchResult(
-          title,
-          authors,
-          genres,
-          publishedYear,
-          finalizado
-        );
-        displayData();
-        resultsList.style.display = "none";
-        resultsList.innerHTML = "";
-        document.getElementById("searchQuery").value = ""; // limpa a barra de busca
-      } catch (error) {
-        console.error("Erro ao salvar o livro buscado", error.message);
-      }
+      // Adiciona um texto de instrução
+      const instructionText = document.createElement("p");
+      instructionText.textContent = "Escolha o status do livro:";
+      instructionText.className = "instruction-text";
+      checkboxContainer.appendChild(instructionText);
+
+      // Create checkboxes
+      const createCheckbox = (id, label) => {
+        const container = document.createElement("div");
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.id = id;
+        input.name = "status";
+        input.value = label;
+        const labelElement = document.createElement("label");
+        labelElement.htmlFor = id;
+        labelElement.textContent = label;
+        container.appendChild(input);
+        container.appendChild(labelElement);
+        return container;
+      };
+
+      
+      checkboxContainer.appendChild(createCheckbox("sim", "Sim (Livro finalizado)"));
+      checkboxContainer.appendChild(createCheckbox("nao", "Não (Futura leitura ou desistência da leitura)"));
+      checkboxContainer.appendChild(createCheckbox("emAndamento", "Em andamento (Leitura em andamento)"));
+
+      // Display the modal
+      modal.style.display = "block";
+
+      // Add change event listener to checkboxContainer after it's been added to the DOM
+      checkboxContainer.addEventListener("change", async (event) => {
+        const selectedOption = event.target.value;
+        try {
+          await saveSearchResult(
+            title,
+            authors,
+            genres,
+            publishedYear,
+            selectedOption
+          );
+          displayData();
+          modal.style.display = "none";
+          resultsList.style.display = "none";
+          resultsList.innerHTML = "";
+          document.getElementById("searchQuery").value = ""; // Clear the search bar
+        } catch (error) {
+          console.error("Erro ao salvar o livro buscado", error.message);
+        }
+      });
     });
 
     resultsList.appendChild(listItem);
   });
 
   resultsList.style.display = "block";
+
+  // Close modal when the user clicks on <span> (x)
+  closeModal.onclick = () => {
+    modal.style.display = "none";
+  };
+
+  // Close modal when the user clicks anywhere outside of the modal
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
 }
+
 
 // Adiciona um ouvinte de eventos de clique ao documento para limpar os resultados da barra de buscas
 document.addEventListener("click", function (event) {
