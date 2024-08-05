@@ -18,7 +18,8 @@
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
-  display: none; /* Inicialmente escondida */
+  display: none;
+  /* Inicialmente escondida */
   text-align: left;
 }
 
@@ -44,4 +45,5 @@
   padding: 20px;
   border: 2px solid rgb(240, 112, 8);
   border-radius: 10px;
+  position: relative;
 }

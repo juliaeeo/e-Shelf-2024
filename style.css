@@ -634,6 +634,23 @@ dialog::backdrop {
     justify-content: center;
     /*centraliza os itens horizontalmente*/
     padding: 5px;
+
+    .modal-content {
+      width: 35%;
+      max-width: 600px;
+      border: solid 2px rgb(238, 162, 99);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      background-color: whitesmoke;
+      text-align: justify;
+      font-size: 15px;
+      position: fixed;
+      top: calc(5em + 50px + 40px + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
     /* Adiciona espaço ao redor do elemento */
     /* background-color: #34b991;  */
     border-radius: 5px;
@@ -742,6 +759,16 @@ dialog::backdrop {
     white-space: pre-line;
     text-align: justify;
   }
+
+  .modal-content {
+    width: 50%;
+    max-width: none;
+    bottom: calc(5em + 20px);
+    left: 5%;
+    transform: none;
+    font-size: 10px;
+
+  }
 }
 
 /* Modal styles  */
@@ -770,9 +797,9 @@ dialog::backdrop {
   text-align: justify;
   font-size: 15px;
   position: fixed;
-  top: 50%;
+  bottom: calc(15em + 50px + 40px + 10px);
   left: 50%;
-  transform: translate(-110%, -120%);
+  transform: translateX(-50%);
 }
 
 .close {
