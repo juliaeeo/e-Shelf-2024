@@ -264,9 +264,9 @@ function displayResults(books) {
       };
 
       
-      checkboxContainer.appendChild(createCheckbox("sim", "Sim (Livro finalizado)"));
-      checkboxContainer.appendChild(createCheckbox("nao", "Não (Futura leitura ou desistência da leitura)"));
-      checkboxContainer.appendChild(createCheckbox("emAndamento", "Em andamento (Leitura em andamento)"));
+      checkboxContainer.appendChild(createCheckbox("sim", "Sim"));
+      checkboxContainer.appendChild(createCheckbox("nao", "Não"));
+      checkboxContainer.appendChild(createCheckbox("emAndamento", "Em andamento"));
 
       // Display the modal
       modal.style.display = "block";
