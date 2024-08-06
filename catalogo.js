@@ -1,11 +1,8 @@
 // Mostrar opções da conta
-document
-  .getElementById("account-toggle")
-  .addEventListener("click", function () {
-    const accountOptions = document.getElementById("account-options");
-    accountOptions.style.display =
-      accountOptions.style.display === "none" ? "block" : "none";
-  });
+document.getElementById("account-toggle").addEventListener("click", function () {
+  const accountOptions = document.getElementById("account-options");
+  accountOptions.style.display = accountOptions.style.display === "none" ? "block" : "none";
+});
 
 // Logout e redirecionamento
 document.getElementById("logout").addEventListener("click", function (event) {
@@ -13,13 +10,13 @@ document.getElementById("logout").addEventListener("click", function (event) {
   // lógica para o logout
   window.location.href = "index.html";
 });
-// javascript pros ícones de filtro, ordenação e estatística
+
+// Javascript pros ícones de filtro, ordenação e estatística
 document.addEventListener("DOMContentLoaded", function () {
   const filterButton = document.getElementById("filterButton");
   const sortButton = document.getElementById("sortButton");
   const sortAuthorButton = document.getElementById("sortAuthorButton");
   const sortGenreButton = document.getElementById("sortGenreButton");
-  const statusButton = document.getElementById("statusButton");
   const statsButton = document.getElementById("statsButton");
 
   const filterOptions = document.getElementById("filterOptions");
@@ -49,8 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function toggleDropdown(element) {
-    element.style.display =
-      element.style.display === "block" ? "none" : "block";
+    element.style.display = element.style.display === "block" ? "none" : "block";
   }
 
   document.addEventListener("click", function (event) {
@@ -60,9 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function closeAllDropdowns() {
-    const dropdowns = document.querySelectorAll(
-      ".dropdown-content, .dropdown-statistic"
-    );
+    const dropdowns = document.querySelectorAll(".dropdown-content, .dropdown-statistic");
     dropdowns.forEach((dropdown) => {
       dropdown.style.display = "none";
     });
@@ -70,24 +64,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // -------------------------------------------------------
-// -------------------------------------------------------
-// -------------------------------------------------------
-
 // Inicialize o Supabase com as credenciais do seu projeto
-const supabaseUrl = "https://uyxbhreygsckfskebocj.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5eGJocmV5Z3Nja2Zza2Vib2NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjkxMDgsImV4cCI6MjAyODM0NTEwOH0.f4hfGh5xpT8-rFsfIOElu9msfxtHtpiz7HsIzjTYdko";
+// -------------------------------------------------------
 
+const supabaseUrl = "https://uyxbhreygsckfskebocj.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5eGJocmV5Z3Nja2Zza2Vib2NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjkxMDgsImV4cCI6MjAyODM0NTEwOH0.f4hfGh5xpT8-rFsfIOElu9msfxtHtpiz7HsIzjTYdko";
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // -------------------------------------------------------
 // Função para verificar a autenticação do usuário
 // -------------------------------------------------------
 async function checkUserAuthentication() {
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+  const { data: { user }, error } = await supabase.auth.getUser();
   if (error) {
     console.error("Erro ao obter o usuário", error.message);
     return null;
@@ -102,6 +90,7 @@ async function checkUserAuthentication() {
 // ------------------------------------------------------------
 // Função para salvar os dados do formulário na tabela "livros"
 // ------------------------------------------------------------
+
 async function saveFormData(livro, autor, serie, ano, finalizado) {
   try {
     const user = await checkUserAuthentication();
@@ -121,422 +110,235 @@ async function saveFormData(livro, autor, serie, ano, finalizado) {
   }
 }
 
-// -----------------------------------------------------------------
-// Função para salvar os resultados da busca na tabela "livros_busca"
-// -----------------------------------------------------------------
-async function saveSearchResult(livro, autor, genero, data, finalizado) {
-  try {
-    const user = await checkUserAuthentication();
-    if (!user) return;
-
-    const { data: insertData, error } = await supabase
-      .from("livros_busca")
-      .insert([{ livro, autor, genero, data, finalizado, user_id: user.id }]);
-    if (error) {
-      throw error;
-    }
-    console.log("Dados inseridos com sucesso", insertData);
-    return insertData;
-  } catch (error) {
-    console.error("Erro ao inserir dados no Supabase", error.message);
-    throw error;
-  }
-}
-
 // -------------------------------------------------------
 // Envio do formulário
 // -------------------------------------------------------
-document
-  .getElementById("submitBtn")
-  .addEventListener("click", async function () {
-    const livro = document.getElementById("livro").value;
-    const autor = document.getElementById("autor").value;
-    const serie = document.getElementById("serie").value;
-    const ano = document.getElementById("ano").value;
-    const finalizado = document.querySelector(
-      'input[name="finalizado"]:checked'
-    ).value;
 
-    try {
-      await saveFormData(livro, autor, serie, ano, finalizado);
-      alert("Dados enviados com sucesso");
-      document.getElementById("bookForm").reset();
-      displayData();
-    } catch (error) {
-      alert("Ocorreu um erro ao enviar os dados");
-      console.error(error);
-    }
-  });
-
-// -------------------------------------------------------
-// Chave da API do Google Books
-// -------------------------------------------------------
-const API_KEY = "AIzaSyByZueS-sEDclSmT-lL4NnJ0Iejwn-251I";
-
-// -------------------------------------------------------
-// Função para buscar livros na API do Google Books
-// -------------------------------------------------------
-async function searchBooks() {
-  const query = document.getElementById("searchQuery").value;
-  const resultsList = document.getElementById("searchResults");
-  resultsList.innerHTML = "";
-
-  if (query.length < 3) {
-    resultsList.style.display = "none";
-    return;
-  }
+document.getElementById("submitBtn").addEventListener("click", async function () {
+  const livro = document.getElementById("livro").value;
+  const autor = document.getElementById("autor").value;
+  const serie = document.getElementById("serie").value;
+  const ano = document.getElementById("ano").value;
+  const finalizado = document.querySelector('input[name="finalizado"]:checked').value;
 
   try {
-    const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${API_KEY}`
-    );
-    const data = await response.json();
-    displayResults(data.items);
+    await saveFormData(livro, autor, serie, ano, finalizado);
+    alert("Dados enviados com sucesso");
+    document.getElementById("bookForm").reset();
+    displayData();
   } catch (error) {
-    console.error(
-      "Erro ao buscar livros na API do Google Books",
-      error.message
-    );
-  }
-}
-
-// -------------------------------------------------------
-// Função para exibir os resultados da busca
-// -------------------------------------------------------
-function displayResults(books) {
-  const resultsList = document.getElementById("searchResults");
-  const modal = document.getElementById("modal");
-  const closeModal = document.getElementById("closeModal");
-  const checkboxContainer = document.getElementById("checkboxContainer");
-
-  resultsList.innerHTML = "";
-
-  if (!books || books.length === 0) {
-    const listItem = document.createElement("li");
-    listItem.textContent = "Nenhum resultado encontrado.";
-    resultsList.appendChild(listItem);
-    resultsList.style.display = "block";
-    return;
-  }
-
-  books.forEach((book) => {
-    const title = book.volumeInfo.title || "Título não disponível";
-    const authors = book.volumeInfo.authors
-      ? book.volumeInfo.authors.join(", ")
-      : "Autor desconhecido";
-    const publishedDate =
-      book.volumeInfo.publishedDate || "Data não disponível";
-    const publishedYear =
-      publishedDate !== "Data não disponível"
-        ? new Date(publishedDate).getFullYear().toString()
-        : "Ano não disponível";
-    const genres = book.volumeInfo.categories
-      ? book.volumeInfo.categories.join(", ")
-      : "Gênero não disponível";
-
-    const listItem = document.createElement("li");
-    listItem.textContent = `${title} - ${authors} - ${genres} - ${publishedYear}`;
-
-    listItem.addEventListener("click", () => {
-      // Clear any existing checkboxes
-      checkboxContainer.innerHTML = "";
-
-      // Adiciona um texto de instrução
-      const instructionText = document.createElement("p");
-      instructionText.textContent = "Escolha o status do livro:";
-      instructionText.className = "instruction-text";
-      checkboxContainer.appendChild(instructionText);
-
-      // Create checkboxes
-      const createCheckbox = (id, label) => {
-        const container = document.createElement("div");
-        const input = document.createElement("input");
-        input.type = "checkbox";
-        input.id = id;
-        input.name = "status";
-        input.value = label;
-        const labelElement = document.createElement("label");
-        labelElement.htmlFor = id;
-        labelElement.textContent = label;
-        container.appendChild(input);
-        container.appendChild(labelElement);
-        return container;
-      };
-
-      
-      checkboxContainer.appendChild(createCheckbox("sim", "Sim"));
-      checkboxContainer.appendChild(createCheckbox("nao", "Não"));
-      checkboxContainer.appendChild(createCheckbox("emAndamento", "Em andamento"));
-
-      // Display the modal
-      modal.style.display = "block";
-
-      // Add change event listener to checkboxContainer after it's been added to the DOM
-      checkboxContainer.addEventListener("change", async (event) => {
-        const selectedOption = event.target.value;
-        try {
-          await saveSearchResult(
-            title,
-            authors,
-            genres,
-            publishedYear,
-            selectedOption
-          );
-          displayData();
-          modal.style.display = "none";
-          resultsList.style.display = "none";
-          resultsList.innerHTML = "";
-          document.getElementById("searchQuery").value = ""; // Clear the search bar
-        } catch (error) {
-          console.error("Erro ao salvar o livro buscado", error.message);
-        }
-      });
-    });
-
-    resultsList.appendChild(listItem);
-  });
-
-  resultsList.style.display = "block";
-
-  // Close modal when the user clicks on <span> (x)
-  closeModal.onclick = () => {
-    modal.style.display = "none";
-  };
-
-  // Close modal when the user clicks anywhere outside of the modal
-  window.onclick = (event) => {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
-}
-
-
-// Adiciona um ouvinte de eventos de clique ao documento para limpar os resultados da barra de buscas
-document.addEventListener("click", function (event) {
-  const searchResults = document.getElementById("searchResults");
-  const searchQuery = document.getElementById("searchQuery");
-  // Verifica se o clique não foi dentro dos resultados de busca ou da barra de pesquisa
-  if (
-    !event.target.closest("#searchResults") &&
-    !event.target.closest("#searchQuery")
-  ) {
-    // Limpa os resultados de busca, oculta o elemento e limpa o campo de busca
-    searchResults.innerHTML = "";
-    searchResults.style.display = "none";
-    searchQuery.value = "";
+    alert("Ocorreu um erro ao enviar os dados");
+    console.error(error);
   }
 });
 
-// Event listener para a barra de busca
-document.getElementById("searchQuery").addEventListener("input", searchBooks);
-
-// ------------------------------------------------------------
+// -------------------------------------------------------------
 // Função para carregar e exibir os dados do Supabase na página
 // ------------------------------------------------------------
+let livros = [];
+
 async function displayData() {
   try {
     const user = await checkUserAuthentication();
     if (!user) return;
 
-    // Obter os livros do usuário logado das duas tabelas
-    const [livrosResponse, livrosBuscaResponse] = await Promise.all([
-      supabase.from("livros").select().eq("user_id", user.id),
-      supabase.from("livros_busca").select().eq("user_id", user.id),
-    ]);
+    // Obter os livros do usuário logado da tabela "livros"
+    const { data, error } = await supabase
+      .from("livros")
+      .select()
+      .eq("user_id", user.id);
 
-    if (livrosResponse.error) throw livrosResponse.error;
-    if (livrosBuscaResponse.error) throw livrosBuscaResponse.error;
+    if (error) throw error;
 
-    const livros = livrosResponse.data || [];
-    const livrosBusca = livrosBuscaResponse.data || [];
+    livros = data || [];
 
-    // Combinar e ordenar os livros alfabeticamente pel título
-    const allBooks = [...livros, ...livrosBusca];
+    // const userDataElement = document.getElementById("bookCatalog");
+    // userDataElement.innerHTML = "";
 
-    const userDataElement = document.getElementById("bookCatalog");
-    userDataElement.innerHTML = "";
-
-    // -------------------------------------------------------
-    // Função para renderizar livros com base em um filtro
-    // -------------------------------------------------------
-    function renderBooks(filter) {
-      userDataElement.innerHTML = "";
-      allBooks.forEach((livro) => {
-        if (filter === "all" || livro.finalizado === filter) {
-          const userDiv = document.createElement("div");
-          userDiv.classList.add("livro");
-
-          // Verificar se o livro vem da tabela "livros" ou "livros_busca"
-          const genero = livro.serie || livro.genero || "Gênero não disponível";
-          const ano = livro.ano || livro.data || "Ano não disponível";
-
-          userDiv.innerHTML = `
-            <p><strong>Livro:</strong> ${livro.livro}</p>
-            <p><strong>Autor:</strong> ${livro.autor}</p>
-            <p><strong>Gênero:</strong> ${genero}</p>
-            <p><strong>Ano:</strong> ${ano}</p>
-            <p class="finalizado"><strong>Finalizado:</strong> ${livro.finalizado}</p>
-          `;
-
-          // Botão de excluir
-          const deleteButton = document.createElement("button");
-          deleteButton.textContent = "x";
-          deleteButton.classList.add("delete-button");
-          deleteButton.addEventListener("click", async () => {
-            if (livro.hasOwnProperty("serie") || livro.hasOwnProperty("ano")) {
-              //Excluir da tabela "livros"
-              await deleteBook(livro.id);
-            } else {
-              //Excluir da tabela livros_busca
-              await deleteBookSearch(livro.id);
-            }
-            displayData();
-          });
-
-          // Função para editar o livro
-          async function editBook(livro) {
-            const dialog = document.getElementById("edit-status-dialog");
-            const confirmButton = document.getElementById(
-              "confirm-status-button"
-            );
-
-            // Show the dialog
-            dialog.showModal();
-
-            // Add an event listener for the confirm button click
-            confirmButton.addEventListener(
-              "click",
-              async () => {
-                // Get the selected status from the dialog
-                const form = dialog.querySelector("form");
-                const formData = new FormData(form);
-                const newStatus = formData.get("status");
-
-                if (!newStatus) return; // If no status is selected, do nothing
-
-                try {
-                  const user = await checkUserAuthentication();
-                  if (!user) return;
-
-                  // Identify the table
-                  const tableName =
-                    livro.hasOwnProperty("serie") || livro.hasOwnProperty("ano")
-                      ? "livros"
-                      : "livros_busca";
-
-                  // Update the status of the book
-                  const { error } = await supabase
-                    .from(tableName)
-                    .update({ finalizado: newStatus })
-                    .eq("id", livro.id)
-                    .eq("user_id", user.id);
-
-                  if (error) {
-                    throw error;
-                  }
-
-                  console.log("Status atualizado com sucesso");
-                  alert("Status do livro atualizado com sucesso");
-                  displayData(); // Update the display of data
-                } catch (error) {
-                  console.error(
-                    "Erro ao atualizar status do livro",
-                    error.message
-                  );
-                  alert("Erro ao atualizar o status do livro");
-                } finally {
-                  dialog.close(); // Close the dialog
-                }
-              },
-              { once: true }
-            ); // Ensure the listener is added only once
-          }
-
-          // Botão de editar
-          const editButton = document.createElement("button");
-          editButton.textContent = "✎"; // Icon for edit
-          editButton.classList.add("edit-button");
-          editButton.addEventListener("click", () => {
-            // chamar a função de editar quando o botão é clicado
-            editBook(livro);
-          });
-
-          userDiv.appendChild(deleteButton);
-          userDiv.appendChild(editButton);
-          userDataElement.appendChild(userDiv);
-        }
-      });
-    }
-
-    //Renderizar todos os livros ao carregar a página
-    renderBooks("all");
-
-    // -------------------------------------------------------
-    // Função para filtrar livros com base no status
-    // -------------------------------------------------------
-    window.filterBooksByStatus = function (status) {
-      let filter;
-      switch (status) {
-        case "finalizado":
-          filter = "Sim";
-          break;
-        case "nao_finalizado":
-          filter = "Não";
-          break;
-        case "em_andamento":
-          filter = "Em andamento";
-          break;
-        default:
-          filter = "all";
-      }
-      renderBooks(filter);
-    };
-
-    // Ordenação alfabética dos livros A-Z
-    document.getElementById("sortAZ").addEventListener("click", () => {
-      allBooks.sort((a, b) => a.livro.localeCompare(b.livro));
-      renderBooks(window.currentFilter || "all");
-    });
-
-    // Ordenação por Autor A-Z
-    document.getElementById("sortAutorAZ").addEventListener("click", () => {
-      allBooks.sort((a, b) => a.autor.localeCompare(b.autor));
-      renderBooks(window.currentFilter || "all");
-    });
-
-    // Ordem por Gênero A-Z
-    document.getElementById("sortGenderAZ").addEventListener("click", () => {
-      allBooks.sort((a, b) => {
-        const genreA = a.serie || a.genero || "";
-        const genreB = b.serie || b.genero || "";
-        return genreA.localeCompare(genreB);
-      });
-      renderBooks(window.currentFilter || "all");
-    });
+    // Call renderBooks withou filter
+    renderBooks(window.currentFilter || "all");
   } catch (error) {
     console.error("Erro ao carregar dados do Supabase", error.message);
   }
 }
 
+    // Função para renderizar livros com base em um filtro
+    function renderBooks(filter){
+      const userDataElement = document.getElementById("bookCatalog");      
+      userDataElement.innerHTML = "";
+
+// Apply filter
+const filteredLivros = livros.filter(livro => {
+  if (filter === "all") return true;
+  return livro.finalizado === filter;
+});
+
+// Sort filtered livros
+
+
+   filteredLivros.forEach((livro) => {
+        const userDiv = document.createElement("div");
+        userDiv.classList.add("livro");
+
+        const genero = livro.serie || "Gênero não disponível";
+        const ano = livro.ano || "Ano não disponível";
+
+        userDiv.innerHTML = `
+          <p><strong>Livro:</strong> ${livro.livro}</p>
+          <p><strong>Autor:</strong> ${livro.autor}</p>
+          <p><strong>Gênero:</strong> ${genero}</p>
+          <p><strong>Ano:</strong> ${ano}</p>
+          <p class="finalizado"><strong>Finalizado:</strong> ${livro.finalizado}</p>
+        `;
+
+        // Botão de excluir
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "x";
+        deleteButton.classList.add("delete-button");
+        deleteButton.addEventListener("click", async () => {
+          await deleteBook(livro.id);
+          displayData();
+        });
+
+        // Botão de editar
+        const editButton = document.createElement("button");
+        editButton.textContent = "✎"; // Icon for edit
+        editButton.classList.add("edit-button");
+        editButton.addEventListener("click", () => {
+          editBook(livro);
+        });
+
+        userDiv.appendChild(deleteButton);
+        userDiv.appendChild(editButton);
+        userDataElement.appendChild(userDiv);
+      });
+    }
+
+    
+// -------------------------------------------------------
+// Função para excluir um livro da tabela "livros"
+// -------------------------------------------------------
+async function deleteBook(bookId) {
+  try {
+    const user = await checkUserAuthentication();
+    if (!user) return;
+
+    const { error } = await supabase
+      .from("livros")
+      .delete()
+      .eq("id", bookId)
+      .eq("user_id", user.id);
+
+    if (error) {
+      throw error;
+    }
+    console.log("Livro excluído com sucesso");
+  } catch (error) {
+    console.error("Erro ao excluir livro", error.message);
+  }
+}
+
+// -------------------------------------------------------
+// Função para editar o livro
+// -------------------------------------------------------
+async function editBook(livro) {
+  const dialog = document.getElementById("edit-status-dialog");
+  const confirmButton = document.getElementById("confirm-status-button");
+
+  // Show the dialog
+  dialog.showModal();
+
+  // Add an event listener for the confirm button click
+  confirmButton.addEventListener(
+    "click",
+    async () => {
+      // Get the selected status from the dialog
+      const form = dialog.querySelector("form");
+      const formData = new FormData(form);
+      const newStatus = formData.get("status");
+
+      if (!newStatus) return; // If no status is selected, do nothing
+
+      try {
+        const user = await checkUserAuthentication();
+        if (!user) return;
+
+        // Update the status of the book
+        const { error } = await supabase
+          .from("livros")
+          .update({ finalizado: newStatus })
+          .eq("id", livro.id)
+          .eq("user_id", user.id);
+
+        if (error) {
+          throw error;
+        }
+
+        console.log("Status atualizado com sucesso");
+        alert("Status do livro atualizado com sucesso");
+        displayData(); // Update the display of data
+      } catch (error) {
+        console.error("Erro ao atualizar status do livro", error.message);
+        alert("Erro ao atualizar o status do livro");
+      } finally {
+        dialog.close(); // Close the dialog
+      }
+    },
+    { once: true }
+  ); // Ensure the event listener is only called once
+}
+
+// -------------------------------------------------------
+// Função para filtrar livros com base no status
+// -------------------------------------------------------
+window.filterBooksByStatus = function (status) {
+  let filter;
+  switch (status) {
+    case "finalizado":
+      filter = "Sim";
+      break;
+    case "nao_finalizado":
+      filter = "Não";
+      break;
+    case "em_andamento":
+      filter = "Em andamento";
+      break;
+    default:
+      filter = "all";
+  }
+  window.currentFilter = filter; //save the current filter
+  renderBooks(filter);
+};
+
+// Ordenação alfabética dos livros A-Z
+document.getElementById("sortAZ").addEventListener("click", () => {
+  livros.sort((a, b) => a.livro.localeCompare(b.livro));
+  renderBooks(window.currentFilter || "all");
+});
+
+// Ordenação por Autor A-Z
+document.getElementById("sortAutorAZ").addEventListener("click", () => {
+  livros.sort((a, b) => a.autor.localeCompare(b.autor));
+  renderBooks(window.currentFilter || "all");
+});
+
+// Ordem por Gênero A-Z
+document.getElementById("sortGenderAZ").addEventListener("click", () => {
+  livros.sort((a, b) => {
+    const genreA = a.serie || a.genero || "";
+    const genreB = b.serie || b.genero || "";
+    return genreA.localeCompare(genreB);
+  });
+  renderBooks(window.currentFilter || "all");
+});
+
 // ---------------------------------------------------------------------------------------
-// Função para contar a quantidade de livros marcados como "Sim" em livros_busca e livros
+// Função para contar a quantidade de livros marcados como "Sim" na tabela livros
 // --------------------------------------------------------------------------------------
 async function countBooksRead() {
   try {
     const user = await checkUserAuthentication();
     if (!user) return;
-
-    // Consulta para contar os livros marcados como "Sim" na tabela livros_busca
-    const { data: dataLivrosBusca, error: errorLivrosBusca } = await supabase
-      .from("livros_busca")
-      .select("livro")
-      .eq("user_id", user.id)
-      .eq("finalizado", "Sim");
-
-    if (errorLivrosBusca) {
-      throw errorLivrosBusca;
-    }
 
     // Consulta para contar os livros marcados como "Sim" na tabela livros
     const { data: dataLivros, error: errorLivros } = await supabase
@@ -549,12 +351,10 @@ async function countBooksRead() {
       throw errorLivros;
     }
 
-    // Somar os resultados das duas consultas
-    const countLivrosBusca = dataLivrosBusca ? dataLivrosBusca.length : 0;
+    // Contar os livros finalizados
     const countLivros = dataLivros ? dataLivros.length : 0;
-    const totalCount = countLivrosBusca + countLivros;
 
-    return totalCount;
+    return countLivros;
   } catch (error) {
     console.error("Erro ao contar livros lidos", error.message);
     throw error;
@@ -576,19 +376,14 @@ function showDialog(count) {
 }
 
 // Event listener para o botão "Livros lidos"
-document
-  .querySelector(".countBooksRead")
-  .addEventListener("click", async () => {
-    try {
-      const count = await countBooksRead();
-      showDialog(count);
-    } catch (error) {
-      console.error(
-        "Erro ao obter estatísticas de livros lidos",
-        error.message
-      );
-    }
-  });
+document.querySelector(".countBooksRead").addEventListener("click", async () => {
+  try {
+    const count = await countBooksRead();
+    showDialog(count);
+  } catch (error) {
+    console.error("Erro ao obter estatísticas de livros lidos", error.message);
+  }
+});
 
 // ---------------------------------------------------------
 // Função para contar a quantidade de livros lidos por autor
@@ -597,17 +392,6 @@ async function countBooksReadByAuthor() {
   try {
     const user = await checkUserAuthentication();
     if (!user) return;
-
-    // Consulta para obter todos os livros marcados como "Sim" na tabela livros_busca
-    const { data: livrosBusca, error: errorLivrosBusca } = await supabase
-      .from("livros_busca")
-      .select("autor")
-      .eq("user_id", user.id)
-      .eq("finalizado", "Sim");
-
-    if (errorLivrosBusca) {
-      throw errorLivrosBusca;
-    }
 
     // Consulta para obter todos os livros marcados como "Sim" na tabela livros
     const { data: livros, error: errorLivros } = await supabase
@@ -634,35 +418,16 @@ async function countBooksReadByAuthor() {
       return count;
     };
 
-    // Combinar e contar os resultados das duas consultas
-    const booksBuscaCount = countBooksByAuthor(livrosBusca || []);
+    // Contar livros lidos por autor
     const booksCount = countBooksByAuthor(livros || []);
 
-    // Combinar os resultados das duas consultas
-    const resultsByAuthor = {};
-    for (const autor in booksBuscaCount) {
-      if (resultsByAuthor[autor]) {
-        resultsByAuthor[autor] += booksBuscaCount[autor];
-      } else {
-        resultsByAuthor[autor] = booksBuscaCount[autor];
-      }
-    }
-
-    for (const autor in booksCount) {
-      if (resultsByAuthor[autor]) {
-        resultsByAuthor[autor] += booksCount[autor];
-      } else {
-        resultsByAuthor[autor] = booksCount[autor];
-      }
-    }
-
     // Ordenar os autores
-    const sortedAuthors = Object.keys(resultsByAuthor).sort();
+    const sortedAuthors = Object.keys(booksCount).sort();
 
-    //  Preparar mensagem para o dialog
+    // Preparar mensagem para o dialog
     let dialogMessage = "Livros lidos por autor:\n\n";
     sortedAuthors.forEach((autor) => {
-      dialogMessage += `${autor}: ${resultsByAuthor[autor]} livro(s)\n`;
+      dialogMessage += `${autor}: ${booksCount[autor]} livro(s)\n`;
     });
 
     // Exibir os resultados via dialog
@@ -704,23 +469,12 @@ document.getElementById("resultDialog").addEventListener("click", (event) => {
 });
 
 // ----------------------------------------------------------
-// Função para contar a quantidade de livros lidos por genero
+// Função para contar a quantidade de livros lidos por gênero
 // ----------------------------------------------------------
 async function countBooksFinishedByGenre() {
   try {
     const user = await checkUserAuthentication();
     if (!user) return;
-
-    // Consulta para obter todos os livros marcados como "Sim" na tabela livros_busca
-    const { data: livrosBusca, error: errorLivrosBusca } = await supabase
-      .from("livros_busca")
-      .select("genero")
-      .eq("user_id", user.id)
-      .eq("finalizado", "Sim");
-
-    if (errorLivrosBusca) {
-      throw errorLivrosBusca;
-    }
 
     // Consulta para obter todos os livros marcados como "Sim" na tabela livros
     const { data: livros, error: errorLivros } = await supabase
@@ -747,27 +501,16 @@ async function countBooksFinishedByGenre() {
       return count;
     };
 
-    // Contagem de livros finalizados por gênero nas duas tabelas
-    const booksBuscaCount = countBooksByGenre(livrosBusca || [], "genero");
+    // Contagem de livros finalizados por gênero na tabela livros
     const booksCount = countBooksByGenre(livros || [], "serie");
 
-    // Combinar os resultados das duas consultas
-    const resultsByGenre = { ...booksBuscaCount };
-    for (const genero in booksCount) {
-      if (resultsByGenre[genero]) {
-        resultsByGenre[genero] += booksCount[genero];
-      } else {
-        resultsByGenre[genero] = booksCount[genero];
-      }
-    }
-
     // Ordenar os gêneros
-    const sortedGenres = Object.keys(resultsByGenre).sort();
+    const sortedGenres = Object.keys(booksCount).sort();
 
     // Preparar mensagem para o dialog
     let dialogMessage = "Livros finalizados por gênero:\n\n";
     sortedGenres.forEach((genero) => {
-      dialogMessage += `${genero}: ${resultsByGenre[genero]} livro(s)\n`;
+      dialogMessage += `${genero}: ${booksCount[genero]} livro(s)\n`;
     });
 
     // Exibir os resultados via dialog
@@ -815,29 +558,7 @@ document
     }
   });
 
-// -------------------------------------------------------
-// Função para deletar um livro da tabela "livros"
-// -------------------------------------------------------
-async function deleteBook(id) {
-  try {
-    const { error } = await supabase.from("livros").delete().eq("id", id);
-    if (error) throw error;
-    console.log("Livro excluído com sucesso");
-  } catch (error) {
-    console.error("Erro ao excluir livro", error.message);
-  }
-}
 
-// Função para deletar um livro da tabela "livros_busca"
-async function deleteBookSearch(id) {
-  try {
-    const { error } = await supabase.from("livros_busca").delete().eq("id", id);
-    if (error) throw error;
-    console.log("Livro excluído com sucesso");
-  } catch (error) {
-    console.error("Erro ao excluir livro", error.message);
-  }
-}
 
-// Inicializar a exibição dos dados
-displayData();
+// Carregar dados na inicialização
+document.addEventListener("DOMContentLoaded", displayData);
