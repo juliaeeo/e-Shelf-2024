@@ -252,12 +252,29 @@ label {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 25px;
+  margin-top: 35px;
+  margin-right: 50px;
   font-size: 18px;
 }
 
 .submission:hover {
   background-color: #0a6b4e;
+}
+
+/* botão de cancelar formulário */
+.cancelation {
+  padding: 16px 32px;
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 35px;
+  font-size: 18px;
+}
+
+.cancelation:hover {
+  background-color: red;
 }
 
 /* botão de excluir */
@@ -339,12 +356,12 @@ footer {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1 1 200px;
-  width: 200px;
+  width: 210px;
   height: 250px;
-  max-width: 230px;
+  max-width: 210px;
   box-sizing: border-box;
   margin: 10px 0;
-  padding: 1em;
+  /* padding: 1em; */
   text-align: left;
   padding: 10px;
   margin-bottom: 15px;
@@ -605,6 +622,46 @@ dialog::backdrop {
   font-size: 14px;
 }
 
+/* Resultados da busca */
+/* Estilo para a lista de resultados de busca */
+#searchResults {
+  position: absolute;
+  background-color: white;
+  border: solid 2px #34b991;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 70%;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: none;
+  padding: 0;
+  margin-top: 15px;
+  list-style-type: none;
+  text-align: justify;
+}
+
+/* Estilo para cada item na lista de resultados */
+#searchResults li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(197, 195, 188);
+}
+
+/* Estilo para o último item na lista de resultados */
+#searchResults li:last-child {
+  border-bottom: none;
+}
+
+/* Estilo para os itens quando o mouse passa por cima */
+#searchResults li:hover {
+  background-color: rgb(245, 189, 85);
+}
+
+/* Estilo para ocultar os resultados quando não houver busca */
+#searchResults.hidden {
+  display: none;
+}
 
 
 /* ---------------------------------------------- */
@@ -760,7 +817,7 @@ dialog::backdrop {
     text-align: justify;
   }
 
-  .modal-content {
+  /* .modal-content {
     width: 50%;
     max-width: none;
     bottom: calc(5em + 20px);
@@ -768,7 +825,7 @@ dialog::backdrop {
     transform: none;
     font-size: 10px;
 
-  }
+  } */
 }
 
 /* Modal styles  */
@@ -786,7 +843,8 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
+*/
+/* .modal-content {
   width: 35%;
   max-width: 600px;
   border: solid 2px rgb(238, 162, 99);
@@ -800,14 +858,14 @@ dialog::backdrop {
   bottom: calc(15em + 50px + 40px + 10px);
   left: 50%;
   transform: translateX(-50%);
-}
-
+} */
+/* 
 .close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
-}
+} */
 
 .close:hover,
 .close:focus {
@@ -816,7 +874,6 @@ dialog::backdrop {
   cursor: pointer;
 }
 
-.instruction-text {
+*/ .instruction-text {
   margin-bottom: 20px;
-  /* Espaço de 10px abaixo do texto */
 }

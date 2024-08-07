@@ -72,6 +72,91 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // -------------------------------------------------------
+// Chave da API do Google Books
+// -------------------------------------------------------
+const API_KEY = "AIzaSyByZueS-sEDclSmT-lL4NnJ0Iejwn-251I";
+
+// Event listener for input fields to trigger search
+document.getElementById("livro").addEventListener("input", searchBooks);
+document.getElementById("autor").addEventListener("input", searchBooks);
+
+// Event listener to clear search results when clicking outside
+document.addEventListener("click", function (event) {
+  const searchResults = document.getElementById("searchResults");
+  if (!event.target.closest("#searchResults") && !event.target.closest("#livro") && !event.target.closest("#autor")) {
+    searchResults.innerHTML = "";
+    searchResults.style.display = "none";
+  }
+});
+
+
+// -------------------------------------------------------
+// Função para buscar livros na API do Google Books
+// -------------------------------------------------------
+
+async function searchBooks(event){
+  const query = event.target.value;
+  const resultsList = document.getElementById("searchResults");
+  resultsList.innerHTML = "";
+
+  if(query.length < 3){
+    resultsList.style.display = "none";
+    return;
+  }
+
+  try{
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${API_KEY}`);
+    const data = await response.json();
+    displayResults(data.items);
+  } catch(error){
+    console.error ("Erro ao buscar livros na API do Google Books", error.message);
+  }
+}
+
+// -------------------------------------------------------
+// Função para exibir os resultados da busca
+// -------------------------------------------------------
+function displayResults(books) {
+  const resultsList = document.getElementById("searchResults");
+  resultsList.innerHTML = "";
+
+  if (!books || books.length === 0) {
+    const listItem = document.createElement("li");
+    listItem.textContent = "Nenhum resultado encontrado.";
+    resultsList.appendChild(listItem);
+    resultsList.style.display = "block";
+    return;
+  }
+
+  books.forEach((book) => {
+    const title = book.volumeInfo.title || "Título não disponível";
+    const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Autor desconhecido";
+    const publishedDate = book.volumeInfo.publishedDate || "Data não disponível";
+    const publishedYear = publishedDate !== "Data não disponível" ? new Date(publishedDate).getFullYear().toString() : "Ano não disponível";
+    const genres = book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "Gênero não disponível";
+
+    const listItem = document.createElement("li");
+    listItem.textContent = `${title} - ${authors} - ${genres} - ${publishedYear}`;
+    listItem.addEventListener("click", () => fillFormInputs(book));
+    resultsList.appendChild(listItem);
+  });
+
+  resultsList.style.display = "block";
+}
+
+// -------------------------------------------------------
+// Função para preencher os campos do formulário
+// -------------------------------------------------------
+function fillFormInputs(book) {
+  document.getElementById("livro").value = book.volumeInfo.title || "";
+  document.getElementById("autor").value = book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "";
+  document.getElementById("serie").value = book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "";
+  document.getElementById("ano").value = book.volumeInfo.publishedDate ? new Date(book.volumeInfo.publishedDate).getFullYear().toString() : "";
+  document.getElementById("searchResults").style.display = "none";
+}
+
+
+// -------------------------------------------------------
 // Função para verificar a autenticação do usuário
 // -------------------------------------------------------
 async function checkUserAuthentication() {
@@ -132,6 +217,8 @@ document.getElementById("submitBtn").addEventListener("click", async function ()
   }
 });
 
+
+
 // -------------------------------------------------------------
 // Função para carregar e exibir os dados do Supabase na página
 // ------------------------------------------------------------
@@ -152,10 +239,7 @@ async function displayData() {
 
     livros = data || [];
 
-    // const userDataElement = document.getElementById("bookCatalog");
-    // userDataElement.innerHTML = "";
-
-    // Call renderBooks withou filter
+    // Call renderBooks without filter
     renderBooks(window.currentFilter || "all");
   } catch (error) {
     console.error("Erro ao carregar dados do Supabase", error.message);
