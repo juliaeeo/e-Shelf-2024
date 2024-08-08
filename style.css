@@ -803,36 +803,32 @@ dialog::backdrop {
 
 
   /* botão de submeter formulário */
-  @media only screen and (max-width: 600px) {
-
-    .submission,
-    .cancelation {
-      display: inline-block;
-      width: 48%;
-      /* Adjust width to make them fit side by side */
-      padding: 12px 0;
-      /* Adjust padding to make buttons smaller */
-      margin-top: 20px;
-      /* Reduce margin to fit them better */
-      font-size: 16px;
-      /* Adjust font size if necessary */
-      text-align: center;
-      /* Center text in buttons */
-      box-sizing: border-box;
-      /* Ensure padding and border are included in the width */
-    }
-
-    .submission {
-      margin-right: 2%;
-      /* Space between buttons */
-    }
-
-    .cancelation {
-      margin-left: 2%;
-      /* Space between buttons */
-    }
+  .submission,
+  .cancelation {
+    display: inline-block;
+    width: 48%;
+    /* Adjust width to make them fit side by side */
+    padding: 12px 0;
+    /* Adjust padding to make buttons smaller */
+    margin-top: 20px;
+    /* Reduce margin to fit them better */
+    font-size: 16px;
+    /* Adjust font size if necessary */
+    text-align: center;
+    /* Center text in buttons */
+    box-sizing: border-box;
+    /* Ensure padding and border are included in the width */
   }
 
+  .submission {
+    margin-right: 2%;
+    /* Space between buttons */
+  }
+
+  .cancelation {
+    margin-left: 2%;
+    /* Space between buttons */
+  }
 
   input[type="text"],
   select,
