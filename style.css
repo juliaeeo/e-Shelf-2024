@@ -686,7 +686,7 @@ dialog::backdrop {
 /* Estilos para telas menores, como celulares */
 /* ---------------------------------------------- */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   h1 {
     text-align: center;
     color: #0a6b4e;
@@ -724,7 +724,7 @@ dialog::backdrop {
 
   .account-options {
     margin-top: 10px;
-    margin-right: 3px;
+    margin-right: 0;
     /* Adiciona espaço acima das opções de conta */
     width: auto;
     font-size: 12px;
@@ -803,16 +803,36 @@ dialog::backdrop {
 
 
   /* botão de submeter formulário */
-  .submission {
-    padding: 16px 32px;
-    background-color: rgb(240, 112, 8);
-    color: whitesmoke;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 35px;
-    margin-right: 20px;
+  @media only screen and (max-width: 600px) {
+
+    .submission,
+    .cancelation {
+      display: inline-block;
+      width: 48%;
+      /* Adjust width to make them fit side by side */
+      padding: 12px 0;
+      /* Adjust padding to make buttons smaller */
+      margin-top: 20px;
+      /* Reduce margin to fit them better */
+      font-size: 16px;
+      /* Adjust font size if necessary */
+      text-align: center;
+      /* Center text in buttons */
+      box-sizing: border-box;
+      /* Ensure padding and border are included in the width */
+    }
+
+    .submission {
+      margin-right: 2%;
+      /* Space between buttons */
+    }
+
+    .cancelation {
+      margin-left: 2%;
+      /* Space between buttons */
+    }
   }
+
 
   input[type="text"],
   select,
