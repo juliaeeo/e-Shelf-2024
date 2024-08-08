@@ -853,5 +853,15 @@ dialog::backdrop {
     margin-right: 10px;
   }
 
+  label.tooltip {
+    font-size: 14px;
+    /* Resize label font for smaller screens */
+  }
+
+  label.tooltip .tooltiptext {
+    font-size: 12px;
+    /* Resize tooltip font for smaller screens */
+  }
+
 
 }
