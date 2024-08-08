@@ -217,6 +217,13 @@ document.getElementById("submitBtn").addEventListener("click", async function ()
   }
 });
 
+// -------------------------------------------------------
+// Limpeza do formulário ao clicar em "Cancelar"
+// -------------------------------------------------------
+
+document.getElementById("cancelBtn").addEventListener("click", function () {
+  document.getElementById("bookForm").reset();
+});
 
 
 // -------------------------------------------------------------
