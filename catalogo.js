@@ -208,7 +208,12 @@ document.getElementById("submitBtn").addEventListener("click", async function ()
 
   try {
     await saveFormData(livro, autor, serie, ano, finalizado);
-    alert("Dados enviados com sucesso");
+    Toastify({
+    text: "Dados enviados com sucesso!",  
+    duration: 3000,  
+    backgroundColor: "#34b991",     
+    }).showToast();
+  
     document.getElementById("bookForm").reset();
     displayData();
   } catch (error) {
@@ -218,7 +223,7 @@ document.getElementById("submitBtn").addEventListener("click", async function ()
 });
 
 // -------------------------------------------------------
-// Limpeza do formulário ao clicar em "Cancelar"
+// Limpeza do formulário ao clicar em "Limpar"
 // -------------------------------------------------------
 
 document.getElementById("cancelBtn").addEventListener("click", function () {
@@ -310,6 +315,12 @@ const filteredLivros = livros.filter(livro => {
 // Função para excluir um livro da tabela "livros"
 // -------------------------------------------------------
 async function deleteBook(bookId) {
+  // exibe a mensagem de confirmação
+  const confirmation = confirm("Tem certeza que deseja apagar este livro?");
+
+  // se o usuário cancelar, a função termina aqui
+  if (!confirmation) return;
+
   try {
     const user = await checkUserAuthentication();
     if (!user) return;
@@ -323,6 +334,14 @@ async function deleteBook(bookId) {
     if (error) {
       throw error;
     }
+
+      // Exibe uma notificação de sucesso após a exclusão do livro
+      Toastify({
+        text: "Livro apagado com sucesso!",  
+        duration: 3000,  
+        backgroundColor: "rgb(245, 189, 85)", // Cor laranja
+      }).showToast();
+
     console.log("Livro excluído com sucesso");
   } catch (error) {
     console.error("Erro ao excluir livro", error.message);

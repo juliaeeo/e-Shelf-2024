@@ -287,7 +287,7 @@ label {
   color: rgb(184, 13, 13);
   background-color: whitesmoke;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 /* botão de editar */
@@ -299,7 +299,7 @@ label {
   color: rgb(67, 67, 230);
   background-color: whitesmoke;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 
@@ -632,15 +632,16 @@ dialog::backdrop {
   border-radius: 8px;
   max-height: 200px;
   overflow-y: auto;
-  width: 70%;
+  width: 75%;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: none;
   padding: 0;
-  margin-top: 15px;
+  margin-top: 5px;
   list-style-type: none;
   text-align: justify;
 }
+
 
 /* Estilo para cada item na lista de resultados */
 #searchResults li {

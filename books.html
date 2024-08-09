@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="busca.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -59,9 +60,11 @@
         <label for="livro">Livro:</label>
         <input type="text" id="livro" name="livro" placeholder="Busca pelo nome do livro" required>
         <div id="bookResults"></div>
+        <ul id="searchResults"></ul>
 
         <label for="autor">Autor:</label>
         <input type="text" id="autor" name="autor" placeholder="Busca pelo nome do autor" required>
+        <ul id="searchResults"></ul>
 
         <label for="serie">Gênero:</label>
         <input type="text" id="serie" name="serie">
@@ -81,10 +84,10 @@
             significa que você ainda está lendo ou usando este livro.</span></label><br>
 
         <button id="submitBtn" class="submission" type="button">Submeter</button>
-        <button id="cancelBtn" class="cancelation" type="button">Cancelar</button>
+        <button id="cancelBtn" class="cancelation" type="button">Limpar</button>
 
       </form>
-      <ul id="searchResults"></ul>
+
     </div>
 
 
@@ -184,6 +187,8 @@
   <!-- inserção do javascript-->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script type="module" src="catalogo.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="vex.combined.min.js"></script>
   <!-- <script type="module" src="filter_books.js"></script> -->
 </body>
 
