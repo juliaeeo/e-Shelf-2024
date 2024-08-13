@@ -307,6 +307,22 @@ label {
   font-size: 20px;
 }
 
+/* botão de emprestar */
+.lend-button {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  border: none;
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+/* Estilo específico da imagem dentro do botão */
+.lend-button .lend-icon {
+  width: 35px;
+  height: 35px;
+}
+
 
 /* Redefinir senha */
 .reset {
@@ -363,7 +379,7 @@ footer {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1 1 200px;
   width: 210px;
-  height: 250px;
+  height: 285px;
   max-width: 210px;
   box-sizing: border-box;
   margin: 10px 0;
@@ -384,9 +400,19 @@ footer {
   margin: 5px 0;
 }
 
-.livro .finalizado,
+/* .livro .finalizado,
 .book .finalizado {
   margin-bottom: 15px;
+} */
+
+.livro .finalizado {
+  margin-top: 0.5rem;
+  /* Espaçamento específico para o status finalizado */
+}
+
+.livro .emprestimo {
+  margin-top: 0.25rem;
+  /* Espaçamento específico para o status de empréstimo */
 }
 
 /* Css para o tooltip */
@@ -599,7 +625,8 @@ dialog::backdrop {
   font-size: 13px;
 }
 
-#confirm-status-button {
+#confirm-status-button,
+#confirmLendBookButton {
   margin-top: 40px;
   background-color: #34b991;
   color: whitesmoke;
@@ -610,7 +637,8 @@ dialog::backdrop {
   font-size: 15px;
 }
 
-#cancel {
+#cancel,
+#cancelLendBookButton {
   background-color: rgb(167, 11, 11);
   color: whitesmoke;
   border: none;
@@ -626,6 +654,13 @@ dialog::backdrop {
   text-align: left;
   /* Alinha o texto à esquerda */
   font-size: 14px;
+}
+
+#borrowerName {
+  padding: 10px;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  box-sizing: border-box;
 }
 
 /* Resultados da busca */

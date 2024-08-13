@@ -1,8 +1,11 @@
 // Mostrar opções da conta
-document.getElementById("account-toggle").addEventListener("click", function () {
-  const accountOptions = document.getElementById("account-options");
-  accountOptions.style.display = accountOptions.style.display === "none" ? "block" : "none";
-});
+document
+  .getElementById("account-toggle")
+  .addEventListener("click", function () {
+    const accountOptions = document.getElementById("account-options");
+    accountOptions.style.display =
+      accountOptions.style.display === "none" ? "block" : "none";
+  });
 
 // Logout e redirecionamento
 document.getElementById("logout").addEventListener("click", function (event) {
@@ -46,7 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function toggleDropdown(element) {
-    element.style.display = element.style.display === "block" ? "none" : "block";
+    element.style.display =
+      element.style.display === "block" ? "none" : "block";
   }
 
   document.addEventListener("click", function (event) {
@@ -56,7 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function closeAllDropdowns() {
-    const dropdowns = document.querySelectorAll(".dropdown-content, .dropdown-statistic");
+    const dropdowns = document.querySelectorAll(
+      ".dropdown-content, .dropdown-statistic"
+    );
     dropdowns.forEach((dropdown) => {
       dropdown.style.display = "none";
     });
@@ -68,7 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // -------------------------------------------------------
 
 const supabaseUrl = "https://uyxbhreygsckfskebocj.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5eGJocmV5Z3Nja2Zza2Vib2NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjkxMDgsImV4cCI6MjAyODM0NTEwOH0.f4hfGh5xpT8-rFsfIOElu9msfxtHtpiz7HsIzjTYdko";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5eGJocmV5Z3Nja2Zza2Vib2NqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI3NjkxMDgsImV4cCI6MjAyODM0NTEwOH0.f4hfGh5xpT8-rFsfIOElu9msfxtHtpiz7HsIzjTYdko";
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // -------------------------------------------------------
@@ -83,33 +90,41 @@ document.getElementById("autor").addEventListener("input", searchBooks);
 // Event listener to clear search results when clicking outside
 document.addEventListener("click", function (event) {
   const searchResults = document.getElementById("searchResults");
-  if (!event.target.closest("#searchResults") && !event.target.closest("#livro") && !event.target.closest("#autor")) {
+  if (
+    !event.target.closest("#searchResults") &&
+    !event.target.closest("#livro") &&
+    !event.target.closest("#autor")
+  ) {
     searchResults.innerHTML = "";
     searchResults.style.display = "none";
   }
 });
 
-
 // -------------------------------------------------------
 // Função para buscar livros na API do Google Books
 // -------------------------------------------------------
 
-async function searchBooks(event){
+async function searchBooks(event) {
   const query = event.target.value;
   const resultsList = document.getElementById("searchResults");
   resultsList.innerHTML = "";
 
-  if(query.length < 3){
+  if (query.length < 3) {
     resultsList.style.display = "none";
     return;
   }
 
-  try{
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${API_KEY}`);
+  try {
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${API_KEY}`
+    );
     const data = await response.json();
     displayResults(data.items);
-  } catch(error){
-    console.error ("Erro ao buscar livros na API do Google Books", error.message);
+  } catch (error) {
+    console.error(
+      "Erro ao buscar livros na API do Google Books",
+      error.message
+    );
   }
 }
 
@@ -130,10 +145,18 @@ function displayResults(books) {
 
   books.forEach((book) => {
     const title = book.volumeInfo.title || "Título não disponível";
-    const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Autor desconhecido";
-    const publishedDate = book.volumeInfo.publishedDate || "Data não disponível";
-    const publishedYear = publishedDate !== "Data não disponível" ? new Date(publishedDate).getFullYear().toString() : "Ano não disponível";
-    const genres = book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "Gênero não disponível";
+    const authors = book.volumeInfo.authors
+      ? book.volumeInfo.authors.join(", ")
+      : "Autor desconhecido";
+    const publishedDate =
+      book.volumeInfo.publishedDate || "Data não disponível";
+    const publishedYear =
+      publishedDate !== "Data não disponível"
+        ? new Date(publishedDate).getFullYear().toString()
+        : "Ano não disponível";
+    const genres = book.volumeInfo.categories
+      ? book.volumeInfo.categories.join(", ")
+      : "Gênero não disponível";
 
     const listItem = document.createElement("li");
     listItem.textContent = `${title} - ${authors} - ${genres} - ${publishedYear}`;
@@ -149,18 +172,26 @@ function displayResults(books) {
 // -------------------------------------------------------
 function fillFormInputs(book) {
   document.getElementById("livro").value = book.volumeInfo.title || "";
-  document.getElementById("autor").value = book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "";
-  document.getElementById("serie").value = book.volumeInfo.categories ? book.volumeInfo.categories.join(", ") : "";
-  document.getElementById("ano").value = book.volumeInfo.publishedDate ? new Date(book.volumeInfo.publishedDate).getFullYear().toString() : "";
+  document.getElementById("autor").value = book.volumeInfo.authors
+    ? book.volumeInfo.authors.join(", ")
+    : "";
+  document.getElementById("serie").value = book.volumeInfo.categories
+    ? book.volumeInfo.categories.join(", ")
+    : "";
+  document.getElementById("ano").value = book.volumeInfo.publishedDate
+    ? new Date(book.volumeInfo.publishedDate).getFullYear().toString()
+    : "";
   document.getElementById("searchResults").style.display = "none";
 }
-
 
 // -------------------------------------------------------
 // Função para verificar a autenticação do usuário
 // -------------------------------------------------------
 async function checkUserAuthentication() {
-  const { data: { user }, error } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
   if (error) {
     console.error("Erro ao obter o usuário", error.message);
     return null;
@@ -199,28 +230,32 @@ async function saveFormData(livro, autor, serie, ano, finalizado) {
 // Envio do formulário
 // -------------------------------------------------------
 
-document.getElementById("submitBtn").addEventListener("click", async function () {
-  const livro = document.getElementById("livro").value;
-  const autor = document.getElementById("autor").value;
-  const serie = document.getElementById("serie").value;
-  const ano = document.getElementById("ano").value;
-  const finalizado = document.querySelector('input[name="finalizado"]:checked').value;
+document
+  .getElementById("submitBtn")
+  .addEventListener("click", async function () {
+    const livro = document.getElementById("livro").value;
+    const autor = document.getElementById("autor").value;
+    const serie = document.getElementById("serie").value;
+    const ano = document.getElementById("ano").value;
+    const finalizado = document.querySelector(
+      'input[name="finalizado"]:checked'
+    ).value;
 
-  try {
-    await saveFormData(livro, autor, serie, ano, finalizado);
-    Toastify({
-    text: "Dados enviados com sucesso!",  
-    duration: 3000,  
-    backgroundColor: "#34b991",     
-    }).showToast();
-  
-    document.getElementById("bookForm").reset();
-    displayData();
-  } catch (error) {
-    alert("Ocorreu um erro ao enviar os dados");
-    console.error(error);
-  }
-});
+    try {
+      await saveFormData(livro, autor, serie, ano, finalizado);
+      Toastify({
+        text: "Dados enviados com sucesso!",
+        duration: 3000,
+        backgroundColor: "#34b991",
+      }).showToast();
+
+      document.getElementById("bookForm").reset();
+      displayData();
+    } catch (error) {
+      alert("Ocorreu um erro ao enviar os dados");
+      console.error(error);
+    }
+  });
 
 // -------------------------------------------------------
 // Limpeza do formulário ao clicar em "Limpar"
@@ -229,7 +264,6 @@ document.getElementById("submitBtn").addEventListener("click", async function ()
 document.getElementById("cancelBtn").addEventListener("click", function () {
   document.getElementById("bookForm").reset();
 });
-
 
 // -------------------------------------------------------------
 // Função para carregar e exibir os dados do Supabase na página
@@ -258,59 +292,73 @@ async function displayData() {
   }
 }
 
-    // Função para renderizar livros com base em um filtro
-    function renderBooks(filter){
-      const userDataElement = document.getElementById("bookCatalog");      
-      userDataElement.innerHTML = "";
+// Função para renderizar livros com base em um filtro
+function renderBooks(filter) {
+  const userDataElement = document.getElementById("bookCatalog");
+  userDataElement.innerHTML = "";
 
-// Apply filter
-const filteredLivros = livros.filter(livro => {
-  if (filter === "all") return true;
-  return livro.finalizado === filter;
-});
+  // Apply filter
+  const filteredLivros = livros.filter((livro) => {
+    if (filter === "all") return true;
+    return livro.finalizado === filter;
+  });
 
-// Sort filtered livros
+  // Sort filtered livros
+  filteredLivros.forEach((livro) => {
+    const userDiv = document.createElement("div");
+    userDiv.classList.add("livro");
 
+    const genero = livro.serie || "Gênero não disponível";
+    const ano = livro.ano || "Ano não disponível";
 
-   filteredLivros.forEach((livro) => {
-        const userDiv = document.createElement("div");
-        userDiv.classList.add("livro");
-
-        const genero = livro.serie || "Gênero não disponível";
-        const ano = livro.ano || "Ano não disponível";
-
-        userDiv.innerHTML = `
+    userDiv.innerHTML = `
           <p><strong>Livro:</strong> ${livro.livro}</p>
           <p><strong>Autor:</strong> ${livro.autor}</p>
           <p><strong>Gênero:</strong> ${genero}</p>
           <p><strong>Ano:</strong> ${ano}</p>
-          <p class="finalizado"><strong>Finalizado:</strong> ${livro.finalizado}</p>
+          <p class="finalizado"><strong>Finalizado:</strong> ${
+            livro.finalizado
+          }</p>
+          ${
+            livro.emprestimo
+              ? `<p class="emprestimo"><strong>Livro emprestado para:</strong> ${livro.emprestimo}</p>`
+              : ""
+          }
         `;
 
-        // Botão de excluir
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "x";
-        deleteButton.classList.add("delete-button");
-        deleteButton.addEventListener("click", async () => {
-          await deleteBook(livro.id);
-          displayData();
-        });
+    // Botão de excluir
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "x";
+    deleteButton.classList.add("delete-button");
+    deleteButton.addEventListener("click", async () => {
+      await deleteBook(livro.id);
+      displayData();
+    });
 
-        // Botão de editar
-        const editButton = document.createElement("button");
-        editButton.textContent = "✎"; // Icon for edit
-        editButton.classList.add("edit-button");
-        editButton.addEventListener("click", () => {
-          editBook(livro);
-        });
+    // Botão de editar
+    const editButton = document.createElement("button");
+    editButton.textContent = "✎"; // Icon for edit
+    editButton.classList.add("edit-button");
+    editButton.addEventListener("click", () => {
+      editBook(livro);
+    });
 
-        userDiv.appendChild(deleteButton);
-        userDiv.appendChild(editButton);
-        userDataElement.appendChild(userDiv);
-      });
-    }
+    // Botão de emprestar livro
+    const lendButton = document.createElement("button");
+    lendButton.textContent = "⇄ 📚";
+    lendButton.classList.add("lend-button");
 
-    
+    lendButton.addEventListener("click", () => {
+      lendBook(livro);
+    });
+
+    userDiv.appendChild(deleteButton);
+    userDiv.appendChild(editButton);
+    userDiv.appendChild(lendButton);
+    userDataElement.appendChild(userDiv);
+  });
+}
+
 // -------------------------------------------------------
 // Função para excluir um livro da tabela "livros"
 // -------------------------------------------------------
@@ -335,12 +383,12 @@ async function deleteBook(bookId) {
       throw error;
     }
 
-      // Exibe uma notificação de sucesso após a exclusão do livro
-      Toastify({
-        text: "Livro apagado com sucesso!",  
-        duration: 3000,  
-        backgroundColor: "rgb(245, 189, 85)", // Cor laranja
-      }).showToast();
+    // Exibe uma notificação de sucesso após a exclusão do livro
+    Toastify({
+      text: "Livro apagado com sucesso!",
+      duration: 3000,
+      backgroundColor: "rgb(245, 189, 85)", // Cor laranja
+    }).showToast();
 
     console.log("Livro excluído com sucesso");
   } catch (error) {
@@ -389,13 +437,76 @@ async function editBook(livro) {
         displayData(); // Update the display of data
       } catch (error) {
         console.error("Erro ao atualizar status do livro", error.message);
-        alert("Erro ao atualizar o status do livro");
+        alert("Erro ao atualizar oname status do livro");
       } finally {
         dialog.close(); // Close the dialog
       }
     },
     { once: true }
   ); // Ensure the event listener is only called once
+}
+
+// -------------------------------------------------------
+// Função para emprestar o livro
+// -------------------------------------------------------
+async function lendBook(livro) {
+  const lendBookDialog = document.getElementById("lendBookDialog");
+  const confirmButton = document.getElementById("confirmLendBookButton");
+  const cancelButton = document.getElementById("cancelLendBookButton");
+  const borrowerNameInput = document.getElementById("borrowerName");
+
+  // Limpa o campo de texto do nome antes de abrir o modal
+  borrowerNameInput.value = "";
+
+  // Abre o modal
+  lendBookDialog.showModal();
+
+  // Adiciona um evento de clique ao botão de confirmar
+  confirmButton.addEventListener(
+    "click",
+    async () => {
+      const borrowerName = borrowerNameInput.value.trim();
+      if (!borrowerName) {
+        alert(
+          "Por favor, insira o nome da pessoa que pegou o livro emprestado."
+        );
+        return; // Se o nome estiver vazio, não faça nada
+      }
+
+      try {
+        const user = await checkUserAuthentication();
+        if (!user) return;
+
+        // Atualiza a coluna "emprestimo" do livro no Supabase
+        const { error } = await supabase
+          .from("livros")
+          .update({ emprestimo: borrowerName })
+          .eq("id", livro.id)
+          .eq("user_id", user.id);
+
+        if (error) {
+          throw error;
+        }
+
+        displayData(); // Atualiza a exibição dos dados no catálogo
+      } catch (error) {
+        console.error("Erro ao salvar o empréstimo", error.message);
+      } finally {
+        lendBookDialog.close(); // Fecha o modal
+      }
+    },
+    { once: true }
+  ); // Garante que o event listener seja chamado apenas uma vez
+
+  // Adiciona um evento de clique ao botão de cancelar
+  cancelButton.addEventListener(
+    "click",
+    (event) => {
+      event.preventDefault(); // Impede o envio do formulário
+      lendBookDialog.close(); // Fecha o modal
+    },
+    { once: true }
+  ); // Garante que o event listener seja chamado apenas uma vez
 }
 
 // -------------------------------------------------------
@@ -486,14 +597,19 @@ function showDialog(count) {
 }
 
 // Event listener para o botão "Livros lidos"
-document.querySelector(".countBooksRead").addEventListener("click", async () => {
-  try {
-    const count = await countBooksRead();
-    showDialog(count);
-  } catch (error) {
-    console.error("Erro ao obter estatísticas de livros lidos", error.message);
-  }
-});
+document
+  .querySelector(".countBooksRead")
+  .addEventListener("click", async () => {
+    try {
+      const count = await countBooksRead();
+      showDialog(count);
+    } catch (error) {
+      console.error(
+        "Erro ao obter estatísticas de livros lidos",
+        error.message
+      );
+    }
+  });
 
 // ---------------------------------------------------------
 // Função para contar a quantidade de livros lidos por autor
@@ -667,8 +783,6 @@ document
       document.getElementById("genreResultDialog").close();
     }
   });
-
-
 
 // Carregar dados na inicialização
 document.addEventListener("DOMContentLoaded", displayData);

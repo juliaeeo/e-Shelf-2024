@@ -2,194 +2,276 @@
 
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>e-Shelf</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="busca.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+  </head>
 
-<head>
-  <title>e-Shelf</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" type="text/css" href="busca.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-</head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-RQ3KGLM3YR"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ3KGLM3YR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
+    gtag("config", "G-RQ3KGLM3YR");
+  </script>
 
-  gtag('config', 'G-RQ3KGLM3YR');
-</script>
+  <body>
+    <!-- ---------------------------------------------- -->
+    <!-- Início do cabeçalho -->
+    <header>
+      <h1>
+        <a href="index.html"><span class="colored">e</span>Shelf</a>
+      </h1>
 
-<body>
-
-  <!-- ---------------------------------------------- -->
-  <!-- Início do cabeçalho -->
-  <header>
-    <h1><a href="index.html"><span class="colored">e</span>Shelf</a></h1>
-
-    <div class="account-box" id="account-toggle">
-      <i class="fas fa-user"></i>
-      <span class="account-text">Sair</span>
-      <i class="fas fa-chevron-down"></i>
-      <div class="account-options" id="account-options" style="display: none;">
-        <a href="#" id="logout">Logout</a>
+      <div class="account-box" id="account-toggle">
+        <i class="fas fa-user"></i>
+        <span class="account-text">Sair</span>
+        <i class="fas fa-chevron-down"></i>
+        <div class="account-options" id="account-options" style="display: none">
+          <a href="#" id="logout">Logout</a>
+        </div>
       </div>
-    </div>
+    </header>
 
-  </header>
-
-  <h2>Estante de e-books</h2>
-
-  <!-- ---------------------------------------------- -->
-  <!-- Área de navegação -->
-
-  <main>
-    <h3 id="catalogoLink">Adicione o seu livro ao<span class="colored2"> <a href="#bookCatalog">
-          catálogo</a></span>
-      inserindo as seguintes
-      informações:</h3>
+    <h2>Estante de e-books</h2>
 
     <!-- ---------------------------------------------- -->
-    <!-- Formulário -->
-    <div class="container">
-      <form id="bookForm" autocomplete="off">
+    <!-- Área de navegação -->
 
-        <label for="livro">Livro:</label>
-        <input type="text" id="livro" name="livro" placeholder="Busca pelo nome do livro" required>
-        <div id="bookResults"></div>
-        <ul id="searchResults"></ul>
+    <main>
+      <h3 id="catalogoLink">
+        Adicione o seu livro ao<span class="colored2">
+          <a href="#bookCatalog"> catálogo</a></span
+        >
+        inserindo as seguintes informações:
+      </h3>
 
-        <label for="autor">Autor:</label>
-        <input type="text" id="autor" name="autor" placeholder="Busca pelo nome do autor" required>
-        <ul id="searchResults"></ul>
+      <!-- ---------------------------------------------- -->
+      <!-- Formulário -->
+      <div class="container">
+        <form id="bookForm" autocomplete="off">
+          <label for="livro">Livro:</label>
+          <input
+            type="text"
+            id="livro"
+            name="livro"
+            placeholder="Busca pelo nome do livro"
+            required
+          />
+          <div id="bookResults"></div>
+          <ul id="searchResults"></ul>
 
-        <label for="serie">Gênero:</label>
-        <input type="text" id="serie" name="serie">
+          <label for="autor">Autor:</label>
+          <input
+            type="text"
+            id="autor"
+            name="autor"
+            placeholder="Busca pelo nome do autor"
+            required
+          />
+          <ul id="searchResults"></ul>
 
-        <label for="ano">Ano de Publicação:</label>
-        <input type="text" id="ano" name="ano">
+          <label for="serie">Gênero:</label>
+          <input type="text" id="serie" name="serie" />
 
-        <label for="finalizado">Livro Finalizado:</label><br>
-        <input type="radio" id="sim" name="finalizado" value="Sim" required>
-        <label for="sim" class="tooltip">Sim<span class="tooltiptext">Este livro está finalizado. Isso significa que
-            você já terminou de ler ou usar este livro.</span></label>
-        <input type="radio" id="nao" name="finalizado" value="Não" required>
-        <label for="nao" class="tooltip">Não<span class="tooltiptext">Este livro não está finalizado, ou seja, você
-            desistiu da leitura ou irá lê-lo em outro momento.</span></label>
-        <input type="radio" id="andamento" name="finalizado" value="Em andamento" required>
-        <label for="andamento" class="tooltip">Em andamento<span class="tooltiptext">Este livro está em andamento. Isso
-            significa que você ainda está lendo ou usando este livro.</span></label><br>
+          <label for="ano">Ano de Publicação:</label>
+          <input type="text" id="ano" name="ano" />
 
-        <button id="submitBtn" class="submission" type="button">Submeter</button>
-        <button id="cancelBtn" class="cancelation" type="button">Limpar</button>
+          <label for="finalizado">Livro Finalizado:</label><br />
+          <input type="radio" id="sim" name="finalizado" value="Sim" required />
+          <label for="sim" class="tooltip"
+            >Sim<span class="tooltiptext"
+              >Este livro está finalizado. Isso significa que você já terminou
+              de ler ou usar este livro.</span
+            ></label
+          >
+          <input type="radio" id="nao" name="finalizado" value="Não" required />
+          <label for="nao" class="tooltip"
+            >Não<span class="tooltiptext"
+              >Este livro não está finalizado, ou seja, você desistiu da leitura
+              ou irá lê-lo em outro momento.</span
+            ></label
+          >
+          <input
+            type="radio"
+            id="andamento"
+            name="finalizado"
+            value="Em andamento"
+            required
+          />
+          <label for="andamento" class="tooltip"
+            >Em andamento<span class="tooltiptext"
+              >Este livro está em andamento. Isso significa que você ainda está
+              lendo ou usando este livro.</span
+            ></label
+          ><br /><br />
 
-      </form>
+          <button id="submitBtn" class="submission" type="button">
+            Submeter
+          </button>
+          <button id="cancelBtn" class="cancelation" type="button">
+            Limpar
+          </button>
+        </form>
+      </div>
 
-    </div>
+      <!-- ------------------------------- -->
+      <!-- Exibição do catálogo de livros -->
+      <!-- -------------------------------- -->
 
+      <h2 id="catalogo">CATÁLOGO DE LIVROS</h2>
 
-    <!-- ------------------------------- -->
-    <!-- Exibição do catálogo de livros -->
-    <!-- -------------------------------- -->
+      <!-- Container único para todos os botões -->
+      <div class="button-container">
+        <!-- Botões de filtro -->
+        <div class="dropdown">
+          <button id="filterButtons"><i class="fas fa-filter"></i></button>
+          <div class="dropdown-content" id="filterOptions">
+            <button onclick="filterBooksByStatus('all')">
+              Todos os livros
+            </button>
+            <button onclick="filterBooksByStatus('finalizado')">
+              Finalizados
+            </button>
+            <button onclick="filterBooksByStatus('nao_finalizado')">
+              Não finalizados
+            </button>
+            <button onclick="filterBooksByStatus('em_andamento')">
+              Em andamento
+            </button>
+          </div>
+        </div>
 
-    <h2 id="catalogo">CATÁLOGO DE LIVROS</h2>
+        <div class="dropdownS">
+          <button id="filterButtons">
+            <i class="fas fa-sort-alpha-down"></i>
+          </button>
+          <div class="dropdown-statistic">
+            <button id="sortAZ">Livros</button>
+            <button id="sortAutorAZ">Autor</button>
+            <button id="sortGenderAZ">Gênero</button>
+          </div>
+        </div>
 
-    <!-- Container único para todos os botões -->
-    <div class="button-container">
-      <!-- Botões de filtro -->
-      <div class="dropdown">
-        <button id="filterButtons"><i class="fas fa-filter"></i></button>
-        <div class="dropdown-content" id="filterOptions">
-          <button onclick="filterBooksByStatus('all')">Todos os livros</button>
-          <button onclick="filterBooksByStatus('finalizado')">Finalizados</button>
-          <button onclick="filterBooksByStatus('nao_finalizado')">Não finalizados</button>
-          <button onclick="filterBooksByStatus('em_andamento')">Em andamento</button>
+        <div class="dropdown">
+          <button id="filterButtons"><i class="fas fa-chart-bar"></i></button>
+          <div class="dropdown-content">
+            <button class="countBooksRead">Livros finalizados</button>
+            <button class="countBooksReadByAuthor">
+              Livros finalizados por autor
+            </button>
+            <button class="countBooksFinishedByGenre">
+              Livros finalizados por gênero
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="dropdownS">
-        <button id="filterButtons"><i class="fas fa-sort-alpha-down"></i></button>
-        <div class="dropdown-statistic">
-          <button id="sortAZ">Livros</button>
-          <button id="sortAutorAZ">Autor</button>
-          <button id="sortGenderAZ">Gênero</button>
+      <!-- Caixa de Diálogo -->
+      <dialog id="booksReadDialog" class="dialog-base dialog-background">
+        <p id="booksReadCount"></p>
+        <button id="closeDialog" class="close-dialog">Fechar</button>
+      </dialog>
+
+      <dialog id="resultDialog" class="dialog-base dialog-background">
+        <p id="resultMessage"></p>
+        <button id="closeResultDialog" class="close-dialog">Fechar</button>
+      </dialog>
+
+      <dialog id="genreResultDialog" class="dialog-base dialog-background">
+        <p id="genreResultMessage"></p>
+        <button id="closeGenreResultDialog" class="close-dialog">Fechar</button>
+      </dialog>
+
+      <dialog id="edit-status-dialog" class="dialog-base dialog-background">
+        <form method="dialog">
+          <p>Informe o novo status do livro:</p>
+          <br />
+          <label>
+            <input type="radio" name="status" value="Sim" required /> Sim (Livro
+            finalizado)
+          </label>
+          <label>
+            <input type="radio" name="status" value="Não" /> Não (Futura leitura
+            ou desistência da leitura)
+          </label>
+          <label>
+            <input type="radio" name="status" value="Em andamento" /> Em
+            andamento (Leitura em andamento)
+          </label>
+          <menu>
+            <button id="cancel">Cancelar</button>
+            <button id="confirm-status-button" value="default">
+              Confirmar
+            </button>
+          </menu>
+        </form>
+      </dialog>
+
+      <!-- Modal para exibição -->
+
+      <div id="modal" class="modal">
+        <div class="modal-content dialog-base">
+          <span id="closeModal" class="close">&times;</span>
+          <div id="checkboxContainer"></div>
         </div>
       </div>
 
-      <div class="dropdown">
-        <button id="filterButtons"><i class="fas fa-chart-bar"></i></button>
-        <div class="dropdown-content">
-          <button class="countBooksRead">Livros finalizados</button>
-          <button class="countBooksReadByAuthor">Livros finalizados por autor</button>
-          <button class="countBooksFinishedByGenre">Livros finalizados por gênero</button>
-        </div>
-      </div>
+      <!-- Modal para emprestar livro -->
+      <dialog id="lendBookDialog" class="dialog-base dialog-background">
+        <form method="dialog">
+          <p>Livro emprestado para:</p>
+          <input
+            type="text"
+            id="borrowerName"
+            name="borrowerName"
+            placeholder="Digite o nome"
+            required
+          />
+          <menu>
+            <button id="confirmLendBookButton" value="default">
+              Confirmar
+            </button>
+            <button id="cancelLendBookButton">Cancelar</button>
+          </menu>
+        </form>
+      </dialog>
 
-    </div>
+      <div id="bookCatalog" class="bookCatalog"></div>
+      <div id="results"></div>
+    </main>
 
-    <!-- Caixa de Diálogo -->
-    <dialog id="booksReadDialog">
-      <p id="booksReadCount"></p>
-      <button id="closeDialog">Fechar</button>
-    </dialog>
+    <!-- rodapé -->
+    <footer>
+      <p>&copy Todos os direitos reservados - Júlia Epischina</p>
+    </footer>
 
-
-    <dialog id="resultDialog">
-      <p id="resultMessage"></p>
-      <button id="closeResultDialog">Fechar</button>
-    </dialog>
-
-    <dialog id="genreResultDialog">
-      <p id="genreResultMessage"></p>
-      <button id="closeGenreResultDialog">Fechar</button>
-    </dialog>
-
-    <dialog id="edit-status-dialog">
-      <form method="dialog">
-        <p>Informe o novo status do livro:</p><br>
-        <label>
-          <input type="radio" name="status" value="Sim" required /> Sim (Livro finalizado)
-        </label>
-        <label>
-          <input type="radio" name="status" value="Não" /> Não (Futura leitura ou desistência da leitura)
-        </label>
-        <label>
-          <input type="radio" name="status" value="Em andamento" /> Em andamento (Leitura em andamento)
-        </label>
-        <menu>
-          <button id="cancel">Cancelar</button>
-          <button id="confirm-status-button" value="default">Confirmar</button>
-        </menu>
-      </form>
-    </dialog>
-
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span id="closeModal" class="close">&times;</span>
-        <div id="checkboxContainer"></div>
-      </div>
-    </div>
-
-
-    <div id="bookCatalog" class="bookCatalog"></div>
-    <div id="results"></div>
-  </main>
-
-
-  <!-- rodapé -->
-  <footer>
-    <p> &copy Todos os direitos reservados - Júlia Epischina</p>
-  </footer>
-
-  <!-- inserção do javascript-->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script type="module" src="catalogo.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script src="vex.combined.min.js"></script>
-  <!-- <script type="module" src="filter_books.js"></script> -->
-</body>
-
+    <!-- inserção do javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="module" src="catalogo.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <!-- <script type="module" src="filter_books.js"></script> -->
+  </body>
 </html>
