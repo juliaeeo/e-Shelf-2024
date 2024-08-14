@@ -298,13 +298,13 @@ label {
 /* botão de editar */
 .edit-button {
   position: absolute;
-  bottom: 5px;
+  bottom: 3px;
   right: 5px;
   border: none;
   color: rgb(67, 67, 230);
   background-color: whitesmoke;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 /* botão de emprestar */
@@ -315,13 +315,15 @@ label {
   border: none;
   background-color: whitesmoke;
   cursor: pointer;
+  font-size: 20px;
 }
 
+
 /* Estilo específico da imagem dentro do botão */
-.lend-button .lend-icon {
-  width: 35px;
-  height: 35px;
-}
+/* .lend-button .lend-icon {
+  width: 155px;
+  height: 55px;
+} */
 
 
 /* Redefinir senha */
@@ -616,14 +618,14 @@ dialog::backdrop {
   background-color: rgb(238, 162, 99);
 }
 
-/* botão de editar */
+/* botão de editar
 .edit-icon {
   position: absolute;
   bottom: 5px;
   right: 5px;
   cursor: pointer;
-  font-size: 13px;
-}
+  font-size: 15px;
+} */
 
 #confirm-status-button,
 #confirmLendBookButton {
@@ -646,6 +648,19 @@ dialog::backdrop {
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
+}
+
+#deleteLendButton {
+  background-color: rgb(11, 136, 167);
+  color: whitesmoke;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 20px;
+  display: block;
+  width: 100%;
 }
 
 #edit-status-dialog label {
@@ -809,6 +824,7 @@ dialog::backdrop {
   .livro {
     flex: 1 1 calc(100% - 1em);
     max-width: calc(100% - 1em);
+    max-height: 230px;
   }
 
   .button-container {

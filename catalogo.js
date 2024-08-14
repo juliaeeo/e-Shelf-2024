@@ -453,7 +453,18 @@ async function lendBook(livro) {
   const lendBookDialog = document.getElementById("lendBookDialog");
   const confirmButton = document.getElementById("confirmLendBookButton");
   const cancelButton = document.getElementById("cancelLendBookButton");
+  const deleteLendButton = document.getElementById("deleteLendButton");
   const borrowerNameInput = document.getElementById("borrowerName");
+
+  // Limpa todos os event listeners antigos para evitar múltiplas execuções
+  confirmButton.replaceWith(confirmButton.cloneNode(true));
+  cancelButton.replaceWith(cancelButton.cloneNode(true));
+  deleteLendButton.replaceWith(deleteLendButton.cloneNode(true));
+
+  // Pega os novos botões sem event listeners antigos
+  const newConfirmButton = document.getElementById("confirmLendBookButton");
+  const newCancelButton = document.getElementById("cancelLendBookButton");
+  const newDeleteLendButton = document.getElementById("deleteLendButton");
 
   // Limpa o campo de texto do nome antes de abrir o modal
   borrowerNameInput.value = "";
@@ -462,7 +473,7 @@ async function lendBook(livro) {
   lendBookDialog.showModal();
 
   // Adiciona um evento de clique ao botão de confirmar
-  confirmButton.addEventListener(
+  newConfirmButton.addEventListener(
     "click",
     async () => {
       const borrowerName = borrowerNameInput.value.trim();
@@ -488,7 +499,7 @@ async function lendBook(livro) {
           throw error;
         }
 
-        displayData(); // Atualiza a exibição dos dados no catálogo
+        displayData();
       } catch (error) {
         console.error("Erro ao salvar o empréstimo", error.message);
       } finally {
@@ -496,17 +507,56 @@ async function lendBook(livro) {
       }
     },
     { once: true }
-  ); // Garante que o event listener seja chamado apenas uma vez
+  );
 
   // Adiciona um evento de clique ao botão de cancelar
-  cancelButton.addEventListener(
+  newCancelButton.addEventListener(
     "click",
     (event) => {
-      event.preventDefault(); // Impede o envio do formulário
-      lendBookDialog.close(); // Fecha o modal
+      event.preventDefault();
+      lendBookDialog.close();
+      borrowerNameInput.value = ""; // Limpa o campo de texto ao cancelar
     },
     { once: true }
-  ); // Garante que o event listener seja chamado apenas uma vez
+  );
+
+  // Excluir um empréstimo
+  newDeleteLendButton.addEventListener(
+    "click",
+    async () => {
+      borrowerNameInput.removeAttribute("required"); // Remove temporariamente o atributo required
+
+      try {
+        const user = await checkUserAuthentication();
+        if (!user) return;
+
+        // Remove o valor da coluna "emprestimo" no Supabase
+        const { error } = await supabase
+          .from("livros")
+          .update({ emprestimo: null }) // Define como `null` para apagar o empréstimo
+          .eq("id", livro.id)
+          .eq("user_id", user.id);
+
+        if (error) throw error;
+
+        displayData();
+
+        // Exibe uma notificação de sucesso após a exclusão do livro
+        Toastify({
+          text: "Empréstimo excluido com sucesso!",
+          duration: 3000,
+          backgroundColor: "rgb(11, 136, 167)",
+        }).showToast();
+      } catch (error) {
+        console.error("erro ao excluir o empréstimo", error.message);
+      } finally {
+        lendBookDialog.close();
+        borrowerNameInput.setAttribute("required", ""); // Restaura o atributo required
+        borrowerNameInput.value = ""; // Limpa o campo de texto ao cancelar
+      }
+    },
+    { once: true }
+  );
 }
 
 // -------------------------------------------------------
