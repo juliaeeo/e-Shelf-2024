@@ -131,5 +131,36 @@
         });
       }
     </script>
+    <script>
+      let deferredPrompt;
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        // Previne o mini-infobar de aparecer no mobile
+        e.preventDefault();
+        // Guarda o evento para ser usado mais tarde
+        deferredPrompt = e;
+
+        // Exibe um botão ou outro elemento que sugira a instalação
+        const installButton = document.createElement("button");
+        installButton.textContent = "Adicionar à tela inicial";
+        document.body.appendChild(installButton);
+
+        installButton.addEventListener("click", () => {
+          // Esconde o botão
+          installButton.style.display = "none";
+          // Exibe o prompt de instalação
+          deferredPrompt.prompt();
+          // Espera a resposta do usuário
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === "accepted") {
+              console.log("Usuário aceitou a instalação");
+            } else {
+              console.log("Usuário recusou a instalação");
+            }
+            deferredPrompt = null;
+          });
+        });
+      });
+    </script>
   </body>
 </html>
