@@ -131,6 +131,8 @@
         });
       }
     </script>
+
+    <!-- Adicionar icone PWA -->
     <script>
       let deferredPrompt;
 
@@ -142,12 +144,14 @@
 
         // Exibe um botão ou outro elemento que sugira a instalação
         const installButton = document.createElement("button");
+        installButton.id = "installButton"; // Atribui o ID para o estilo
         installButton.textContent = "Adicionar à tela inicial";
         document.body.appendChild(installButton);
 
         installButton.addEventListener("click", () => {
           // Esconde o botão
-          installButton.style.display = "none";
+          // installButton.style.display = "none";
+          installButton.classList.add("hidden"); // Oculta o botão após o clique
           // Exibe o prompt de instalação
           deferredPrompt.prompt();
           // Espera a resposta do usuário

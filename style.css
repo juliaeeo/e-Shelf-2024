@@ -736,6 +736,36 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+/* Estilo para o botão de instalação */
+#installButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgb(245, 189, 85);
+  color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+#installButton:hover {
+  transform: scale(1.05);
+}
+
+#installButton:active {
+  transform: scale(0.95);
+}
+
+#installButton.hidden {
+  display: none;
+}
+
+
 
 
 /* ---------------------------------------------- */
