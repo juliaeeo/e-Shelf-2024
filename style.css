@@ -319,6 +319,24 @@ label {
 }
 
 
+/* botão compre agora */
+.buy-button {
+  position: absolute;
+  bottom: 5px;
+  left: 55%;
+  transform: translateX(-50%);
+  border: none;
+  background-color: rgb(233, 176, 130);
+  color: #077a58;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+
 /* Estilo específico da imagem dentro do botão */
 /* .lend-button .lend-icon {
   width: 155px;
@@ -380,9 +398,9 @@ footer {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1 1 200px;
-  width: 210px;
+  width: 250px;
   height: 285px;
-  max-width: 210px;
+  max-width: 280px;
   box-sizing: border-box;
   margin: 10px 0;
   /* padding: 1em; */

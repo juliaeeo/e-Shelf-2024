@@ -326,6 +326,17 @@ function renderBooks(filter) {
           }
         `;
 
+    // Botão compre agora quando o status for "não"
+    if (livro.finalizado === "Não") {
+      const buyButton = document.createElement("button");
+      buyButton.textContent = "Comprar livro";
+      buyButton.classList.add("buy-button");
+      buyButton.addEventListener("click", () => {
+        window.open("https://amzn.to/4cEFnSa", "_blank");
+      });
+      userDiv.appendChild(buyButton);
+    }
+
     // Botão de excluir
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "x";
